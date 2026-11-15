@@ -1,0 +1,390 @@
+
+
+/* 관리자 휴가 관리 화면 전용 스타일. 공통 사이드바와 별도로 사용합니다. */
+.alr-content-area {
+	flex: 1;
+	width: 100%;
+	min-width: 0;
+	background: #fff;
+}
+
+.alr-page, .alr-page * {
+	box-sizing: border-box;
+}
+
+.alr-page {
+	min-height: 0;
+	padding: 27px 34px 60px;
+	background: #fff;
+	color: #172238;
+	font: 14px/1.55 "Pretendard", "Malgun Gothic", Arial, sans-serif;
+}
+
+.alr-page h1, .alr-page h2, .alr-page p {
+	margin: 0;
+}
+
+.alr-heading {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-between;
+	gap: 18px;
+	align-items: start;
+	margin-bottom: 25px;
+}
+
+.alr-title {
+	font-size: 22px;
+	font-weight: 750;
+	letter-spacing: -.4px;
+}
+
+.alr-subtitle {
+	font-size: 13px;
+	color: #7c8aa1;
+	margin-top: 5px !important;
+}
+
+.alr-demo {
+	font-size: 12px;
+	color: #68768b;
+	border: 1px solid #dfe6f0;
+	padding: 7px 11px;
+	border-radius: 5px;
+	background: #f8fafc;
+}
+
+.alr-panel {
+	border: 1px solid #dfe6ef;
+	background: #fff;
+	border-radius: 7px;
+}
+
+.alr-filter {
+	padding: 21px 24px;
+	display: flex;
+	gap: 14px;
+	align-items: end;
+	flex-wrap: wrap;
+}
+
+.alr-field {
+	display: flex;
+	flex-direction: column;
+	gap: 7px;
+	min-width: 145px;
+}
+
+.alr-field label {
+	font-size: 12px;
+	font-weight: 650;
+	color: #596981;
+}
+
+.alr-field input, .alr-field select {
+	border: 1px solid #dbe3ee;
+	background: #fff;
+	height: 40px;
+	border-radius: 5px;
+	padding: 0 12px;
+	min-width: 0;
+	color: #273347;
+	font: inherit;
+}
+
+.alr-field input[type=date] {
+	min-width: 152px;
+}
+
+.alr-field.alr-grow {
+	flex: 1;
+	min-width: 170px;
+}
+
+.alr-actions {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+}
+
+.alr-btn {
+	min-height: 39px;
+	padding: 0 15px;
+	border: 1px solid #dce4ee;
+	border-radius: 5px;
+	color: #28344a;
+	background: #fff;
+	cursor: pointer;
+	font: inherit;
+	white-space: nowrap;
+}
+
+.alr-btn:hover {
+	background: #f3f6fa;
+}
+
+.alr-btn-primary {
+	color: #fff;
+	background: #182238;
+	border-color: #182238;
+}
+
+.alr-btn-primary:hover {
+	background: #2b3a56;
+}
+
+.alr-btn-small {
+	min-height: 31px;
+	font-size: 12px;
+	padding: 0 10px;
+}
+
+.alr-btn:focus-visible, .alr-field input:focus-visible, .alr-field select:focus-visible
+	{
+	outline: 2px solid #668bc6;
+	outline-offset: 2px;
+}
+
+.alr-stats {
+	display: grid;
+	grid-template-columns: repeat(4, minmax(0, 1fr));
+	gap: 17px;
+	margin: 21px 0 27px;
+}
+
+.alr-stat {
+	border: 1px solid #dfe6ef;
+	border-radius: 7px;
+	padding: 18px 20px;
+	min-height: 102px;
+}
+
+.alr-stat-label {
+	font-size: 12px;
+	color: #7e8ba0;
+}
+
+.alr-stat-value {
+	font-size: 26px;
+	font-weight: 750;
+	margin-top: 8px;
+}
+
+.alr-panel-head {
+	padding: 19px 23px;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 10px;
+	border-bottom: 1px solid #e1e7ef;
+}
+
+.alr-section-title {
+	font-size: 16px;
+	font-weight: 750;
+}
+
+.alr-count {
+	font-size: 12px;
+	color: #75849b;
+}
+
+.alr-scroll {
+	overflow-x: auto;
+}
+
+.alr-table {
+	border-collapse: collapse;
+	width: 100%;
+	min-width: 940px;
+	font-size: 13px;
+}
+
+.alr-table thead {
+	background: #f4f6f9;
+}
+
+.alr-table th {
+	text-align: left;
+	padding: 14px 15px;
+	font-weight: 650;
+	color: #4e5e75;
+	white-space: nowrap;
+	border-bottom: 1px solid #dfe6ef;
+}
+
+.alr-table td {
+	padding: 15px;
+	border-bottom: 1px solid #e9edf3;
+	vertical-align: middle;
+}
+
+.alr-table tbody tr:hover {
+	background: #fafbfc;
+}
+
+.alr-table tbody tr:last-child td {
+	border-bottom: 0;
+}
+
+.alr-table .alr-ellipsis {
+	max-width: 210px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.alr-pill {
+	display: inline-block;
+	padding: 4px 10px;
+	border-radius: 99px;
+	font-size: 12px;
+	font-weight: 600;
+	white-space: nowrap;
+}
+
+.alr-pill-pending {
+	color: #a76a10;
+	background: #fff3de;
+}
+
+.alr-pill-approved {
+	color: #18744a;
+	background: #e7f5ec;
+}
+
+.alr-pill-rejected {
+	color: #a83f43;
+	background: #fceced;
+}
+
+.alr-row-actions {
+	display: flex;
+	flex-wrap: nowrap;
+	gap: 6px;
+}
+
+.alr-empty {
+	text-align: center;
+	color: #8a95a7;
+	padding: 42px 15px !important;
+}
+
+.alr-footer {
+	padding: 15px 23px;
+	color: #8b97a8;
+	font-size: 12px;
+	border-top: 1px solid #e8ecf2;
+}
+
+.alr-overlay {
+	position: fixed;
+	inset: 0;
+	background: rgba(12, 19, 33, .47);
+	z-index: 3000;
+	display: none;
+	align-items: center;
+	justify-content: center;
+	padding: 20px;
+}
+
+.alr-overlay.alr-open {
+	display: flex;
+}
+
+.alr-dialog {
+	background: #fff;
+	width: min(100%, 540px);
+	max-height: 90vh;
+	overflow: auto;
+	border-radius: 9px;
+	box-shadow: 0 15px 60px #1114;
+}
+
+.alr-dialog-head {
+	padding: 20px 25px;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	border-bottom: 1px solid #e1e7ef;
+}
+
+.alr-dialog-head h2 {
+	font-size: 18px;
+}
+
+.alr-close {
+	border: 0;
+	background: transparent;
+	font-size: 25px;
+	cursor: pointer;
+	color: #738097;
+}
+
+.alr-detail {
+	padding: 22px 25px;
+	display: grid;
+	grid-template-columns: 110px 1fr;
+	column-gap: 12px;
+	row-gap: 16px;
+	font-size: 13px;
+}
+
+.alr-detail dt {
+	color: #8290a5;
+}
+
+.alr-detail dd {
+	margin: 0;
+	overflow-wrap: anywhere;
+}
+
+.alr-dialog-bottom {
+	border-top: 1px solid #e1e7ef;
+	padding: 14px 25px;
+	display: flex;
+	justify-content: end;
+}
+
+@media ( max-width :1050px) {
+	.alr-stats {
+		gap: 10px;
+	}
+	.alr-stat {
+		padding: 15px;
+	}
+}
+
+@media ( max-width :767px) {
+	.alr-content-area, .sidebar-collapse .alr-content-area {
+		margin-left: 0;
+	}
+	.alr-page {
+		padding: 20px 15px 35px;
+	}
+	.alr-stats {
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+	}
+	.alr-filter {
+		padding: 15px;
+	}
+	.alr-field {
+		flex: 1;
+	}
+}
+
+/* AdminLTE owns the shared layout. Preserve the original white palette. */
+body.hrms-leave .content-wrapper { background: #fff; min-width: 0; }
+body.hrms-leave .hrms-leave-content { padding: 0; min-width: 0; }
+body.hrms-leave .alr-page { max-width: none; padding: 24px; font-size: 14px; }
+@media (max-width: 767.98px) {
+    body.hrms-leave .alr-page { padding: 16px; }
+    .hrms-leave .lh-filter-panel { flex-wrap: wrap; }
+    .hrms-leave .lh-filter-controls, .hrms-leave .lh-filter-field { min-width: 0; }
+    .hrms-leave .lh-date-range { flex-wrap: wrap; }
+    .hrms-leave .lh-date-range .lh-input { min-width: 0; }
+    .hrms-leave .alr-field { min-width: 0; flex-basis: 100%; }
+    .hrms-leave .alr-field.alr-grow { min-width: 0; }
+    .hrms-leave .alr-actions { flex-wrap: wrap; }
+}
+.hrms-leave .lh-modal-overlay, .hrms-leave .alr-overlay { z-index: 1050; }

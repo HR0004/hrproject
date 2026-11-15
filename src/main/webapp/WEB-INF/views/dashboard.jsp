@@ -12,24 +12,22 @@
 
     <title>HRMS Admin - 대시보드</title>
 
-    <!-- 기존 공통 디자인 유지 -->
-    <link rel="stylesheet"
-          href="https://cdn.jsdelivr.net/npm/admin-lte@3.2/dist/css/adminlte.min.css">
+    <%@ include file="/WEB-INF/views/common/adminlte-head.jspf" %>
 
     <!-- 대시보드 내부 전용 CSS -->
     <link rel="stylesheet"
           href="${pageContext.request.contextPath}/css/dashboard.css">
 </head>
 
-<body class="hold-transition sidebar-mini layout-fixed">
+<body class="hold-transition hrms-adminlte">
 
 <div class="wrapper">
 
-    <!-- 공통 사이드바 : 수정하지 않음 -->
-    <%@ include file="/WEB-INF/views/common/sidebar.jspf" %>
+    <!-- AdminLTE 공통 사이드바 -->
+    <%@ include file="/WEB-INF/views/common/adminlte-sidebar.jspf" %>
 
-    <!-- 공통 헤더 : 수정하지 않음 -->
-    <%@ include file="/WEB-INF/views/common/header.jspf" %>
+    <!-- AdminLTE 공통 헤더 -->
+    <%@ include file="/WEB-INF/views/common/adminlte-header.jspf" %>
 
     <!-- 대시보드 메인 영역 -->
     <div class="content-wrapper">
@@ -187,12 +185,7 @@
 
 </div>
 
-<!-- AdminLTE 스크립트 -->
-<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
-
-<script src="https://cdn.jsdelivr.net/npm/admin-lte@3.2/dist/js/adminlte.min.js"></script>
+<%@ include file="/WEB-INF/views/common/adminlte-scripts.jspf" %>
 
 </body>
 </html>

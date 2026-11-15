@@ -1,0 +1,89 @@
+<%@ page pageEncoding="UTF-8" %>
+<% boolean hrmsLteSidebarIsAdmin = request.isUserInRole("HR_ADMIN"); %>
+<aside class="main-sidebar sidebar-light-primary elevation-1" id="hrms-lte-sidebar" aria-label="주 메뉴">
+    <a class="brand-link" href="${pageContext.request.contextPath}<%= hrmsLteSidebarIsAdmin ? "/dashboard" : "/employee/home" %>">
+        <span class="hrms-lte-brand-mark" aria-hidden="true">田</span>
+        <span class="brand-text font-weight-light"><%= hrmsLteSidebarIsAdmin ? "HRMS Admin" : "HRMS Employee" %></span>
+    </a>
+    <div class="sidebar">
+        <div class="hrms-lte-sidebar-title">인사관리 시스템</div>
+        <nav aria-label="업무 메뉴">
+            <ul class="nav nav-pills nav-sidebar flex-column" id="hrms-lte-menu"
+                data-context-path="${pageContext.request.contextPath}">
+            <% if (hrmsLteSidebarIsAdmin) { %>
+            <li class="nav-item">
+                <a href="${pageContext.request.contextPath}/dashboard" class="nav-link" data-menu-path="/dashboard">
+                    <span class="nav-icon hrms-lte-menu-number" aria-hidden="true">00</span><p>대시보드</p>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="${pageContext.request.contextPath}/departments" class="nav-link" data-menu-path="/departments">
+                    <span class="nav-icon hrms-lte-menu-number" aria-hidden="true">01</span><p>부서 관리</p>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="${pageContext.request.contextPath}/jobs" class="nav-link" data-menu-path="/jobs">
+                    <span class="nav-icon hrms-lte-menu-number" aria-hidden="true">02</span><p>직급 관리</p>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="${pageContext.request.contextPath}/employees" class="nav-link" data-menu-path="/employees">
+                    <span class="nav-icon hrms-lte-menu-number" aria-hidden="true">03</span><p>사원 관리</p>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="${pageContext.request.contextPath}/attendance" class="nav-link" data-menu-path="/attendance">
+                    <span class="nav-icon hrms-lte-menu-number" aria-hidden="true">04</span><p>내 근태</p>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="${pageContext.request.contextPath}/leave" class="nav-link" data-menu-path="/leave">
+                    <span class="nav-icon hrms-lte-menu-number" aria-hidden="true">05</span><p>내 휴가</p>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="${pageContext.request.contextPath}/admin/accounts" class="nav-link" data-menu-path="/admin/accounts">
+                    <span class="nav-icon hrms-lte-menu-number" aria-hidden="true">06</span><p>권한 관리</p>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="${pageContext.request.contextPath}/mypage" class="nav-link" data-menu-path="/mypage">
+                    <span class="nav-icon hrms-lte-menu-number" aria-hidden="true">07</span><p>내 정보</p>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="${pageContext.request.contextPath}/admin/roles/permissions" class="nav-link" data-menu-path="/admin/roles/permissions">
+                    <span class="nav-icon hrms-lte-menu-number" aria-hidden="true">08</span><p>역할별 권한 설정</p>
+                </a>
+            </li>
+            <% } else { %>
+            <li class="nav-item">
+                <a href="${pageContext.request.contextPath}/employee/home" class="nav-link" data-menu-path="/employee/home">
+                    <span class="nav-icon hrms-lte-menu-number" aria-hidden="true">00</span><p>사원 홈</p>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="${pageContext.request.contextPath}/mypage" class="nav-link" data-menu-path="/mypage">
+                    <span class="nav-icon hrms-lte-menu-number" aria-hidden="true">01</span><p>내 정보</p>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="${pageContext.request.contextPath}/employee/myedit" class="nav-link" data-menu-path="/employee/myedit">
+                    <span class="nav-icon hrms-lte-menu-number" aria-hidden="true">02</span><p>내 정보 수정</p>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="${pageContext.request.contextPath}/attendance" class="nav-link" data-menu-path="/attendance">
+                    <span class="nav-icon hrms-lte-menu-number" aria-hidden="true">03</span><p>내 근태</p>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="${pageContext.request.contextPath}/leave" class="nav-link" data-menu-path="/leave">
+                    <span class="nav-icon hrms-lte-menu-number" aria-hidden="true">04</span><p>내 휴가</p>
+                </a>
+            </li>
+            <% } %>
+            </ul>
+        </nav>
+    </div>
+</aside>

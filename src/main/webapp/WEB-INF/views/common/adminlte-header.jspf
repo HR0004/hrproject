@@ -1,0 +1,39 @@
+<%@ page pageEncoding="UTF-8" %>
+<%@ page import="org.springframework.web.util.HtmlUtils" %>
+<%
+    boolean hrmsLteHeaderIsAdmin = request.isUserInRole("HR_ADMIN");
+    String hrmsLteLoginId = request.getUserPrincipal() != null
+        ? request.getUserPrincipal().getName() : "사용자";
+%>
+<nav class="main-header navbar navbar-expand navbar-white navbar-light" aria-label="상단 사용자 메뉴">
+    <ul class="navbar-nav">
+        <li class="nav-item">
+            <button type="button" class="nav-link hrms-lte-toggle" data-widget="pushmenu"
+                    aria-controls="hrms-lte-sidebar" aria-expanded="true" aria-label="사이드바 접기 또는 펼치기">
+                <span aria-hidden="true">&#9776;</span>
+            </button>
+        </li>
+    </ul>
+    <ul class="navbar-nav ml-auto">
+        <li class="nav-item dropdown">
+            <button type="button" class="nav-link btn btn-light hrms-lte-profile" id="hrms-lte-profile"
+                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <%= hrmsLteHeaderIsAdmin ? "관리자" : "사원" %> <span aria-hidden="true">&#9662;</span>
+            </button>
+            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="hrms-lte-profile">
+                <div class="dropdown-header"><%= HtmlUtils.htmlEscape(hrmsLteLoginId) %></div>
+                <div class="dropdown-divider"></div>
+                <a href="${pageContext.request.contextPath}/mypage" class="dropdown-item">내 정보</a>
+                <a href="${pageContext.request.contextPath}/employee/myedit" class="dropdown-item">내 정보 수정</a>
+                <% if (hrmsLteHeaderIsAdmin) { %>
+                <a href="${pageContext.request.contextPath}/admin/accounts" class="dropdown-item">권한 위임 관리</a>
+                <% } %>
+                <div class="dropdown-divider"></div>
+                <form action="${pageContext.request.contextPath}/logout" method="post" class="mb-0">
+                    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
+                    <button type="submit" class="dropdown-item text-danger">로그아웃</button>
+                </form>
+            </div>
+        </li>
+    </ul>
+</nav>

@@ -1,0 +1,6 @@
+<%@ page pageEncoding="UTF-8" %>
+<!-- Order matters. Load once before page-specific JavaScript. -->
+<script src="${pageContext.request.contextPath}/static/vendor/jquery-3.7.1/jquery.min.js"></script>
+<script src="${pageContext.request.contextPath}/static/vendor/bootstrap-4.6.2/bootstrap.bundle.min.js"></script>
+<script src="${pageContext.request.contextPath}/static/vendor/adminlte-3.2.0/adminlte.min.js"></script>
+<script src="${pageContext.request.contextPath}/static/js/adminlte-layout.js?v=1"></script>
