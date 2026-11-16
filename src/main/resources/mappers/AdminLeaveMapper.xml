@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hexagon.hrproject.mapper.AdminLeaveMapper">
+    <select id="findRequests" resultType="com.hexagon.hrproject.dto.response.AdminLeaveRequestRow">
+        SELECT lr.leave_request_id AS requestId, lr.emp_id AS empId,
+            e.ename AS empName, e.department_id AS departmentId,
+            d.department_name AS department,
+            DATE_FORMAT(lr.request_date, '%Y-%m-%d') AS requestDate,
+            DATE_FORMAT(lr.start_date, '%Y-%m-%d') AS startDate,
+            DATE_FORMAT(lr.end_date, '%Y-%m-%d') AS endDate,
+            lr.days, lr.reason, lr.status, lr.approver_id AS approverId,
+            ap.ename AS approverName,
+            DATE_FORMAT(lr.approved_at, '%Y-%m-%d %H:%i') AS approvedAt
+        FROM leave_request lr
+        JOIN emp e ON e.emp_id = lr.emp_id
+        LEFT JOIN department d ON d.department_id = e.department_id
+        LEFT JOIN emp ap ON ap.emp_id = lr.approver_id
+        <where>
+            <if test="departmentId != null">e.department_id = #{departmentId}</if>
+            <if test="startDate != null">AND lr.request_date &gt;= #{startDate}</if>
+            <if test="endExclusive != null">AND lr.request_date &lt; #{endExclusive}</if>
+            <if test="status != null">AND lr.status = #{status}</if>
+            <if test="keyword != null">
+                AND (e.ename LIKE CONCAT('%', #{keyword}, '%') OR CAST(lr.emp_id AS CHAR) = #{keyword})
+            </if>
+        </where>
+        ORDER BY lr.request_date DESC, lr.leave_request_id DESC
+    </select>
+    <select id="lockRequest" resultType="com.hexagon.hrproject.dto.response.AdminLeaveRequestRow">
+        SELECT leave_request_id AS requestId, emp_id AS empId, status, days,
+            DATE_FORMAT(start_date, '%Y-%m-%d') AS startDate,
+            DATE_FORMAT(end_date, '%Y-%m-%d') AS endDate
+        FROM leave_request WHERE leave_request_id = #{requestId} FOR UPDATE
+    </select>
+    <select id="lockBalance" resultType="com.hexagon.hrproject.dto.response.AdminLeaveBalance">
+        SELECT balance_id AS balanceId, total_days AS totalDays, used_days AS usedDays
+        FROM tb_leave_balance WHERE emp_id = #{empId} AND fiscal_year = #{fiscalYear} FOR UPDATE
+    </select>
+    <update id="consumeBalance">
+        UPDATE tb_leave_balance SET used_days = used_days + #{days}
+        WHERE balance_id = #{balanceId} AND total_days - used_days &gt;= #{days}
+    </update>
+    <update id="decide">
+        UPDATE leave_request SET status = #{status}, approver_id = #{approverId}, approved_at = NOW()
+        WHERE leave_request_id = #{requestId} AND status = 'PENDING'
+    </update>
+</mapper>

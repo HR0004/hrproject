@@ -32,28 +32,33 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a href="${pageContext.request.contextPath}/attendance" class="nav-link" data-menu-path="/attendance">
-                    <span class="nav-icon hrms-lte-menu-number" aria-hidden="true">04</span><p>내 근태</p>
+                <a href="${pageContext.request.contextPath}/salary/list" class="nav-link" data-menu-path="/salary">
+                    <span class="nav-icon hrms-lte-menu-number" aria-hidden="true">04</span><p>급여 관리</p>
                 </a>
             </li>
             <li class="nav-item">
-                <a href="${pageContext.request.contextPath}/leave" class="nav-link" data-menu-path="/leave">
-                    <span class="nav-icon hrms-lte-menu-number" aria-hidden="true">05</span><p>내 휴가</p>
+                <a href="${pageContext.request.contextPath}/attendance/admin" class="nav-link" data-menu-path="/attendance">
+                    <span class="nav-icon hrms-lte-menu-number" aria-hidden="true">05</span><p>근태 관리</p>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="${pageContext.request.contextPath}/leave/admin" class="nav-link" data-menu-path="/leave">
+                    <span class="nav-icon hrms-lte-menu-number" aria-hidden="true">06</span><p>휴가 관리</p>
                 </a>
             </li>
             <li class="nav-item">
                 <a href="${pageContext.request.contextPath}/admin/accounts" class="nav-link" data-menu-path="/admin/accounts">
-                    <span class="nav-icon hrms-lte-menu-number" aria-hidden="true">06</span><p>권한 관리</p>
+                    <span class="nav-icon hrms-lte-menu-number" aria-hidden="true">07</span><p>권한 관리</p>
                 </a>
             </li>
             <li class="nav-item">
                 <a href="${pageContext.request.contextPath}/mypage" class="nav-link" data-menu-path="/mypage">
-                    <span class="nav-icon hrms-lte-menu-number" aria-hidden="true">07</span><p>내 정보</p>
+                    <span class="nav-icon hrms-lte-menu-number" aria-hidden="true">08</span><p>내 정보</p>
                 </a>
             </li>
             <li class="nav-item">
                 <a href="${pageContext.request.contextPath}/admin/roles/permissions" class="nav-link" data-menu-path="/admin/roles/permissions">
-                    <span class="nav-icon hrms-lte-menu-number" aria-hidden="true">08</span><p>역할별 권한 설정</p>
+                    <span class="nav-icon hrms-lte-menu-number" aria-hidden="true">09</span><p>역할별 권한 설정</p>
                 </a>
             </li>
             <% } else { %>
@@ -73,13 +78,18 @@
                 </a>
             </li>
             <li class="nav-item">
+                <a href="${pageContext.request.contextPath}/salary/my" class="nav-link" data-menu-path="/salary/my">
+                    <span class="nav-icon hrms-lte-menu-number" aria-hidden="true">03</span><p>내 급여</p>
+                </a>
+            </li>
+            <li class="nav-item">
                 <a href="${pageContext.request.contextPath}/attendance" class="nav-link" data-menu-path="/attendance">
-                    <span class="nav-icon hrms-lte-menu-number" aria-hidden="true">03</span><p>내 근태</p>
+                    <span class="nav-icon hrms-lte-menu-number" aria-hidden="true">04</span><p>내 근태</p>
                 </a>
             </li>
             <li class="nav-item">
                 <a href="${pageContext.request.contextPath}/leave" class="nav-link" data-menu-path="/leave">
-                    <span class="nav-icon hrms-lte-menu-number" aria-hidden="true">04</span><p>내 휴가</p>
+                    <span class="nav-icon hrms-lte-menu-number" aria-hidden="true">05</span><p>내 휴가</p>
                 </a>
             </li>
             <% } %>

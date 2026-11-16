@@ -63,12 +63,24 @@ public class SecurityConfig {
                     antMatcher(HttpMethod.PUT, "/api/accounts/me/password/")
                 ).authenticated()
 
+                // 본인 급여 조회: 전체 급여 관리 제한보다 먼저 적용
+                .requestMatchers(
+                    antMatcher("/salary/my"),
+                    antMatcher("/salary/my/**")
+                ).authenticated()
+
                 // 관리자 화면 및 관리자 API
                 .requestMatchers(
                     antMatcher("/"),
                     antMatcher("/dashboard"),
                     antMatcher("/dashboard/**"),
                     antMatcher("/admin/**"),
+                    antMatcher("/attendance/admin"),
+                    antMatcher("/leave/admin"),
+                    antMatcher("/api/leave/admin"),
+                    antMatcher("/api/leave/admin/**"),
+                    antMatcher("/salary"),
+                    antMatcher("/salary/**"),
                     antMatcher("/departments"),
                     antMatcher("/departments/**"),
                     antMatcher("/jobs"),

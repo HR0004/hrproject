@@ -48,9 +48,9 @@ public class DepartmentAttendanceApiController {
             );
         }
 
-        // 실제 관리자 역할 코드와 일치하는지 확인 필요
+        // 공통 로그인/사이드바와 동일한 관리자 역할
         boolean isAdmin = hasAuthority(
-            authentication, "ROLE_ADMIN"
+            authentication, "ROLE_HR_ADMIN"
         );
 
         boolean canReadTeam = hasAuthority(
@@ -95,6 +95,13 @@ public class DepartmentAttendanceApiController {
             allowedDepartmentId,
             workDate
         );
+    }
+
+    @org.springframework.web.bind.annotation.ExceptionHandler(ResponseStatusException.class)
+    @ResponseBody
+    public org.springframework.http.ResponseEntity<java.util.Map<String, String>> handleStatus(ResponseStatusException e) {
+        return org.springframework.http.ResponseEntity.status(e.getStatus()).body(
+            java.util.Collections.singletonMap("message", e.getReason() == null ? "요청을 처리할 수 없습니다." : e.getReason()));
     }
 
     private boolean hasAuthority(

@@ -13,26 +13,28 @@
 
     <title>HRMS - 내 급여 조회</title>
 
-    <link rel="stylesheet"
-          href="https://cdn.jsdelivr.net/npm/admin-lte@3.2/dist/css/adminlte.min.css">
+    
 
-    <link rel="stylesheet"
-          href="${pageContext.request.contextPath}/css/salary.css">
+    
+<%@ include file="/WEB-INF/views/common/adminlte-head.jspf" %>
+<link rel="stylesheet" href="${pageContext.request.contextPath}/static/vendor/fontawesome-6.5.2/css/all.min.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/salary.css?v=salary-unified-1">
 </head>
 
-<body class="hold-transition sidebar-mini layout-fixed">
+<body class="hold-transition hrms-adminlte hrms-salary" data-context-path="${pageContext.request.contextPath}">
 
 <div class="wrapper">
 
-    <%@ include file="/WEB-INF/views/common/header.jspf" %>
-    <%@ include file="/WEB-INF/views/common/sidebar.jspf" %>
+    <%@ include file="/WEB-INF/views/common/adminlte-header.jspf" %>
+    <%@ include file="/WEB-INF/views/common/adminlte-sidebar.jspf" %>
 
-    <div class="content-wrapper salary-page">
+    <div class="content-wrapper">
+<main class="salary-page hrms-page-content">
 
         <section class="content-header">
             <div class="container-fluid salary-heading">
-                <h1>내 급여 조회</h1>
-                <p>본인의 월별 급여와 지급 내역을 확인할 수 있습니다.</p>
+                <h1 class="hrms-page-title">내 급여 조회</h1>
+                <p class="page-path">본인의 월별 급여와 지급 내역을 확인할 수 있습니다.</p>
             </div>
         </section>
 
@@ -42,7 +44,7 @@
                 <!-- 최근 급여 요약 -->
                 <div class="salary-stats">
 
-                    <div class="salary-stat-card">
+                    <div class="salary-stat-card summary-card">
                         <span>선택 연월</span>
                         <strong>
                             <c:choose>
@@ -54,7 +56,7 @@
                         </strong>
                     </div>
 
-                    <div class="salary-stat-card">
+                    <div class="salary-stat-card summary-card">
                         <span>기본급</span>
                         <strong>
                             <c:choose>
@@ -68,7 +70,7 @@
                         </strong>
                     </div>
 
-                    <div class="salary-stat-card">
+                    <div class="salary-stat-card summary-card">
                         <span>실수령액</span>
                         <strong>
                             <c:choose>
@@ -82,7 +84,7 @@
                         </strong>
                     </div>
 
-                    <div class="salary-stat-card">
+                    <div class="salary-stat-card summary-card">
                         <span>지급일</span>
                         <strong>
                             <c:choose>
@@ -128,7 +130,7 @@
                         </select>
 
                         <button type="submit"
-                                class="salary-register-btn">
+                                class="salary-register-btn primary-btn">
                             조회
                         </button>
                     </form>
@@ -226,12 +228,13 @@
             </div>
         </section>
 
-    </div>
+    </main>
+</div>
 </div>
 
-<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/admin-lte@3.2/dist/js/adminlte.min.js"></script>
+<%@ include file="/WEB-INF/views/common/adminlte-scripts.jspf" %>
+
+
 
 <script>
 const mySalaryRows = Array.from(

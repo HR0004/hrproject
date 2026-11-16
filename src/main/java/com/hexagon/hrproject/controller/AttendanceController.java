@@ -31,6 +31,6 @@ public class AttendanceController {
 	
 	@GetMapping("/attendance/admin")
 	public String attendanceAdminPage() {
-		return "attendance/admindepartmentattendance";
+		return "attendance/adminDepartmentAttendance";
 	}
 }
