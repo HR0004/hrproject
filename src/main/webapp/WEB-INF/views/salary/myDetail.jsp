@@ -13,28 +13,30 @@
 
     <title>HRMS - 내 급여 상세</title>
 
-    <link rel="stylesheet"
-          href="https://cdn.jsdelivr.net/npm/admin-lte@3.2/dist/css/adminlte.min.css">
+    
 
-    <link rel="stylesheet"
-          href="${pageContext.request.contextPath}/css/salary.css">
+    
+<%@ include file="/WEB-INF/views/common/adminlte-head.jspf" %>
+<link rel="stylesheet" href="${pageContext.request.contextPath}/static/vendor/fontawesome-6.5.2/css/all.min.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/salary.css?v=salary-unified-1">
 </head>
 
-<body class="hold-transition sidebar-mini layout-fixed">
+<body class="hold-transition hrms-adminlte hrms-salary" data-context-path="${pageContext.request.contextPath}">
 
 <div class="wrapper">
 
-    <%@ include file="/WEB-INF/views/common/header.jspf" %>
-    <%@ include file="/WEB-INF/views/common/sidebar.jspf" %>
+    <%@ include file="/WEB-INF/views/common/adminlte-header.jspf" %>
+    <%@ include file="/WEB-INF/views/common/adminlte-sidebar.jspf" %>
 
-    <div class="content-wrapper salary-page">
+    <div class="content-wrapper">
+<main class="salary-page hrms-page-content">
 
         <section class="content-header">
             <div class="container-fluid salary-heading">
 
-                <h1>내 급여 상세</h1>
+                <h1 class="hrms-page-title">내 급여 상세</h1>
 
-                <p>
+                <p class="page-path">
                     <c:out value="${salary.salaryYearMonth}"/>
                     급여의 지급 내역입니다.
                 </p>
@@ -52,7 +54,7 @@
                 </div>
 
                 <!-- 상세 정보 -->
-                <div class="salary-detail-card">
+                <div class="salary-detail-card content-card">
 
                     <div class="salary-detail-header">
 
@@ -136,7 +138,7 @@
                 <div class="salary-detail-actions">
 
                     <a href="${pageContext.request.contextPath}/salary/my"
-                       class="salary-confirm-btn">
+                       class="salary-confirm-btn primary-btn">
                         목록으로
                     </a>
 
@@ -145,12 +147,13 @@
             </div>
         </section>
 
-    </div>
+    </main>
+</div>
 </div>
 
-<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/admin-lte@3.2/dist/js/adminlte.min.js"></script>
+<%@ include file="/WEB-INF/views/common/adminlte-scripts.jspf" %>
+
+
 
 </body>
 </html>

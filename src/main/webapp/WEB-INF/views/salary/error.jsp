@@ -12,32 +12,34 @@
 
     <title>HRMS - 급여 오류</title>
 
-    <link rel="stylesheet"
-          href="https://cdn.jsdelivr.net/npm/admin-lte@3.2/dist/css/adminlte.min.css">
+    
 
-    <link rel="stylesheet"
-          href="${pageContext.request.contextPath}/css/salary.css">
+    
+<%@ include file="/WEB-INF/views/common/adminlte-head.jspf" %>
+<link rel="stylesheet" href="${pageContext.request.contextPath}/static/vendor/fontawesome-6.5.2/css/all.min.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/salary.css?v=salary-unified-1">
 </head>
 
-<body class="hold-transition sidebar-mini layout-fixed">
+<body class="hold-transition hrms-adminlte hrms-salary" data-context-path="${pageContext.request.contextPath}">
 
 <div class="wrapper">
 
-    <%@ include file="/WEB-INF/views/common/header.jspf" %>
-    <%@ include file="/WEB-INF/views/common/sidebar.jspf" %>
+    <%@ include file="/WEB-INF/views/common/adminlte-header.jspf" %>
+    <%@ include file="/WEB-INF/views/common/adminlte-sidebar.jspf" %>
 
-    <div class="content-wrapper salary-page">
+    <div class="content-wrapper">
+<main class="salary-page hrms-page-content">
 
         <section class="content">
             <div class="container-fluid">
 
-                <div class="salary-error-container">
+                <div class="salary-error-container content-card">
 
                     <div class="salary-error-icon">!</div>
 
-                    <h1>급여 정보를 확인할 수 없습니다.</h1>
+                    <h1 class="hrms-page-title">급여 정보를 확인할 수 없습니다.</h1>
 
-                    <p>
+                    <p class="page-path">
                         <c:choose>
                             <c:when test="${not empty errorMessage}">
                                 <c:out value="${errorMessage}"/>
@@ -48,8 +50,8 @@
                         </c:choose>
                     </p>
 
-                    <a href="${pageContext.request.contextPath}/salary/list"
-                       class="salary-confirm-btn">
+                    <a href="${pageContext.request.contextPath}<%= request.isUserInRole("HR_ADMIN") ? "/salary/list" : "/salary/my" %>"
+                       class="salary-confirm-btn primary-btn">
                         급여 목록으로 돌아가기
                     </a>
 
@@ -58,12 +60,13 @@
             </div>
         </section>
 
-    </div>
+    </main>
+</div>
 </div>
 
-<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/admin-lte@3.2/dist/js/adminlte.min.js"></script>
+<%@ include file="/WEB-INF/views/common/adminlte-scripts.jspf" %>
+
+
 
 </body>
 </html>

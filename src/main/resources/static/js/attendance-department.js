@@ -62,7 +62,7 @@ async function loadDepartments() {
 }
 
 
-// 개발용 예시. 실제 구현은 로그인 관리자의 부서를 서버가 판정해 조회해야 합니다.
+// DB 조회 결과를 부서/날짜 조건에 맞게 표시합니다.
 
 let departmentAttendanceRows = [];
 
@@ -257,7 +257,12 @@ const showDepartmentAttendanceDetail = function(empId) {
 
 };
 
+function currentAttendanceDate() {
+    const now = new Date();
+    return now.getFullYear() + "-" + String(now.getMonth() + 1).padStart(2, "0") + "-" + String(now.getDate()).padStart(2, "0");
+}
 $(function() {
+    $("input[name='workDate']").val(currentAttendanceDate());
 	
 	loadDepartments().then(function() {
 	    getDepartmentAttendance();
@@ -269,7 +274,7 @@ $(function() {
 		
     	$("#datDepartment").val("");
     	
-        $("input[name='workDate']").val("2026-11-05");
+        $("input[name='workDate']").val(currentAttendanceDate());
 
         $("select[name='attendanceStatus']").val("ALL");
 

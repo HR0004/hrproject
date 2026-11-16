@@ -5,6 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>직원 휴가 신청 관리</title>
+    <meta name="_csrf" content="${_csrf.token}">
+    <meta name="_csrf_header" content="${_csrf.headerName}">
     <%@ include file="/WEB-INF/views/common/adminlte-head.jspf" %>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/leave-admin.css?v=job-unified-1">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/attendance-leave-layout.css?v=2">
@@ -21,23 +23,27 @@
 <h1 class="alr-title hrms-page-title">직원 휴가 신청 관리</h1>
 <p class="alr-subtitle page-path">담당 직원의 휴가 신청을 조회하고 승인 상태를 확인합니다.</p>
 </div>
-<span class="alr-demo">화면 예시 데이터 · DB 미연결</span>
+<span class="alr-demo">부서별 조회 · 승인 및 반려</span>
 </header>
+<p role="status" aria-live="polite" id="adminLeaveMessage"></p>
 <section aria-label="휴가 신청 검색 조건" class="alr-panel alr-filter">
 <div class="alr-field">
-<label for="alrStartDate">신청 시작일</label><input id="alrStartDate" name="startDate" type="date" value="2026-10-01"/>
+<label for="alrDepartment">조회 부서</label><select id="alrDepartment" name="departmentId"><option value="">전체 부서</option></select>
 </div>
 <div class="alr-field">
-<label for="alrEndDate">신청 종료일</label><input id="alrEndDate" name="endDate" type="date" value="2026-11-30"/>
+<label for="alrStartDate">신청 시작일</label><input id="alrStartDate" name="startDate" type="date"/>
+</div>
+<div class="alr-field">
+<label for="alrEndDate">신청 종료일</label><input id="alrEndDate" name="endDate" type="date"/>
 </div>
 <div class="alr-field">
 <label for="alrStatus">처리 상태</label> <select id="alrStatus" name="statusFilter"><option value="ALL">전체</option>
 <option value="PENDING">승인 대기</option>
 <option value="APPROVED">승인 완료</option>
-<option value="REJECTED">반려</option></select>
+<option value="REJECTED">반려</option><option value="CANCELED">취소됨</option></select>
 </div>
 <div class="alr-field alr-grow">
-<label for="alrKeyword">사원 검색</label><input id="alrKeyword" name="keyword" placeholder="이름 또는 사번" type="search"/>
+<label for="alrKeyword">사원 검색</label><input id="alrKeyword" name="keyword" maxlength="50" placeholder="이름 또는 사번" type="search"/>
 </div>
 <div class="alr-actions">
 <button class="alr-btn alr-btn-primary" name="searchLeaveRequests" type="button">조회</button>
@@ -72,6 +78,7 @@
 <thead>
 <tr>
 <th>신청일</th>
+<th>소속 부서</th>
 <th>사번 / 이름</th>
 <th>사용 기간</th>
 <th>신청 일수</th>
@@ -83,8 +90,7 @@
 <tbody name="leaveRequestRows"></tbody>
 </table></div>
 </div>
-<div class="alr-footer">※ 샘플 화면입니다. 승인·반려는 백엔드 권한 검증 및 처리 API
-						연결 후 사용할 수 있습니다.</div>
+<div class="alr-footer">※ 승인 시 신청 일수가 해당 연도의 잔여 휴가에서 차감됩니다. 이미 처리된 신청은 다시 처리할 수 없습니다.</div>
 </section>
 </main>
 <div aria-labelledby="alrDetailTitle" aria-modal="true" class="alr-overlay" name="leaveDetailOverlay" role="dialog">
@@ -103,6 +109,6 @@
     </div>
 </div>
 <%@ include file="/WEB-INF/views/common/adminlte-scripts.jspf" %>
-<script src="${pageContext.request.contextPath}/static/js/leave-admin.js?v=1"></script>
+<script src="${pageContext.request.contextPath}/static/js/leave-admin.js?v=admin-live-1"></script>
 </body>
 </html>

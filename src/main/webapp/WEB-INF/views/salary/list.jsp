@@ -12,37 +12,38 @@
     <title>HRMS - 급여 관리</title>
 
     <!-- Font Awesome -->
-    <link rel="stylesheet"
-          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    
 
     <!-- AdminLTE -->
-    <link rel="stylesheet"
-          href="https://cdn.jsdelivr.net/npm/admin-lte@3.2/dist/css/adminlte.min.css">
+    
 
 <!-- css -->
-<link rel="stylesheet"
-      href="${pageContext.request.contextPath}/static/css/salary.css">
+
     
+<%@ include file="/WEB-INF/views/common/adminlte-head.jspf" %>
+<link rel="stylesheet" href="${pageContext.request.contextPath}/static/vendor/fontawesome-6.5.2/css/all.min.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/salary.css?v=salary-unified-1">
 </head>
 
-<body class="hold-transition sidebar-mini layout-fixed">
+<body class="hold-transition hrms-adminlte hrms-salary" data-context-path="${pageContext.request.contextPath}">
 
 <div class="wrapper">
 
     <!-- 공통 헤더 -->
-    <%@ include file="/WEB-INF/views/common/header.jspf" %>
+    <%@ include file="/WEB-INF/views/common/adminlte-header.jspf" %>
 
     <!-- 공통 사이드바 -->
-    <%@ include file="/WEB-INF/views/common/sidebar.jspf" %>
+    <%@ include file="/WEB-INF/views/common/adminlte-sidebar.jspf" %>
 
-    <div class="content-wrapper salary-page">
+    <div class="content-wrapper">
+<main class="salary-page hrms-page-content">
 
         <!-- 페이지 제목 -->
         <section class="content-header">
             <div class="container-fluid">
                 <div class="salary-heading">
-                    <h1>급여 관리</h1>
-                    <p>사원별 월 급여를 조회하고 관리합니다.</p>
+                    <h1 class="hrms-page-title">급여 관리</h1>
+                    <p class="page-path">사원별 월 급여를 조회하고 관리합니다.</p>
                 </div>
             </div>
         </section>
@@ -53,22 +54,22 @@
                 <!-- 통계 카드 -->
                 <div class="salary-stats">
 
-                    <div class="salary-stat-card">
+                    <div class="salary-stat-card summary-card">
                         <span>급여 대상</span>
                         <strong id="salaryEmployeeCount">0명</strong>
                     </div>
 
-                    <div class="salary-stat-card">
+                    <div class="salary-stat-card summary-card">
                         <span>지급 예정</span>
                         <strong id="salaryRecordCount">0건</strong>
                     </div>
 
-                    <div class="salary-stat-card">
+                    <div class="salary-stat-card summary-card">
                         <span>급여 총액</span>
                         <strong id="salaryTotalAmount">0원</strong>
                     </div>
 
-                    <div class="salary-stat-card">
+                    <div class="salary-stat-card summary-card">
                         <span>조회 연월</span>
                         <strong id="salaryMonthInfo">전체</strong>
                     </div>
@@ -114,9 +115,10 @@
                         </button>
                     </form>
 
+                    <a href="${pageContext.request.contextPath}/salary/my" class="salary-cancel-btn">내 급여 조회</a>
                     <!-- 급여 등록 -->
                     <a href="${pageContext.request.contextPath}/salary/create"
-                       class="salary-register-btn">
+                       class="salary-register-btn primary-btn">
                         + 급여 등록
                     </a>
 
@@ -232,17 +234,18 @@
 
             </div>
         </section>
-    </div>
+    </main>
+</div>
 </div>
 
 <!-- jQuery -->
-<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<%@ include file="/WEB-INF/views/common/adminlte-scripts.jspf" %>
 
 <!-- Bootstrap -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+
 
 <!-- AdminLTE -->
-<script src="https://cdn.jsdelivr.net/npm/admin-lte@3.2/dist/js/adminlte.min.js"></script>
+
 
 <script>
 

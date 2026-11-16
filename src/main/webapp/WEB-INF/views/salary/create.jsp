@@ -10,29 +10,30 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>HRMS - 급여 등록</title>
 
-<link rel="stylesheet"
-	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 
-<link rel="stylesheet"
-	href="https://cdn.jsdelivr.net/npm/admin-lte@3.2/dist/css/adminlte.min.css">
 
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/css/salary.css">
+
+
+
+<%@ include file="/WEB-INF/views/common/adminlte-head.jspf" %>
+<link rel="stylesheet" href="${pageContext.request.contextPath}/static/vendor/fontawesome-6.5.2/css/all.min.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/salary.css?v=salary-unified-1">
 </head>
 
-<body class="hold-transition sidebar-mini layout-fixed">
+<body class="hold-transition hrms-adminlte hrms-salary" data-context-path="${pageContext.request.contextPath}">
 
 	<div class="wrapper">
 
-		<%@ include file="/WEB-INF/views/common/header.jspf"%>
-		<%@ include file="/WEB-INF/views/common/sidebar.jspf"%>
+		<%@ include file="/WEB-INF/views/common/adminlte-header.jspf"%>
+		<%@ include file="/WEB-INF/views/common/adminlte-sidebar.jspf"%>
 
-		<div class="content-wrapper salary-page">
+		<div class="content-wrapper">
+<main class="salary-page hrms-page-content">
 
 			<section class="content-header">
 				<div class="container-fluid salary-heading">
-					<h1>급여 등록</h1>
-					<p>지급 대상과 금액을 입력한 뒤 급여 내역을 검토해 주세요.</p>
+					<h1 class="hrms-page-title">급여 등록</h1>
+					<p class="page-path">지급 대상과 금액을 입력한 뒤 급여 내역을 검토해 주세요.</p>
 				</div>
 			</section>
 
@@ -64,7 +65,7 @@
 								value="${_csrf.token}">
 						</c:if>
 
-						<div class="salary-form-card">
+						<div class="salary-form-card content-card">
 
 							<h2>급여 정보</h2>
 
@@ -156,14 +157,15 @@
 								class="salary-cancel-btn">취소</a>
 
 							<button type="button" id="salaryReviewBtn"
-								class="salary-confirm-btn">급여 검토</button>
+								class="salary-confirm-btn primary-btn">급여 검토</button>
 						</div>
 
 					</form>
 
 				</div>
 			</section>
-		</div>
+		</main>
+</div>
 	</div>
 
 	<!-- 최종 등록 확인 팝업 -->
@@ -206,16 +208,14 @@
 				<button type="button" id="salaryBackBtn" class="salary-cancel-btn">돌아가기</button>
 
 				<button type="button" id="salarySubmitBtn"
-					class="salary-confirm-btn">등록 확정</button>
+					class="salary-confirm-btn primary-btn">등록 확정</button>
 			</div>
 		</div>
 	</div>
 
-	<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-	<script
-		src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
-	<script
-		src="https://cdn.jsdelivr.net/npm/admin-lte@3.2/dist/js/adminlte.min.js"></script>
+	<%@ include file="/WEB-INF/views/common/adminlte-scripts.jspf" %>
+	
+	
 
 	<script>
 const salaryForm = document.getElementById("salaryCreateForm");

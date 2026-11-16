@@ -30,7 +30,7 @@
 </select>
 </div>
 <div class="dat-field">
-<label for="datWorkDate">근무 일자</label><input id="datWorkDate" name="workDate" type="date" value="2026-11-05"/>
+<label for="datWorkDate">근무 일자</label><input id="datWorkDate" name="workDate" type="date"/>
 </div>
 <div class="dat-field">
 <label for="datStatus">근태 상태</label> <select id="datStatus" name="attendanceStatus"><option value="ALL">전체</option>
@@ -108,6 +108,6 @@
     </div>
 </div>
 <%@ include file="/WEB-INF/views/common/adminlte-scripts.jspf" %>
-<script src="${pageContext.request.contextPath}/static/js/attendance-department.js?v=1"></script>
+<script src="${pageContext.request.contextPath}/static/js/attendance-department.js?v=admin-live-1"></script>
 </body>
 </html>
