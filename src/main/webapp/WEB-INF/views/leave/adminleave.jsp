@@ -6,24 +6,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>직원 휴가 신청 관리</title>
     <%@ include file="/WEB-INF/views/common/adminlte-head.jspf" %>
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/leave-admin.css?v=1">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/leave-admin.css?v=job-unified-1">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/attendance-leave-layout.css?v=2">
 </head>
 <body class="hold-transition hrms-adminlte hrms-leave" data-context-path="${pageContext.request.contextPath}">
 <div class="wrapper">
     <%@ include file="/WEB-INF/views/common/adminlte-header.jspf" %>
     <%@ include file="/WEB-INF/views/common/adminlte-sidebar.jspf" %>
     <div class="content-wrapper">
-<nav class="px-4 pt-3" aria-label="휴가 화면 이동">
-<a class="btn btn-sm btn-outline-secondary" href="${pageContext.request.contextPath}/leave">휴가 현황</a>
-<a class="btn btn-sm btn-outline-secondary" href="${pageContext.request.contextPath}/leave/history">신청 내역</a>
-<a class="btn btn-sm btn-outline-secondary" href="${pageContext.request.contextPath}/leave/apply">휴가 신청</a>
-</nav>
         <div class="content hrms-leave-content">
-<main class="alr-page">
-<header class="alr-heading">
+<main class="alr-page hrms-page-content hrms-attendance-leave-page">
+<header class="alr-heading hrms-section-page-header">
 <div>
-<h1 class="alr-title">직원 휴가 신청 관리</h1>
-<p class="alr-subtitle">담당 직원의 휴가 신청을 조회하고 승인 상태를 확인합니다.</p>
+<h1 class="alr-title hrms-page-title">직원 휴가 신청 관리</h1>
+<p class="alr-subtitle page-path">담당 직원의 휴가 신청을 조회하고 승인 상태를 확인합니다.</p>
 </div>
 <span class="alr-demo">화면 예시 데이터 · DB 미연결</span>
 </header>
@@ -72,7 +68,7 @@
 <div class="alr-count" name="resultCount">총 0건</div>
 </div>
 <div class="alr-scroll">
-<table class="alr-table">
+<div class="hrms-table-scroll"><table class="alr-table">
 <thead>
 <tr>
 <th>신청일</th>
@@ -85,7 +81,7 @@
 </tr>
 </thead>
 <tbody name="leaveRequestRows"></tbody>
-</table>
+</table></div>
 </div>
 <div class="alr-footer">※ 샘플 화면입니다. 승인·반려는 백엔드 권한 검증 및 처리 API
 						연결 후 사용할 수 있습니다.</div>

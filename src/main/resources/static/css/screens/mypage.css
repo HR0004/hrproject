@@ -1,0 +1,9 @@
+@charset "UTF-8";
+/* Layout only. Visual components: hrms-theme.css. */
+.hrms-adminlte .profile-header { display:flex;align-items:center;gap:20px;margin-bottom:24px }
+.hrms-adminlte .profile-avatar { display:flex;align-items:center;justify-content:center;width:64px;height:64px }
+.hrms-adminlte .mypage-name { margin:0 0 8px }
+.hrms-adminlte .info-group { margin-bottom:20px }
+.hrms-adminlte .info-label { margin-bottom:6px }
+.hrms-adminlte .password-form { max-width:680px }
+.hrms-adminlte .password-form input { width:100% }

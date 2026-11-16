@@ -6,22 +6,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>휴가 신청</title>
     <%@ include file="/WEB-INF/views/common/adminlte-head.jspf" %>
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/leave-apply.css?v=1">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/leave-apply.css?v=job-unified-1">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/attendance-leave-layout.css?v=2">
 </head>
 <body class="hold-transition hrms-adminlte hrms-leave" data-context-path="${pageContext.request.contextPath}">
 <div class="wrapper">
     <%@ include file="/WEB-INF/views/common/adminlte-header.jspf" %>
     <%@ include file="/WEB-INF/views/common/adminlte-sidebar.jspf" %>
     <div class="content-wrapper">
-<nav class="px-4 pt-3" aria-label="휴가 화면 이동">
-<a class="btn btn-sm btn-outline-secondary" href="${pageContext.request.contextPath}/leave">휴가 현황</a>
-<a class="btn btn-sm btn-outline-secondary" href="${pageContext.request.contextPath}/leave/history">신청 내역</a>
-<a class="btn btn-sm btn-primary" href="${pageContext.request.contextPath}/leave/apply" aria-current="page">휴가 신청</a>
-</nav>
         <div class="content hrms-leave-content">
-<main class="la-page">
-<h1 class="la-heading">휴가 신청</h1>
-<p class="la-subheading">휴가 종류와 기간을 입력하여 휴가를 신청합니다.</p>
+<main class="la-page hrms-page-content hrms-attendance-leave-page">
+<header class="hrms-section-page-header">
+<h1 class="la-heading hrms-page-title">휴가 신청</h1>
+<p class="la-subheading page-path">휴가 종류와 기간을 입력하여 휴가를 신청합니다.</p>
+</header>
 <section aria-labelledby="laFormTitle" class="la-card card">
 <div class="la-card-header">
 <h2 class="la-card-title" id="laFormTitle">휴가 신청서</h2>

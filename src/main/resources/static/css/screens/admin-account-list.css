@@ -1,0 +1,11 @@
+@charset "UTF-8";
+/* Layout only. Visual components: hrms-theme.css. */
+.hrms-adminlte .employee-stats { display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px;margin-bottom:40px }
+.hrms-adminlte .employee-toolbar-actions, .hrms-adminlte .account-search-form { display:flex;align-items:center;flex-wrap:wrap;gap:12px }
+.hrms-adminlte .employee-table { min-width:900px }
+.hrms-adminlte .employee-pagination-wrap { display:flex;justify-content:center }
+.hrms-adminlte .account-search-form { margin-bottom:20px }
+.hrms-adminlte .account-search-form input { flex:1;min-width:180px }
+.hrms-adminlte .account-sr-only { position:absolute;width:1px;height:1px;padding:0;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap }
+.hrms-adminlte .account-status-form { margin:0 }
+.hrms-adminlte .account-status-feedback { margin-bottom:20px }

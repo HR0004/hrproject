@@ -1,0 +1,9 @@
+@charset "UTF-8";
+/* Layout only. Visual components: hrms-theme.css. */
+.hrms-adminlte .myedit-grid { display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px }
+.hrms-adminlte .myedit-field { position:relative }
+.hrms-adminlte .myedit-field input { width:100%;padding-right:36px }
+.hrms-adminlte .myedit-lock { position:absolute;right:12px;bottom:12px }
+.hrms-adminlte .myedit-actions, .hrms-adminlte .myedit-buttons { display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap }
+.hrms-adminlte .myedit-actions { margin-top:24px }
+.hrms-adminlte .myedit-status { white-space:nowrap }

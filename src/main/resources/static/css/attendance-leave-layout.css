@@ -1,0 +1,23 @@
+@charset "UTF-8";
+/* Attendance/leave pages use the same page geometry as Job Management.
+   Loaded after page CSS; scoped to these pages only. */
+.hrms-adminlte .content-wrapper .hrms-attendance-leave-page {
+    width:100%; max-width:none; min-width:0; margin:0;
+    padding:var(--hrms-page-y) var(--hrms-page-x) 40px;
+}
+.hrms-adminlte .content-wrapper .hrms-attendance-leave-page > .hrms-section-page-header {
+    margin:0 0 20px; padding:0; gap:16px;
+}
+.hrms-adminlte .content-wrapper .hrms-attendance-leave-page .hrms-section-page-header .hrms-page-title {
+    margin:0 0 8px; padding:0;
+    color:var(--hrms-heading);
+    font:700 var(--hrms-title-size)/1.4 var(--hrms-font);
+    letter-spacing:-.4px;
+}
+.hrms-adminlte .content-wrapper .hrms-attendance-leave-page .hrms-section-page-header .page-path {
+    margin:0; padding:0; color:var(--hrms-muted);
+    font-family:var(--hrms-font); font-size:13px; font-weight:400; line-height:1.6;
+}
+.hrms-adminlte .content-wrapper .hrms-attendance-leave-page > .hrms-section-page-header + * {
+    margin-top:0;
+}

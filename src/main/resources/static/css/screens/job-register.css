@@ -1,0 +1,6 @@
+@charset "UTF-8";
+/* Layout only. Visual components: hrms-theme.css. */
+.hrms-adminlte .job-register-container { width:100%;max-width:900px;margin:0 auto }
+.hrms-adminlte .job-form-group, .hrms-adminlte .form-group { margin-bottom:20px }
+.hrms-adminlte .job-form-group input, .hrms-adminlte .form-group input { width:100% }
+.hrms-adminlte .job-form-actions, .hrms-adminlte .button-group { display:flex;justify-content:flex-end;gap:10px;margin-top:24px }

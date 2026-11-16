@@ -6,23 +6,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>부서 근태 현황</title>
     <%@ include file="/WEB-INF/views/common/adminlte-head.jspf" %>
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/attendance-department.css?v=1">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/attendance-department.css?v=job-unified-1">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/attendance-leave-layout.css?v=2">
 </head>
 <body class="hold-transition hrms-adminlte hrms-attendance" data-context-path="${pageContext.request.contextPath}">
 <div class="wrapper">
     <%@ include file="/WEB-INF/views/common/adminlte-header.jspf" %>
     <%@ include file="/WEB-INF/views/common/adminlte-sidebar.jspf" %>
     <div class="content-wrapper">
-<nav class="hrms-attendance-links px-4 pt-3" aria-label="근태 화면 이동">
-    <a class="btn btn-sm btn-outline-secondary" href="${pageContext.request.contextPath}/attendance">내 근태</a>
-    <a class="btn btn-sm btn-outline-secondary" href="${pageContext.request.contextPath}/attendance/monthly">월별 조회</a>
-</nav>
+
         <div class="content hrms-attendance-content">
-<main class="dat-page">
-<header class="dat-header">
+<main class="dat-page hrms-page-content hrms-attendance-leave-page">
+<header class="dat-header hrms-section-page-header">
 <div>
-<h1 class="dat-title">부서 근태 현황</h1>
-<p class="dat-subtitle">같은 부서 직원의 일별 출퇴근 및 근태 상태를 확인합니다.</p>
+<h1 class="dat-title hrms-page-title">부서 근태 현황</h1>
+<p class="dat-subtitle page-path">같은 부서 직원의 일별 출퇴근 및 근태 상태를 확인합니다.</p>
 </div>
 </header>
 <section aria-label="부서 근태 조회 조건" class="dat-panel dat-filter">
@@ -74,7 +72,7 @@
 <span class="dat-count" name="attendanceCount">총 0명</span>
 </div>
 <div class="dat-scroll">
-<table class="dat-table">
+<div class="hrms-table-scroll"><table class="dat-table">
 <thead>
 <tr>
 <th>사번</th>
@@ -87,7 +85,7 @@
 </tr>
 </thead>
 <tbody name="departmentAttendanceRows"></tbody>
-</table>
+</table></div>
 </div>
 <div class="dat-footer">※ 미기록은 결근 확정이 아닙니다. 휴가 여부 및 근무 일정과 함께
 

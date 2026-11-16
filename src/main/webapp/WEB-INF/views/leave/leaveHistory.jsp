@@ -6,22 +6,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>휴가 신청 내역</title>
     <%@ include file="/WEB-INF/views/common/adminlte-head.jspf" %>
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/leave-history.css?v=1">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/leave-history.css?v=job-unified-1">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/attendance-leave-layout.css?v=2">
 </head>
 <body class="hold-transition hrms-adminlte hrms-leave" data-context-path="${pageContext.request.contextPath}">
 <div class="wrapper">
     <%@ include file="/WEB-INF/views/common/adminlte-header.jspf" %>
     <%@ include file="/WEB-INF/views/common/adminlte-sidebar.jspf" %>
     <div class="content-wrapper">
-<nav class="px-4 pt-3" aria-label="휴가 화면 이동">
-<a class="btn btn-sm btn-outline-secondary" href="${pageContext.request.contextPath}/leave">휴가 현황</a>
-<a class="btn btn-sm btn-primary" href="${pageContext.request.contextPath}/leave/history" aria-current="page">신청 내역</a>
-<a class="btn btn-sm btn-outline-secondary" href="${pageContext.request.contextPath}/leave/apply">휴가 신청</a>
-</nav>
         <div class="content hrms-leave-content">
-<main class="lh-page">
-<h1 class="lh-heading">휴가 신청 내역</h1>
-<p class="lh-caption">신청한 휴가의 기간과 승인 상태를 확인할 수 있습니다.</p>
+<main class="lh-page hrms-page-content hrms-attendance-leave-page">
+<header class="hrms-section-page-header">
+<h1 class="lh-heading hrms-page-title">휴가 신청 내역</h1>
+<p class="lh-caption page-path">신청한 휴가의 기간과 승인 상태를 확인할 수 있습니다.</p>
+</header>
 <section aria-label="휴가 신청 내역 검색 조건" class="lh-filter-panel">
 <div class="lh-filter-controls">
 <div class="lh-filter-field">
@@ -55,7 +53,7 @@
 <span class="lh-count" name="historyCount">총 0건</span>
 </div>
 <div class="lh-table-scroll">
-<table class="lh-table">
+<div class="hrms-table-scroll"><table class="lh-table">
 <thead>
 <tr>
 <th scope="col">신청일</th>
@@ -75,7 +73,7 @@
 <td class="lh-empty" colspan="7">검색 결과가 없습니다.</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 </div>
 <div class="lh-card-bottom">
 <span class="lh-footer-count" name="historyFooterCount">총

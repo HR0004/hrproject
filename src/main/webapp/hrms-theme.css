@@ -1,0 +1,17 @@
+@charset "UTF-8";
+
+:root {
+    --hrms-bg: #fff;
+    --hrms-text: #172033;
+    --hrms-muted: #728199;
+    --hrms-border: #dce5f1;
+
+    --hrms-primary: #111a30;
+    --hrms-primary-hover: #27334c;
+
+    --hrms-title-size: 24px;
+    --hrms-section-title-size: 16px;
+    --hrms-control-height: 44px;
+    --hrms-card-radius: 10px;
+    --hrms-card-padding: 24px;
+}

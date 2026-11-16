@@ -6,23 +6,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>나의 월별 근태 성적</title>
     <%@ include file="/WEB-INF/views/common/adminlte-head.jspf" %>
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/attendance-monthly.css?v=1">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/attendance-monthly.css?v=job-unified-1">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/attendance-leave-layout.css?v=2">
 </head>
 <body class="hold-transition hrms-adminlte hrms-attendance" data-context-path="${pageContext.request.contextPath}">
 <div class="wrapper">
     <%@ include file="/WEB-INF/views/common/adminlte-header.jspf" %>
     <%@ include file="/WEB-INF/views/common/adminlte-sidebar.jspf" %>
     <div class="content-wrapper">
-<nav class="hrms-attendance-links px-4 pt-3" aria-label="근태 화면 이동">
-    <a class="btn btn-sm btn-outline-secondary" href="${pageContext.request.contextPath}/attendance">내 근태</a>
-    <a class="btn btn-sm btn-primary" href="${pageContext.request.contextPath}/attendance/monthly" aria-current="page">월별 조회</a>
-</nav>
+
         <div class="content hrms-attendance-content">
-<main class="ma-page">
-<header class="ma-head">
+<main class="ma-page hrms-page-content hrms-attendance-leave-page">
+<header class="ma-head hrms-section-page-header">
 <div>
-<h2 class="ma-title">나의 월별 근태 성적</h2>
-<p class="ma-subtitle">월별 총근일수, 지각·조퇴, 결근 및 연장근무 현황을 확인할 수
+<h2 class="ma-title hrms-page-title">나의 월별 근태 성적</h2>
+<p class="ma-subtitle page-path">월별 총근일수, 지각·조퇴, 결근 및 연장근무 현황을 확인할 수
 							있습니다.</p>
 </div>
 <div class="ma-search-controls">
@@ -68,7 +66,7 @@
 <p class="ma-section-subtitle">개인별 월간 근태 집계</p>
 </div>
 <div class="ma-table-scroll">
-<table class="ma-table">
+<div class="hrms-table-scroll"><table class="ma-table">
 <colgroup>
 <col style="width: 15%;"/>
 <col style="width: 15%;"/>
@@ -94,7 +92,7 @@
 <td class="ma-empty" colspan="7">근태 데이터를 불러오는 중입니다.</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 </div>
 </section>
 </main>

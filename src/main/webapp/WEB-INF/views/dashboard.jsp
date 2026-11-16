@@ -16,7 +16,7 @@
 
     <!-- 대시보드 내부 전용 CSS -->
     <link rel="stylesheet"
-          href="${pageContext.request.contextPath}/css/dashboard.css">
+          href="${pageContext.request.contextPath}/css/dashboard.css?v=job-unified-1">
 </head>
 
 <body class="hold-transition hrms-adminlte">
@@ -144,7 +144,7 @@
 
                     <div class="dashboard-table-scroll">
 
-                        <table class="dashboard-system-table">
+                        <div class="hrms-table-scroll"><table class="dashboard-system-table">
 
                             <thead>
                                 <tr>
@@ -172,7 +172,7 @@
 
                             </tbody>
 
-                        </table>
+                        </table></div>
 
                     </div>
 

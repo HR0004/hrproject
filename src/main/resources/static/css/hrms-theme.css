@@ -1,0 +1,475 @@
+@charset "UTF-8";
+/* HRMS design system. Source of truth: the current Job Management tab. */
+:root {
+ --hrms-bg: #fff; --hrms-text: #172033; --hrms-heading: #14213b;
+ --hrms-muted: #8293b1; --hrms-border: #e2e8f0; --hrms-input-border: #dce3ec;
+ --hrms-primary: #10192e; --hrms-primary-hover: #263754; --hrms-table-head: #edf2f8;
+ --hrms-soft: #f5f7fb; --hrms-success: #197849; --hrms-warning: #a66d14; --hrms-danger: #b83b48;
+ --hrms-font: "Malgun Gothic", Arial, sans-serif; --hrms-body-size: 13px;
+ --hrms-title-size: 24px; --hrms-section-title-size: 16px; --hrms-control-height: 42px;
+ --hrms-card-radius: 10px; --hrms-card-padding: 24px; --hrms-page-x: 36px; --hrms-page-y: 32px;
+}
+body.hrms-adminlte { margin:0; background:var(--hrms-bg); font-family:var(--hrms-font); color:var(--hrms-text); }
+body.hrms-adminlte .content-wrapper { background:var(--hrms-bg); min-width:0; font-family:var(--hrms-font); font-size:var(--hrms-body-size); line-height:1.6; }
+.hrms-adminlte .content-wrapper *, .hrms-adminlte .hrms-popup-content * { box-sizing:border-box; }
+.hrms-adminlte [hidden] { display:none !important; }
+.hrms-adminlte .content-wrapper .container-fluid { padding-left:0; padding-right:0; }
+.hrms-adminlte .hrms-page-content { width:100%; max-width:none; margin:0; min-width:0; padding:var(--hrms-page-y) var(--hrms-page-x) 40px; }
+.hrms-adminlte .hrms-page-content > .content-header { padding:0 0 20px; }
+.hrms-adminlte .hrms-page-content > .content { padding:0; }
+.hrms-adminlte .hrms-attendance-content, .hrms-adminlte .hrms-leave-content { padding:0; }
+.hrms-adminlte .hrms-subnav { display:flex; flex-wrap:wrap; gap:8px; padding:24px var(--hrms-page-x) 0; }
+.hrms-adminlte .hrms-popup-content { min-height:100vh; padding:24px; font-family:var(--hrms-font); font-size:var(--hrms-body-size); }
+.hrms-adminlte .popup-card, .hrms-adminlte .job-popup-card { max-width:600px; margin:0 auto; }
+.hrms-adminlte .content-wrapper h1, .hrms-adminlte .content-wrapper h2, .hrms-adminlte .content-wrapper h3, .hrms-adminlte .content-wrapper p { margin-top:0; }
+
+.hrms-adminlte .hrms-page-title,
+.hrms-adminlte .dashboard-heading-title,
+.hrms-adminlte .att-dashboard > header .att-heading,
+.hrms-adminlte .ma-title,
+.hrms-adminlte .dat-title,
+.hrms-adminlte .leave-dashboard > header .leave-heading,
+.hrms-adminlte .la-heading,
+.hrms-adminlte .lh-heading,
+.hrms-adminlte .alr-title { margin:0 0 8px; color:var(--hrms-heading); font:700 var(--hrms-title-size)/1.4 var(--hrms-font); letter-spacing:-.4px; }
+
+.hrms-adminlte .employee-page-desc,
+.hrms-adminlte .page-path,
+.hrms-adminlte .tools-location,
+.hrms-adminlte .mypage-location,
+.hrms-adminlte .dashboard-heading-desc,
+.hrms-adminlte .att-caption,
+.hrms-adminlte .ma-subtitle,
+.hrms-adminlte .dat-subtitle,
+.hrms-adminlte .leave-caption,
+.hrms-adminlte .la-subheading,
+.hrms-adminlte .lh-caption,
+.hrms-adminlte .alr-subtitle,
+.hrms-adminlte .popup-description,
+.hrms-adminlte .job-breadcrumb,
+.hrms-adminlte .job-page-heading p,
+.hrms-adminlte .employee-register-heading p,
+.hrms-adminlte .employee-detail-heading p,
+.hrms-adminlte .employee-home-heading p,
+.hrms-adminlte .myedit-heading p { margin:0; color:var(--hrms-muted); font-size:13px; line-height:1.6; }
+
+.hrms-adminlte .hrms-page-heading,
+.hrms-adminlte .employee-register-heading,
+.hrms-adminlte .employee-detail-heading,
+.hrms-adminlte .employee-home-heading,
+.hrms-adminlte .myedit-heading,
+.hrms-adminlte .job-page-heading,
+.hrms-adminlte .att-dashboard > header,
+.hrms-adminlte .ma-head,
+.hrms-adminlte .dat-header,
+.hrms-adminlte .alr-heading,
+.hrms-adminlte .leave-dashboard > header { margin-bottom:20px; }
+
+.hrms-adminlte .employee-list-title,
+.hrms-adminlte .search-section-title,
+.hrms-adminlte .search-result-title,
+.hrms-adminlte .section-subtitle,
+.hrms-adminlte .tools-card h2,
+.hrms-adminlte .account-info-title,
+.hrms-adminlte .dashboard-system-title,
+.hrms-adminlte .att-card-title,
+.hrms-adminlte .att-section .att-heading,
+.hrms-adminlte .ma-section-title,
+.hrms-adminlte .dat-section-title,
+.hrms-adminlte .leave-card-title,
+.hrms-adminlte .la-card-title,
+.hrms-adminlte .lh-card-title,
+.hrms-adminlte .alr-section-title,
+.hrms-adminlte .mypage-info-title,
+.hrms-adminlte .password-title,
+.hrms-adminlte .myedit-section-title,
+.hrms-adminlte .myedit-card-heading h2,
+.hrms-adminlte .employee-detail-info h2,
+.hrms-adminlte .employee-register-card > h2,
+.hrms-adminlte .employee-home-card-heading h2,
+.hrms-adminlte .job-card-heading h2 { margin:0 0 12px; color:var(--hrms-heading); font-size:var(--hrms-section-title-size); font-weight:700; line-height:1.5; }
+
+.hrms-adminlte :where(.content-wrapper button,.hrms-popup-content button,.content-wrapper input,.content-wrapper select,.content-wrapper textarea,.hrms-popup-content input,.hrms-popup-content select) { font-family:var(--hrms-font); font-size:var(--hrms-body-size); }
+
+.hrms-adminlte :where(.content-wrapper button,.hrms-popup-content button,.content-wrapper .employee-search-btn,.content-wrapper .employee-register-btn,.content-wrapper .employee-detail-button,.content-wrapper .employee-action-link,.content-wrapper .back-list-btn,.content-wrapper .btn-list,.content-wrapper .tools-navigation a,.content-wrapper .account-reset-link,.content-wrapper .job-back-btn,.hrms-popup-content .job-cancel-btn,.content-wrapper .job-cancel-btn,.content-wrapper .employee-home-edit-btn) { display:inline-flex; align-items:center; justify-content:center; gap:6px; min-height:var(--hrms-control-height); padding:10px 18px; border:1px solid var(--hrms-input-border); border-radius:8px; background:#fff; color:var(--hrms-text); font-weight:400; line-height:20px; text-decoration:none; cursor:pointer; vertical-align:middle; }
+
+.hrms-adminlte .primary-btn,
+.hrms-adminlte .job-submit-btn,
+.hrms-adminlte .employee-register-btn:not(.btn-outline),
+.hrms-adminlte .employee-detail-button-primary,
+.hrms-adminlte .search-btn-primary,
+.hrms-adminlte .btn-save,
+.hrms-adminlte .tools-button,
+.hrms-adminlte .att-button-primary,
+.hrms-adminlte .att-dark,
+.hrms-adminlte .dat-btn-primary,
+.hrms-adminlte .leave-button-primary,
+.hrms-adminlte .la-btn-primary,
+.hrms-adminlte .alr-btn-primary,
+.hrms-adminlte .lh-apply-btn,
+.hrms-adminlte .lh-modal-ok,
+.hrms-adminlte .myedit-btn-primary,
+.hrms-adminlte .info-modal-primary,
+.hrms-adminlte .password-submit,
+.hrms-adminlte .account-search-submit,
+.hrms-adminlte .btn.btn-primary { padding-left:22px; padding-right:22px; background:var(--hrms-primary); border-color:var(--hrms-primary); color:#fff; }
+
+.hrms-adminlte .primary-btn:hover:not(:disabled),
+.hrms-adminlte .job-submit-btn:hover:not(:disabled),
+.hrms-adminlte .employee-register-btn:not(.btn-outline):hover:not(:disabled),
+.hrms-adminlte .employee-detail-button-primary:hover:not(:disabled),
+.hrms-adminlte .search-btn-primary:hover:not(:disabled),
+.hrms-adminlte .btn-save:hover:not(:disabled),
+.hrms-adminlte .tools-button:hover:not(:disabled),
+.hrms-adminlte .att-button-primary:hover:not(:disabled),
+.hrms-adminlte .att-dark:hover:not(:disabled),
+.hrms-adminlte .dat-btn-primary:hover:not(:disabled),
+.hrms-adminlte .leave-button-primary:hover:not(:disabled),
+.hrms-adminlte .la-btn-primary:hover:not(:disabled),
+.hrms-adminlte .alr-btn-primary:hover:not(:disabled),
+.hrms-adminlte .lh-apply-btn:hover:not(:disabled),
+.hrms-adminlte .lh-modal-ok:hover:not(:disabled),
+.hrms-adminlte .myedit-btn-primary:hover:not(:disabled),
+.hrms-adminlte .info-modal-primary:hover:not(:disabled),
+.hrms-adminlte .password-submit:hover:not(:disabled),
+.hrms-adminlte .account-search-submit:hover:not(:disabled),
+.hrms-adminlte .btn.btn-primary:hover:not(:disabled) { background:var(--hrms-primary-hover); border-color:var(--hrms-primary-hover); color:#fff; }
+
+.hrms-adminlte .content-wrapper button:disabled,
+.hrms-adminlte .hrms-popup-content button:disabled { opacity:.45; cursor:not-allowed; }
+
+.hrms-adminlte .content-wrapper .btn-danger,
+.hrms-adminlte .content-wrapper .danger { background:var(--hrms-danger); border-color:var(--hrms-danger); color:#fff; }
+
+.hrms-adminlte .content-wrapper input:not([type="checkbox"]):not([type="radio"]):not([type="hidden"]),
+.hrms-adminlte .content-wrapper select,
+.hrms-adminlte .hrms-popup-content input:not([type="hidden"]),
+.hrms-adminlte .hrms-popup-content select { min-height:var(--hrms-control-height); padding:10px 14px; border:1px solid var(--hrms-input-border); border-radius:8px; background:#fff; color:var(--hrms-text); line-height:20px; max-width:100%; }
+
+.hrms-adminlte .content-wrapper textarea { display:block; width:100%; min-height:140px; padding:12px 14px; border:1px solid var(--hrms-input-border); border-radius:8px; resize:vertical; color:var(--hrms-text); background:#fff; }
+
+.hrms-adminlte .content-wrapper input:focus,
+.hrms-adminlte .content-wrapper select:focus,
+.hrms-adminlte .content-wrapper textarea:focus,
+.hrms-adminlte .hrms-popup-content input:focus { outline:0; border-color:var(--hrms-muted); box-shadow:0 0 0 3px rgba(130,147,177,.12); }
+
+.hrms-adminlte .content-wrapper input[readonly],
+.hrms-adminlte .content-wrapper input:disabled,
+.hrms-adminlte .content-wrapper select:disabled { background:var(--hrms-soft); color:#64748b; }
+
+.hrms-adminlte .content-wrapper input[type="checkbox"],
+.hrms-adminlte .content-wrapper input[type="radio"] { width:16px; height:16px; flex-shrink:0; accent-color:var(--hrms-primary); }
+
+.hrms-adminlte .content-wrapper label,
+.hrms-adminlte .hrms-popup-content label { font-weight:600; }
+
+.hrms-adminlte .form-group > label,
+.hrms-adminlte .job-form-group > label,
+.hrms-adminlte .register-field > label,
+.hrms-adminlte .myedit-field > label,
+.hrms-adminlte .la-field > .la-label,
+.hrms-adminlte .search-field > label { display:block; margin:0 0 8px; }
+
+.hrms-adminlte .summary-card,
+.hrms-adminlte .employee-stat-card,
+.hrms-adminlte .dashboard-stat-card,
+.hrms-adminlte .ma-stat-card,
+.hrms-adminlte .dat-stat,
+.hrms-adminlte .alr-stat,
+.hrms-adminlte .employee-home-summary-card { min-height:115px; margin:0; padding:24px; background:#fff; border:1px solid var(--hrms-border); border-radius:var(--hrms-card-radius); box-shadow:none; }
+
+.hrms-adminlte .summary-card p,
+.hrms-adminlte .employee-stat-label,
+.hrms-adminlte .dashboard-stat-label,
+.hrms-adminlte .ma-stat-label,
+.hrms-adminlte .dat-stat-label,
+.hrms-adminlte .alr-stat-label,
+.hrms-adminlte .employee-home-summary-card p { margin:0 0 20px; color:#475569; font-size:13px; font-weight:400; }
+
+.hrms-adminlte .summary-card h3,
+.hrms-adminlte .employee-stat-number,
+.hrms-adminlte .dashboard-stat-value,
+.hrms-adminlte .ma-stat-value,
+.hrms-adminlte .dat-stat-value,
+.hrms-adminlte .alr-stat-value,
+.hrms-adminlte .employee-home-summary-card h2,
+.hrms-adminlte .leave-summary-value { margin:0; color:var(--hrms-heading); font-size:22px; font-weight:700; line-height:1.4; }
+
+.hrms-adminlte .content-card,
+.hrms-adminlte .tools-card,
+.hrms-adminlte .search-panel,
+.hrms-adminlte .search-results,
+.hrms-adminlte .employee-detail-card,
+.hrms-adminlte .employee-register-card,
+.hrms-adminlte .employee-home-card,
+.hrms-adminlte .profile-card,
+.hrms-adminlte .password-card,
+.hrms-adminlte .myedit-card,
+.hrms-adminlte .att-today-card,
+.hrms-adminlte .att-section,
+.hrms-adminlte .dat-panel,
+.hrms-adminlte .leave-card,
+.hrms-adminlte .la-card,
+.hrms-adminlte .lh-card,
+.hrms-adminlte .alr-panel,
+.hrms-adminlte .dashboard-system,
+.hrms-adminlte .popup-card,
+.hrms-adminlte .job-popup-card { background:#fff; border:1px solid var(--hrms-border); border-radius:var(--hrms-card-radius); padding:var(--hrms-card-padding); margin-bottom:24px; box-shadow:none; }
+
+.hrms-adminlte .employee-toolbar,
+.hrms-adminlte .table-top,
+.hrms-adminlte .search-result-header,
+.hrms-adminlte .leave-card-head,
+.hrms-adminlte .la-card-header,
+.hrms-adminlte .lh-card-head,
+.hrms-adminlte .alr-panel-head,
+.hrms-adminlte .dat-panel-head,
+.hrms-adminlte .myedit-card-heading,
+.hrms-adminlte .employee-home-card-heading,
+.hrms-adminlte .employee-detail-heading,
+.hrms-adminlte .employee-register-heading,
+.hrms-adminlte .ma-head,
+.hrms-adminlte .dat-header,
+.hrms-adminlte .alr-heading { display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:16px; margin-bottom:20px; }
+
+.hrms-adminlte .table-top h3 { font-size:14px; font-weight:600; margin:0; }
+
+.hrms-adminlte .hrms-table-scroll,
+.hrms-adminlte .employee-table-wrap,
+.hrms-adminlte .search-table-wrap,
+.hrms-adminlte .dashboard-table-scroll,
+.hrms-adminlte .att-table-wrap,
+.hrms-adminlte .ma-table-scroll,
+.hrms-adminlte .dat-scroll,
+.hrms-adminlte .leave-table-scroll,
+.hrms-adminlte .lh-table-scroll,
+.hrms-adminlte .alr-scroll,
+.hrms-adminlte .preview-table-wrap { width:100%; min-width:0; overflow-x:auto; }
+
+.hrms-adminlte .content-wrapper table,
+.hrms-adminlte .hrms-popup-content table { width:100%; border-collapse:separate; border-spacing:0 5px; font-size:13px; line-height:1.6; table-layout:auto; }
+
+.hrms-adminlte .content-wrapper table th,
+.hrms-adminlte .hrms-popup-content table th { padding:18px 22px; background:var(--hrms-table-head); color:var(--hrms-text); text-align:left; border:0; font-size:13px; font-weight:600; white-space:nowrap; }
+
+.hrms-adminlte .content-wrapper table td,
+.hrms-adminlte .hrms-popup-content table td { padding:18px 22px; background:#fff; color:var(--hrms-text); border-top:1px solid var(--hrms-border); border-bottom:1px solid var(--hrms-border); vertical-align:middle; }
+
+.hrms-adminlte .content-wrapper table td:first-child { border-left:1px solid var(--hrms-border); border-radius:8px 0 0 8px; }
+
+.hrms-adminlte .content-wrapper table td:last-child { border-right:1px solid var(--hrms-border); border-radius:0 8px 8px 0; }
+
+.hrms-adminlte .content-wrapper table button,
+.hrms-adminlte .content-wrapper table .employee-action-link { min-height:34px; padding:6px 12px; border-radius:6px; font-size:13px; margin-right:4px; }
+
+.hrms-adminlte .content-wrapper table td button:not(.btn-danger):not(.alr-btn-primary) { background:#fff; color:var(--hrms-text); border-color:var(--hrms-input-border); }
+
+.hrms-adminlte .content-wrapper table td button:hover:not(:disabled) { background:var(--hrms-table-head); }
+
+.hrms-adminlte .employee-empty,
+.hrms-adminlte .empty-message,
+.hrms-adminlte .account-empty-list,
+.hrms-adminlte .att-empty,
+.hrms-adminlte .ma-empty,
+.hrms-adminlte .dat-empty,
+.hrms-adminlte .leave-empty,
+.hrms-adminlte .lh-empty,
+.hrms-adminlte .alr-empty { text-align:center; color:var(--hrms-muted); padding:32px 16px; }
+
+.hrms-adminlte .account-muted,
+.hrms-adminlte .account-scope-note,
+.hrms-adminlte .employee-notice,
+.hrms-adminlte .employee-register-hint,
+.hrms-adminlte .employee-detail-hint,
+.hrms-adminlte .preview-note,
+.hrms-adminlte .tools-description,
+.hrms-adminlte .att-help,
+.hrms-adminlte .att-footer-note,
+.hrms-adminlte .ma-notice,
+.hrms-adminlte .dat-footer,
+.hrms-adminlte .leave-note,
+.hrms-adminlte .la-notice,
+.hrms-adminlte .alr-footer,
+.hrms-adminlte .lh-footer-count,
+.hrms-adminlte .password-note,
+.hrms-adminlte .password-help,
+.hrms-adminlte .myedit-actions-text,
+.hrms-adminlte .ma-section-subtitle { font-size:12px; line-height:1.6; color:var(--hrms-muted); margin:12px 0 0; }
+
+.hrms-adminlte .account-role-badge,
+.hrms-adminlte .role-badge,
+.hrms-adminlte .employee-status,
+.hrms-adminlte .employee-detail-status,
+.hrms-adminlte .myedit-status,
+.hrms-adminlte .lh-status,
+.hrms-adminlte .dat-pill,
+.hrms-adminlte .alr-pill,
+.hrms-adminlte .att-status-badge { display:inline-flex; align-items:center; justify-content:center; gap:6px; padding:5px 10px; border-radius:20px; background:var(--hrms-soft); font-size:12px; line-height:1.5; }
+
+.hrms-adminlte .is-active.employee-status,
+.hrms-adminlte .is-active.employee-detail-status,
+.hrms-adminlte .dat-pill-normal,
+.hrms-adminlte .alr-pill-approved,
+.hrms-adminlte .att-status-badge { color:var(--hrms-success); background:#e7f5ec; }
+
+.hrms-adminlte .is-leave.employee-status,
+.hrms-adminlte .dat-pill-late,
+.hrms-adminlte .dat-pill-early,
+.hrms-adminlte .alr-pill-pending { color:var(--hrms-warning); background:#fff2da; }
+
+.hrms-adminlte .is-retired.employee-status,
+.hrms-adminlte .is-retired.employee-detail-status,
+.hrms-adminlte .alr-pill-rejected { color:var(--hrms-danger); background:#fceced; }
+
+.hrms-adminlte .required,
+.hrms-adminlte .la-required,
+.hrms-adminlte .att-failure,
+.hrms-adminlte .password-message,
+.hrms-adminlte .myedit-message { color:var(--hrms-danger); }
+
+.hrms-adminlte .tools-message,
+.hrms-adminlte .employee-notice,
+.hrms-adminlte .register-notice,
+.hrms-adminlte .job-info-box,
+.hrms-adminlte .myedit-notice,
+.hrms-adminlte .info-modal-description { padding:14px 16px; border:1px solid var(--hrms-border); border-radius:8px; background:var(--hrms-table-head); color:#475569; margin:0 0 20px; }
+
+.hrms-adminlte .content-wrapper .breadcrumb { background:none; padding:0; color:var(--hrms-muted); font-size:12px; margin:0 0 8px; }
+
+.hrms-adminlte .role-label,
+.hrms-adminlte .tools-permission { display:flex; align-items:flex-start; gap:12px; padding:14px; border:1px solid var(--hrms-border); border-radius:8px; background:#fff; font-weight:400; margin:0; cursor:pointer; }
+
+.hrms-adminlte .role-label input,
+.hrms-adminlte .tools-permission input { margin-top:3px; }
+
+.hrms-adminlte .tools-permission small,
+.hrms-adminlte .preview-note { display:block; color:var(--hrms-muted); }
+
+.hrms-adminlte .la-card-body { padding:0; }
+
+.hrms-adminlte .myedit-divider { border:0; border-top:1px solid var(--hrms-border); margin:24px 0; }
+
+.hrms-adminlte .att-time { font-size:17px; font-weight:700; }
+
+.hrms-adminlte .att-value,
+.hrms-adminlte .employee-detail-value,
+.hrms-adminlte .info-value { font-size:14px; color:var(--hrms-heading); }
+
+.hrms-adminlte .employee-home-info-item span,
+.hrms-adminlte .info-label,
+.hrms-adminlte .employee-detail-field label { color:var(--hrms-muted); font-size:12px; font-weight:400; }
+
+.hrms-adminlte .employee-home-shortcut,
+.hrms-adminlte .employee-home-bottom-link,
+.hrms-adminlte .employee-name { color:var(--hrms-heading); }
+
+.hrms-adminlte .password-modal,
+.hrms-adminlte .info-modal,
+.hrms-adminlte .lh-modal-overlay,
+.hrms-adminlte .dat-overlay,
+.hrms-adminlte .alr-overlay { display:none; position:fixed; inset:0; z-index:1060; align-items:center; justify-content:center; padding:20px; background:rgba(15,23,42,.45); }
+
+.hrms-adminlte .password-modal.show,
+.hrms-adminlte .info-modal.show,
+.hrms-adminlte .lh-modal-overlay.is-open,
+.hrms-adminlte .dat-overlay.dat-open,
+.hrms-adminlte .alr-overlay.alr-open { display:flex; }
+
+.hrms-adminlte .info-modal { z-index:2000; }
+
+.hrms-adminlte .att-dialog-overlay { display:flex; position:fixed; inset:0; z-index:1060; align-items:center; justify-content:center; padding:20px; background:rgba(15,23,42,.45); }
+
+.hrms-adminlte .password-modal-content,
+.hrms-adminlte .info-modal-content,
+.hrms-adminlte .lh-modal,
+.hrms-adminlte .dat-dialog,
+.hrms-adminlte .alr-dialog,
+.hrms-adminlte .att-dialog { width:100%; max-width:560px; max-height:90vh; overflow:auto; padding:24px; background:#fff; border:1px solid var(--hrms-border); border-radius:10px; box-shadow:0 15px 40px rgba(15,23,42,.15); }
+
+.hrms-adminlte .password-modal-header,
+.hrms-adminlte .info-modal-title,
+.hrms-adminlte .lh-modal-header,
+.hrms-adminlte .dat-dialog-head,
+.hrms-adminlte .alr-dialog-head,
+.hrms-adminlte .att-dialog-top { display:flex; align-items:center; justify-content:space-between; gap:12px; margin-bottom:20px; }
+
+.hrms-adminlte .password-modal-header h3,
+.hrms-adminlte .info-modal-title h3,
+.hrms-adminlte .lh-modal-header h2,
+.hrms-adminlte .dat-dialog-head h2,
+.hrms-adminlte .alr-dialog-head h2,
+.hrms-adminlte .att-dialog-top h3 { margin:0; font-size:18px; font-weight:700; }
+
+.hrms-adminlte .password-modal-header button,
+.hrms-adminlte .lh-modal-close,
+.hrms-adminlte .dat-close,
+.hrms-adminlte .alr-close,
+.hrms-adminlte .att-close { min-height:32px; padding:0 6px; border:0; background:transparent; font-size:26px; line-height:1; }
+
+.hrms-adminlte .password-modal-content label { display:block; margin:16px 0 8px; }
+
+.hrms-adminlte .password-modal-content input { width:100%; }
+
+.hrms-adminlte .password-modal-buttons,
+.hrms-adminlte .info-modal-buttons,
+.hrms-adminlte .lh-modal-footer,
+.hrms-adminlte .dat-dialog-bottom,
+.hrms-adminlte .alr-dialog-bottom { display:flex; justify-content:flex-end; gap:10px; margin-top:24px; }
+
+.hrms-adminlte .info-modal-icon { display:inline-flex; align-items:center; justify-content:center; width:42px; height:42px; border-radius:50%; font-size:22px; flex-shrink:0; }
+
+.hrms-adminlte .info-modal-icon.confirm { background:var(--hrms-table-head); color:var(--hrms-primary); }
+
+.hrms-adminlte .info-modal-icon.success { background:#e7f5ec; color:var(--hrms-success); }
+
+.hrms-adminlte .info-modal-icon.warning { background:#fff2da; color:var(--hrms-warning); }
+
+.hrms-adminlte .info-modal-icon.error { background:#fceced; color:var(--hrms-danger); }
+
+.hrms-adminlte .lh-modal-data,
+.hrms-adminlte .dat-detail,
+.hrms-adminlte .alr-detail { display:grid; grid-template-columns:110px minmax(0,1fr); gap:12px; margin:0; }
+
+.hrms-adminlte .lh-modal-data dt,
+.hrms-adminlte .dat-detail dt,
+.hrms-adminlte .alr-detail dt { font-weight:400; color:var(--hrms-muted); }
+
+.hrms-adminlte .lh-modal-data dd,
+.hrms-adminlte .dat-detail dd,
+.hrms-adminlte .alr-detail dd { margin:0; overflow-wrap:anywhere; }
+
+.hrms-adminlte .employee-pagination,
+.hrms-adminlte .lh-pagination,
+.hrms-adminlte .pagination { display:flex; align-items:center; justify-content:center; flex-wrap:wrap; gap:6px; margin:20px 0 0; padding:0; list-style:none; }
+
+.hrms-adminlte .employee-pagination button,
+.hrms-adminlte .lh-page-btn,
+.hrms-adminlte .pagination button,
+.hrms-adminlte .pagination .btn { min-height:34px; min-width:34px; padding:6px 10px; }
+
+.hrms-adminlte .lh-page-btn.is-current,
+.hrms-adminlte .employee-pagination .active,
+.hrms-adminlte .pagination .btn-dark { background:var(--hrms-primary); color:#fff; border-color:var(--hrms-primary); }
+
+@media (max-width:800px) {
+ :root { --hrms-page-x:20px; --hrms-page-y:24px; --hrms-card-padding:18px; }
+ .hrms-adminlte .content-wrapper table th, .hrms-adminlte .content-wrapper table td { padding:12px; }
+ .hrms-adminlte .content-wrapper button { max-width:100%; }
+ .hrms-adminlte .hrms-popup-content { padding:16px; }
+}
+@media (prefers-reduced-motion:reduce) { .hrms-adminlte * { scroll-behavior:auto !important; } }
+
+@media (max-width:1000px) {
+ .hrms-adminlte .content-wrapper .employee-stats,.hrms-adminlte .content-wrapper .dashboard-stats,.hrms-adminlte .content-wrapper .employee-home-summary,.hrms-adminlte .content-wrapper .dat-stats,.hrms-adminlte .content-wrapper .ma-stats,.hrms-adminlte .content-wrapper .alr-stats { grid-template-columns:repeat(2,minmax(0,1fr)); }
+ .hrms-adminlte .content-wrapper .search-grid,.hrms-adminlte .content-wrapper .employee-register-grid,.hrms-adminlte .content-wrapper .employee-detail-grid,.hrms-adminlte .content-wrapper .myedit-grid { grid-template-columns:repeat(2,minmax(0,1fr)); }
+ .hrms-adminlte .content-wrapper .att-today-grid { grid-template-columns:repeat(2,minmax(0,1fr)); }
+}
+@media (max-width:700px) {
+ .hrms-adminlte .content-wrapper .summary-row,.hrms-adminlte .content-wrapper .search-grid,.hrms-adminlte .content-wrapper .employee-register-grid,.hrms-adminlte .content-wrapper .employee-detail-grid,.hrms-adminlte .content-wrapper .myedit-grid,.hrms-adminlte .content-wrapper .role-list-container,.hrms-adminlte .content-wrapper .tools-permissions,.hrms-adminlte .content-wrapper .employee-home-middle,.hrms-adminlte .content-wrapper .employee-home-bottom,.hrms-adminlte .content-wrapper .att-today-grid,.hrms-adminlte .content-wrapper .leave-summary-grid { grid-template-columns:1fr; }
+ .hrms-adminlte .content-wrapper .table-top,.hrms-adminlte .content-wrapper .employee-toolbar { align-items:stretch; flex-direction:column; }
+ .hrms-adminlte .content-wrapper .table-actions input { width:auto; min-width:0; flex:1; }
+ .hrms-adminlte .content-wrapper .dat-field,.hrms-adminlte .content-wrapper .alr-field { min-width:0; flex-basis:100%; }
+ .hrms-adminlte .content-wrapper .employee-toolbar-actions { flex-wrap:wrap; }
+ .hrms-adminlte .content-wrapper .la-date-grid { grid-template-columns:1fr; }
+ .hrms-adminlte .content-wrapper .lh-date-range input { width:130px; }
+}

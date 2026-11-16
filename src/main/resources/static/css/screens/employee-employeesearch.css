@@ -1,0 +1,7 @@
+@charset "UTF-8";
+/* Layout only. Visual components: hrms-theme.css. */
+.hrms-adminlte .search-grid { display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:20px }
+.hrms-adminlte .search-field input, .hrms-adminlte .search-field select { width:100% }
+.hrms-adminlte .search-bottom, .hrms-adminlte .search-actions, .hrms-adminlte .date-range { display:flex;align-items:center;flex-wrap:wrap;gap:12px }
+.hrms-adminlte .search-bottom { justify-content:space-between;margin-top:20px }
+.hrms-adminlte .employee-table { min-width:900px }

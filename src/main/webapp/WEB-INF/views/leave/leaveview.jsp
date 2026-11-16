@@ -6,23 +6,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>휴가 현황</title>
     <%@ include file="/WEB-INF/views/common/adminlte-head.jspf" %>
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/leave-balance.css?v=1">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/leave-balance.css?v=job-unified-1">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/attendance-leave-layout.css?v=2">
 </head>
 <body class="hold-transition hrms-adminlte hrms-leave" data-context-path="${pageContext.request.contextPath}">
 <div class="wrapper">
     <%@ include file="/WEB-INF/views/common/adminlte-header.jspf" %>
     <%@ include file="/WEB-INF/views/common/adminlte-sidebar.jspf" %>
     <div class="content-wrapper">
-<nav class="px-4 pt-3" aria-label="휴가 화면 이동">
-<a class="btn btn-sm btn-primary" href="${pageContext.request.contextPath}/leave" aria-current="page">휴가 현황</a>
-<a class="btn btn-sm btn-outline-secondary" href="${pageContext.request.contextPath}/leave/history">신청 내역</a>
-<a class="btn btn-sm btn-outline-secondary" href="${pageContext.request.contextPath}/leave/apply">휴가 신청</a>
-</nav>
+
         <div class="content hrms-leave-content">
-<section class="leave-dashboard">
-<header>
-<h2 class="leave-heading">휴가 현황</h2>
-<p class="leave-caption">부여된 휴가와 사용 및 잔여 일수를 확인할 수 있습니다.</p>
+<section class="leave-dashboard hrms-page-content hrms-attendance-leave-page">
+<header class="hrms-section-page-header">
+<h2 class="leave-heading hrms-page-title">휴가 현황</h2>
+<p class="leave-caption page-path">부여된 휴가와 사용 및 잔여 일수를 확인할 수 있습니다.</p>
 </header>
 <!-- 1. 나의 휴가 현황 -->
 <section class="leave-card card">
@@ -57,7 +54,7 @@
 <div class="leave-card-count" name="leaveHistoryCount">조회 중</div>
 </div>
 <div class="leave-table-scroll">
-<table class="leave-table">
+<div class="hrms-table-scroll"><table class="leave-table">
 <thead>
 <tr>
 <th>사용일</th>
@@ -73,7 +70,7 @@
 <td class="leave-empty" colspan="5">휴가 사용 내역을 불러오는 중입니다.</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 </div>
 <p class="leave-note">※ 휴가 일수는 회사 휴가 정책에 따라 산정됩니다.</p>
 </section>

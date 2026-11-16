@@ -1,0 +1,7 @@
+@charset "UTF-8";
+/* Layout only. Visual components: hrms-theme.css. */
+.hrms-adminlte .employee-detail-summary, .hrms-adminlte .employee-detail-person, .hrms-adminlte .employee-detail-actions, .hrms-adminlte .employee-detail-action-buttons { display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap }
+.hrms-adminlte .employee-detail-avatar { display:flex;align-items:center;justify-content:center;width:64px;height:64px }
+.hrms-adminlte .employee-detail-grid { display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:24px }
+.hrms-adminlte .employee-detail-field label { display:block;margin-bottom:8px }
+.hrms-adminlte .employee-detail-value { min-height:24px }

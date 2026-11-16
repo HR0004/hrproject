@@ -6,22 +6,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>내 근태 현황</title>
     <%@ include file="/WEB-INF/views/common/adminlte-head.jspf" %>
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/attendance-my.css?v=1">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/attendance-my.css?v=job-unified-1">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/attendance-leave-layout.css?v=2">
 </head>
 <body class="hold-transition hrms-adminlte hrms-attendance" data-context-path="${pageContext.request.contextPath}">
 <div class="wrapper">
     <%@ include file="/WEB-INF/views/common/adminlte-header.jspf" %>
     <%@ include file="/WEB-INF/views/common/adminlte-sidebar.jspf" %>
     <div class="content-wrapper">
-<nav class="hrms-attendance-links px-4 pt-3" aria-label="근태 화면 이동">
-    <a class="btn btn-sm btn-primary" href="${pageContext.request.contextPath}/attendance" aria-current="page">내 근태</a>
-    <a class="btn btn-sm btn-outline-secondary" href="${pageContext.request.contextPath}/attendance/monthly">월별 조회</a>
-</nav>
+
         <div class="content hrms-attendance-content">
-<section class="att-dashboard" id="att-dashboard">
-<header>
-<h2 class="att-heading">내 근태 현황</h2>
-<p class="att-caption">출근 및 퇴근을 등록하고 나의 근태 기록을 확인할 수 있습니다.</p>
+<section class="att-dashboard hrms-page-content hrms-attendance-leave-page" id="att-dashboard">
+<header class="hrms-section-page-header">
+<h2 class="att-heading hrms-page-title">내 근태 현황</h2>
+<p class="att-caption page-path">출근 및 퇴근을 등록하고 나의 근태 기록을 확인할 수 있습니다.</p>
 </header>
 <!-- 위에 꺼 -->
 <section class="att-today-card card">
@@ -82,7 +80,7 @@
 </div>
 </div>
 <div class="att-table-wrap">
-<table class="att-table">
+<div class="hrms-table-scroll"><table class="att-table">
 <thead>
 <tr>
 <th>근무 일자</th>
@@ -98,7 +96,7 @@
 <td class="att-empty" colspan="6">근태 기록을 불러오는 중입니다.</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 </div>
 <p class="att-footer-note">※ 근무 시간은 화면에서 계산한 임시 값입니다. 휴게시간 공제 등
 						실제 근태 규칙은 Service에서 처리해야 합니다.</p>

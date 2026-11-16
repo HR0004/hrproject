@@ -1,0 +1,9 @@
+@charset "UTF-8";
+/* Layout only. Visual components: hrms-theme.css. */
+.hrms-adminlte .role-list-container, .hrms-adminlte .preview-summary { display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin:20px 0 }
+.hrms-adminlte .role-label>span { min-width:0 }
+.hrms-adminlte .role-label strong { display:block }
+.hrms-adminlte .form-actions, .hrms-adminlte .list-navigation { display:flex;justify-content:flex-end;gap:10px;margin-top:24px }
+.hrms-adminlte .preview-summary dt { margin-bottom:6px }
+.hrms-adminlte .preview-summary dd { margin:0 }
+.hrms-adminlte .preview-table { min-width:460px }

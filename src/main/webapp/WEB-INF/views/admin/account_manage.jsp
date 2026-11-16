@@ -58,36 +58,27 @@
 %>
 
 <!DOCTYPE html>
-<html lang="ko">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+<html lang="ko"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>HRMS - 권한 부여</title>
 
-    <title>HRMS - 권한 부여</title>
-
-    <link rel="stylesheet"
-          href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap">
-
-    <link rel="stylesheet"
-          href="${pageContext.request.contextPath}/css/account-manage.css?v=preview-1">
-</head>
-
-<body class="account-manage-page">
-
-    <%@ include file="/WEB-INF/views/common/sidebar.jspf" %>
-
-    <main class="main-area">
-
-        <div class="top-nav-bar">
-            <div class="page-title-area">
-                <div class="breadcrumb">HRMS / 권한 관리</div>
-                <h1>사원 계정 및 역할(Role) 설정</h1>
-            </div>
-
-            <%@ include file="/WEB-INF/views/common/header.jspf" %>
-        </div>
-
-        <section class="content-card">
+<meta name="_csrf" content="${_csrf.token}">
+<meta name="_csrf_header" content="${_csrf.headerName}">
+<%@ include file="/WEB-INF/views/common/adminlte-head.jspf" %>
+<link rel="stylesheet" href="${pageContext.request.contextPath}/static/vendor/fontawesome-6.5.2/css/all.min.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/screens/admin-account-manage.css?v=job-unified-1">
+</head><body class="hold-transition hrms-adminlte hrms-screen-admin-account-manage account-manage-page" data-context-path="${pageContext.request.contextPath}">
+<div class="wrapper">
+<%@ include file="/WEB-INF/views/common/adminlte-header.jspf" %>
+<%@ include file="/WEB-INF/views/common/adminlte-sidebar.jspf" %>
+<div class="content-wrapper">
+<main class="hrms-page-content">
+<div class="hrms-page-heading">
+<div class="page-title-area">
+<div class="breadcrumb">HRMS / 권한 관리</div>
+<h1 class="hrms-page-title">사원 계정 및 역할(Role) 설정</h1>
+</div>
+</div>
+<section class="content-card">
 
             <% if (managedAccount != null) { %>
 
@@ -109,24 +100,14 @@
             </p>
             <% } %>
 
-            <form id="roleForm"
-                  method="post"
-                  action="${pageContext.request.contextPath}/admin/accounts/<%=managedAccount.getAccountId()%>/roles"
-                  data-save-completed="<%=saveCompleted%>">
-
-                <input type="hidden"
-                       name="${_csrf.parameterName}"
-                       value="${_csrf.token}">
-
-                <!-- 역할 선택 -->
-                <section id="roleSelection"
-                         aria-labelledby="roleSelectionTitle">
-
-                    <h3 id="roleSelectionTitle" class="section-subtitle">
+            <form action="${pageContext.request.contextPath}/admin/accounts/<%=managedAccount.getAccountId()%>/roles" data-save-completed="<%=saveCompleted%>" id="roleForm" method="post">
+<input name="${_csrf.parameterName}" type="hidden" value="${_csrf.token}"/>
+<!-- 역할 선택 -->
+<section aria-labelledby="roleSelectionTitle" id="roleSelection">
+<h3 class="section-subtitle" id="roleSelectionTitle">
                         부여할 역할 선택
                     </h3>
-
-                    <div class="role-list-container">
+<div class="role-list-container">
 
                         <%
                         for (HrRole option : roleOptions) {
@@ -149,23 +130,15 @@
                         %>
 
                         <label class="role-label">
-
-                            <input type="checkbox"
-                                   name="roleIds"
-                                   value="<%=option.getHrRoleId()%>"
-                                   data-role-name="<%=rolePreviewEscape(option.getRoleName())%>"
-                                   data-role-code="<%=rolePreviewEscape(option.getRoleCode())%>"
-                                   <%=checked ? "checked" : ""%>>
-
-                            <span>
-                                <strong>
+<input data-role-code="<%=rolePreviewEscape(option.getRoleCode())%>" data-role-name="<%=rolePreviewEscape(option.getRoleName())%>" <%=checked ? "checked" : ""%> name="roleIds" type="checkbox" value="<%=option.getHrRoleId()%>"/>
+<span>
+<strong>
                                     <%=rolePreviewEscape(option.getRoleName())%>
                                 </strong>
                                 (<%=rolePreviewEscape(option.getRoleCode())%>)
                             </span>
-
-                            <!-- DB에서 조회한 역할별 권한 정보 -->
-                            <span class="role-permission-data" hidden>
+<!-- DB에서 조회한 역할별 권한 정보 -->
+<span class="role-permission-data" hidden="">
                                 <%
                                 for (Map<String, Object> permissionRow
                                         : permissionRows) {
@@ -179,15 +152,12 @@
                                     }
                                 %>
 
-                                <span
-                                    data-permission-code="<%=rolePreviewEscape(permissionRow.get("permissionCode"))%>"
-                                    data-permission-name="<%=rolePreviewEscape(permissionRow.get("permissionName"))%>">
-                                </span>
+                                <span data-permission-code="<%=rolePreviewEscape(permissionRow.get("permissionCode"))%>" data-permission-name="<%=rolePreviewEscape(permissionRow.get("permissionName"))%>">
+</span>
 
                                 <% } %>
                             </span>
-
-                        </label>
+</label>
 
                         <% } %>
 
@@ -198,109 +168,71 @@
                         <% } %>
 
                     </div>
-
-                    <button id="previewButton"
-                            type="button"
-                            class="btn-save"
-                            <%=hasRoleOption && permissionDataReady
+<button class="btn-save" id="previewButton" <%=hasRoleOption && permissionDataReady
                                 ? ""
-                                : "disabled"%>>
+                                : "disabled"%> type="button">
                         다음 · 권한 미리보기
                     </button>
-
-                </section>
-
-                <!-- 저장 전 미리보기 -->
-                <section id="rolePreview"
-                         aria-labelledby="previewTitle"
-                         hidden>
-
-                    <h3 id="previewTitle"
-                        class="section-subtitle"
-                        tabindex="-1">
+</section>
+<!-- 저장 전 미리보기 -->
+<section aria-labelledby="previewTitle" hidden="" id="rolePreview">
+<h3 class="section-subtitle" id="previewTitle" tabindex="-1">
                         저장 전 권한 미리보기
                     </h3>
-
-                    <dl class="preview-summary">
-
-                        <div>
-                            <dt>사원</dt>
-                            <dd>
+<dl class="preview-summary">
+<div>
+<dt>사원</dt>
+<dd>
                                 <%=rolePreviewEscape(
                                     managedAccount.getEmp() == null
                                         ? "사원 정보 없음"
                                         : managedAccount.getEmp().getEname()
                                 )%>
                             </dd>
-                        </div>
-
-                        <div>
-                            <dt>로그인 아이디</dt>
-                            <dd>
+</div>
+<div>
+<dt>로그인 아이디</dt>
+<dd>
                                 <%=rolePreviewEscape(
                                     managedAccount.getLoginId()
                                 )%>
                             </dd>
-                        </div>
-
-                        <div>
-                            <dt>선택한 역할</dt>
-                            <dd id="previewRoles"></dd>
-                        </div>
-
-                    </dl>
-
-                    <h4 class="section-subtitle">
+</div>
+<div>
+<dt>선택한 역할</dt>
+<dd id="previewRoles"></dd>
+</div>
+</dl>
+<h4 class="section-subtitle">
                         선택한 역할에 연결된 권한
                     </h4>
-
-                    <p id="previewEmpty"
-                       class="empty-message"
-                       role="status"
-                       hidden>
-                    </p>
-
-                    <div id="permissionTableWrap"
-                         class="preview-table-wrap">
-
-                        <table class="preview-table">
-                            <thead>
-                                <tr>
-                                    <th scope="col">권한 이름</th>
-                                    <th scope="col">권한 코드</th>
-                                </tr>
-                            </thead>
-
-                            <tbody id="previewPermissions"></tbody>
-                        </table>
-
-                    </div>
-
-                    <p class="preview-note">
+<p class="empty-message" hidden="" id="previewEmpty" role="status">
+</p>
+<div class="preview-table-wrap" id="permissionTableWrap">
+<div class="hrms-table-scroll"><table class="preview-table">
+<thead>
+<tr>
+<th scope="col">권한 이름</th>
+<th scope="col">권한 코드</th>
+</tr>
+</thead>
+<tbody id="previewPermissions"></tbody>
+</table></div>
+</div>
+<p class="preview-note">
                         중복 권한은 한 번만 표시합니다.
                         변경된 권한은 대상 계정이 다시 로그인한 뒤 적용됩니다.
                     </p>
-
-                    <div class="form-actions">
-
-                        <button id="backButton"
-                                type="button"
-                                class="btn-list">
+<div class="form-actions">
+<button class="btn-list" id="backButton" type="button">
                             이전 · 역할 수정
                         </button>
-
-                        <button id="saveButton"
-                                type="submit"
-                                class="btn-save"
-                                disabled>
+<button class="btn-save" disabled="" id="saveButton" type="submit">
                             권한 저장하기
                         </button>
-
-                    </div>
-
-                </section>
-
-            </form>
+</div>
+</section>
+</form>
 
             <% } else { %>
 
@@ -311,168 +243,14 @@
             <% } %>
 
             <div class="list-navigation">
-                <a class="btn-list"
-                   href="${pageContext.request.contextPath}/admin/accounts">
+<a class="btn-list" href="${pageContext.request.contextPath}/admin/accounts">
                     목록으로
                 </a>
-            </div>
-
-        </section>
-
-    </main>
-
-    <script>
-    (function () {
-        var form = document.getElementById("roleForm");
-        if (!form) return;
-
-        var selection = document.getElementById("roleSelection");
-        var preview = document.getElementById("rolePreview");
-
-        var previewButton = document.getElementById("previewButton");
-        var backButton = document.getElementById("backButton");
-        var saveButton = document.getElementById("saveButton");
-
-        var roleOutput = document.getElementById("previewRoles");
-        var permissionOutput =
-            document.getElementById("previewPermissions");
-
-        var emptyMessage = document.getElementById("previewEmpty");
-        var tableWrap = document.getElementById("permissionTableWrap");
-
-        var previewValid = false;
-        var submitting = false;
-
-        function showSelection() {
-            previewValid = false;
-            selection.hidden = false;
-            preview.hidden = true;
-            saveButton.disabled = true;
-        }
-
-        previewButton.addEventListener("click", function () {
-            if (submitting || previewButton.disabled) return;
-
-            var selected = form.querySelectorAll(
-                'input[name="roleIds"]:checked'
-            );
-
-            var permissions = new Map();
-
-            roleOutput.textContent = "";
-            permissionOutput.textContent = "";
-
-            Array.prototype.forEach.call(selected, function (input) {
-                var badge = document.createElement("span");
-                badge.className = "role-badge";
-
-                badge.textContent =
-                    input.dataset.roleName || input.dataset.roleCode;
-
-                roleOutput.appendChild(badge);
-
-                var source = input.closest("label").querySelectorAll(
-                    "[data-permission-code]"
-                );
-
-                Array.prototype.forEach.call(source, function (item) {
-                    var code = item.dataset.permissionCode;
-
-                    if (code) {
-                        permissions.set(
-                            code,
-                            item.dataset.permissionName || code
-                        );
-                    }
-                });
-            });
-
-            permissions.forEach(function (name, code) {
-                var row = document.createElement("tr");
-                var nameCell = document.createElement("td");
-                var codeCell = document.createElement("td");
-
-                nameCell.textContent = name;
-                codeCell.textContent = code;
-
-                row.appendChild(nameCell);
-                row.appendChild(codeCell);
-                permissionOutput.appendChild(row);
-            });
-
-            if (!selected.length) {
-                roleOutput.textContent = "선택된 역할 없음";
-            }
-
-            emptyMessage.hidden = permissions.size > 0;
-
-            emptyMessage.textContent = !selected.length
-                ? "선택된 역할이 없습니다. 저장하면 기존 역할이 모두 해제됩니다."
-                : "선택한 역할에 연결된 세부 권한이 없습니다.";
-
-            tableWrap.hidden = permissions.size === 0;
-
-            selection.hidden = true;
-            preview.hidden = false;
-            previewValid = true;
-            saveButton.disabled = false;
-
-            document.getElementById("previewTitle").focus();
-        });
-
-        backButton.addEventListener("click", function () {
-            if (submitting) return;
-
-            showSelection();
-            previewButton.focus();
-        });
-
-        form.addEventListener("change", function () {
-            if (!submitting) {
-                showSelection();
-            }
-        });
-
-        form.addEventListener("submit", function (event) {
-            if (submitting || !previewValid) {
-                event.preventDefault();
-                return;
-            }
-
-            var selected = form.querySelectorAll(
-                'input[name="roleIds"]:checked'
-            );
-
-            var message = selected.length
-                ? "권한을 변경하시겠습니까?"
-                : "선택한 역할이 없습니다. 기존 역할을 모두 해제하시겠습니까?";
-
-            if (!window.confirm(message)) {
-                event.preventDefault();
-                return;
-            }
-
-            submitting = true;
-            saveButton.disabled = true;
-            backButton.disabled = true;
-            saveButton.textContent = "저장 중...";
-        });
-
-        window.addEventListener("pageshow", function (event) {
-            if (event.persisted) {
-                submitting = false;
-                backButton.disabled = false;
-                saveButton.textContent = "권한 저장하기";
-                showSelection();
-            }
-        });
-
-        if (form.dataset.saveCompleted === "true") {
-            form.dataset.saveCompleted = "false";
-            window.alert("권한이 변경되었습니다.");
-        }
-    }());
-    </script>
-
-</body>
-</html>
+</div>
+</section>
+</main>
+</div>
+</div>
+<%@ include file="/WEB-INF/views/common/adminlte-scripts.jspf" %>
+<script src="${pageContext.request.contextPath}/static/js/screens/admin-account-manage.js?v=1"></script>
+</body></html>
