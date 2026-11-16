@@ -41,20 +41,20 @@ public class MySalaryController {
 
 		if (auth == null || !auth.isAuthenticated() || !(auth.getPrincipal() instanceof AccountDetails)) {
 
-			throw new SalaryBusinessException("로그인한 사원 정보를 확인할 수 없습니다.");
+			throw new SalaryBusinessException("ログイン中の社員情報を確認できません。");
 		}
 
 		AccountDetails details = (AccountDetails) auth.getPrincipal();
 
 		if (details.getAccount() == null || details.getAccount().getEmp() == null) {
 
-			throw new SalaryBusinessException("로그인 계정에 연결된 사원 정보가 없습니다.");
+			throw new SalaryBusinessException("ログインアカウントに社員情報が紐付いていません。");
 		}
 
 		Emp emp = details.getAccount().getEmp();
 
 		if (emp.getEmpId() <= 0) {
-			throw new SalaryBusinessException("유효한 사원 번호가 없습니다.");
+			throw new SalaryBusinessException("有効な社員番号がありません。");
 		}
 
 		return Long.valueOf(emp.getEmpId());

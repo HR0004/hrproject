@@ -21,7 +21,7 @@
 
 				link.classList.remove("active");
 
-				if (link.textContent.includes("03 사원 관리")) {
+				if (link.textContent.includes("03 社員管理")) {
 					link.classList.add("active");
 				}
 
@@ -40,7 +40,7 @@
 	        );
 
 	        if (!response.ok) {
-	            throw new Error("사원 상세조회 실패");
+	            throw new Error("社員詳細の取得に失敗しました");
 	        }
 
 	        const result = await response.json();
@@ -60,17 +60,17 @@
 	        $("#detailPhone").text(result.phone ?? "-");
 
 	        const hiredate = result.hiredate
-	            ? new Date(result.hiredate).toLocaleDateString("ko-KR")
+	            ? new Date(result.hiredate).toLocaleDateString("ja-JP")
 	            : "-";
 
 	        $("#detailHiredate").text(hiredate);
 
 	        // 재직 상태
 	        const status = {
-	            ACTIVE: "재직",
-	            LEAVE: "휴직",
-	            RETIRED: "퇴직"
-	        }[result.status] ?? "미확인";
+	            ACTIVE: "在籍",
+	            LEAVE: "休職",
+	            RETIRED: "退職"
+	        }[result.status] ?? "未確認";
 
 	        $("#detailStatus").text(status);
 	        $("#summaryStatus").text(status);
@@ -83,15 +83,15 @@
 	                RETIRED: "is-retired"
 	            }[result.status] ?? "");
 
-	        console.log("사원 상세정보:", result);
+	        console.log("社員の詳細情報:", result);
 
 	    } catch (error) {
-	        console.error("사원 상세조회 오류:", error);
+	        console.error("社員詳細の取得エラー:", error);
 	        $(".employee-detail-summary, .employee-detail-info, .employee-detail-actions").hide();
 	        $(".employee-detail-heading").after(
 	            $("<section>")
 	                .addClass("employee-detail-card employee-detail-not-found")
-	                .text("사원 정보를 불러올 수 없습니다. 사번을 확인해 주세요.")
+	                .text("社員情報を読み込めません。 社員番号を確認してください。")
 	        );
 	    }
 	};
@@ -105,36 +105,36 @@
 
 	        confirm: {
 	            icon: "⚠️",
-	            title: "퇴직 처리 확인",
-	            message: "선택한 사원을 퇴직 처리하시겠습니까?",
-	            detail: "사번 " + emp.empId
-	                  + " · 성명 " + emp.ename
-	                  + " · 현재 상태 재직",
-	            button: "퇴직 처리"
+	            title: "退職処理の確認",
+	            message: "選択した社員の退職処理を行いますか？",
+	            detail: "社員番号 " + emp.empId
+	                  + " ・ 氏名 " + emp.ename
+	                  + " ・ 現在の在籍状態",
+	            button: "退職処理"
 	        },
 
 	        success: {
 	            icon: "✅",
-	            title: "퇴직 처리 완료",
-	            message: "재직 상태가 퇴직으로 변경되었습니다.",
-	            detail: "사원 기록은 삭제되지 않고 보관됩니다.",
-	            button: "닫기"
+	            title: "退職処理が完了しました",
+	            message: "在籍状態を退職に変更しました。",
+	            detail: "社員の記録は削除せずに保管されます。",
+	            button: "閉じる"
 	        },
 
 	        error: {
 	            icon: "❗",
-	            title: "퇴직 처리 불가",
-	            message: "이미 퇴직 처리된 사원입니다.",
-	            detail: "현재 재직 상태를 확인해 주세요.",
-	            button: "확인"
+	            title: "退職処理できません",
+	            message: "この社員はすでに退職処理済みです。",
+	            detail: "現在の在籍状態を確認してください。",
+	            button: "確認"
 	        },
 
 	        fail: {
 	            icon: "❗",
-	            title: "퇴직 처리 실패",
-	            message: "퇴직 처리 중 오류가 발생했습니다.",
-	            detail: "잠시 후 다시 시도해 주세요.",
-	            button: "확인"
+	            title: "退職処理に失敗しました",
+	            message: "退職処理中にエラーが発生しました。",
+	            detail: "しばらくしてから再度お試しください。",
+	            button: "確認"
 	        }
 	    };
 
@@ -189,7 +189,7 @@
 	        );
 
 	        if (!response.ok) {
-	            throw new Error("사원 조회 실패");
+	            throw new Error("社員情報の取得に失敗しました");
 	        }
 
 	        const emp = await response.json();
@@ -204,7 +204,7 @@
 	        showRetirePopup("confirm", emp);
 
 	    } catch (error) {
-	        console.error("사원 조회 오류:", error);
+	        console.error("社員情報の取得エラー:", error);
 	        showRetirePopup("fail");
 	    }
 	};
@@ -231,14 +231,14 @@
 	        }
 
 	        if (!response.ok) {
-	            throw new Error("퇴직 처리 실패");
+	            throw new Error("退職処理に失敗しました");
 	        }
 
 	        // 퇴직 성공 팝업
 	        showRetirePopup("success");
 
 	    } catch (error) {
-	        console.error("퇴직 처리 오류:", error);
+	        console.error("退職処理エラー:", error);
 	        showRetirePopup("fail");
 
 	    } finally {

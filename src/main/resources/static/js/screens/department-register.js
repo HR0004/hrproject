@@ -9,7 +9,7 @@ const regist = async () => {
         document.getElementById("departmentName").value.trim();
 
     if (!departmentName) {
-        alert("부서명을 입력하세요.");
+        alert("部署名を入力してください。");
         return;
     }
 
@@ -40,14 +40,14 @@ const regist = async () => {
 
         if (!contentType.includes("application/json")) {
             throw new Error(
-                "JSON 응답이 아닙니다. HTTP " + response.status
+                "JSON レスポンスではありません。 HTTP " + response.status
             );
         }
 
         const result = await response.json();
 
         if (!response.ok || !result.success) {
-            throw new Error(result.message || "부서 등록 실패");
+            throw new Error(result.message || "部署の登録に失敗しました");
         }
 
         alert(result.message);
@@ -60,7 +60,7 @@ const regist = async () => {
         }
 
     } catch (error) {
-        console.error("부서 등록 오류:", error);
+        console.error("部署登録エラー:", error);
         alert(error.message);
     }
 };

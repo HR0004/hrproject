@@ -17,7 +17,7 @@ public class SalaryCalculator {
             deduction == null) {
 
             throw new IllegalArgumentException(
-                "금액을 모두 입력하세요."
+                "金額をすべて入力してください。"
             );
         }
 
@@ -27,7 +27,7 @@ public class SalaryCalculator {
             deduction.signum() < 0) {
 
             throw new IllegalArgumentException(
-                "금액은 음수일 수 없습니다."
+                "金額に負の値は指定できません。"
             );
         }
 

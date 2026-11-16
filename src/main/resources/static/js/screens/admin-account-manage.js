@@ -77,14 +77,14 @@
             });
 
             if (!selected.length) {
-                roleOutput.textContent = "선택된 역할 없음";
+                roleOutput.textContent = "ロール未選択";
             }
 
             emptyMessage.hidden = permissions.size > 0;
 
             emptyMessage.textContent = !selected.length
-                ? "선택된 역할이 없습니다. 저장하면 기존 역할이 모두 해제됩니다."
-                : "선택한 역할에 연결된 세부 권한이 없습니다.";
+                ? "選択したロールがありません。 保存すると既存のロールがすべて解除されます。"
+                : "選択したロールに個別権限が設定されていません。";
 
             tableWrap.hidden = permissions.size === 0;
 
@@ -120,8 +120,8 @@
             );
 
             var message = selected.length
-                ? "권한을 변경하시겠습니까?"
-                : "선택한 역할이 없습니다. 기존 역할을 모두 해제하시겠습니까?";
+                ? "権限を変更しますか？"
+                : "選択したロールがありません。 既存のロールをすべて解除しますか？";
 
             if (!window.confirm(message)) {
                 event.preventDefault();
@@ -131,20 +131,20 @@
             submitting = true;
             saveButton.disabled = true;
             backButton.disabled = true;
-            saveButton.textContent = "저장 중...";
+            saveButton.textContent = "保存中。..";
         });
 
         window.addEventListener("pageshow", function (event) {
             if (event.persisted) {
                 submitting = false;
                 backButton.disabled = false;
-                saveButton.textContent = "권한 저장하기";
+                saveButton.textContent = "権限を保存";
                 showSelection();
             }
         });
 
         if (form.dataset.saveCompleted === "true") {
             form.dataset.saveCompleted = "false";
-            window.alert("권한이 변경되었습니다.");
+            window.alert("権限を変更しました。");
         }
     }());

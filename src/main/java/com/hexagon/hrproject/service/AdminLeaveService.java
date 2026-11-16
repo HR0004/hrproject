@@ -26,55 +26,55 @@ public class AdminLeaveService {
     @Transactional(readOnly = true)
     public List<AdminLeaveRequestRow> findRequests(Integer departmentId, String startDate,
             String endDate, String status, String keyword) {
-        if (departmentId != null && departmentId <= 0) throw bad("조회 부서를 확인하세요.");
+        if (departmentId != null && departmentId <= 0) throw bad("検索する部署を確認してください。");
         LocalDate start = optionalDate(startDate), end = optionalDate(endDate);
-        if (start != null && end != null && start.isAfter(end)) throw bad("신청 종료일은 시작일보다 빠를 수 없습니다.");
+        if (start != null && end != null && start.isAfter(end)) throw bad("申請終了日は開始日以降に設定してください。");
         String state = trim(status), search = trim(keyword);
         if ("ALL".equals(state)) state = null;
-        if (state != null && !Arrays.asList("PENDING", "APPROVED", "REJECTED", "CANCELED").contains(state)) throw bad("처리 상태가 올바르지 않습니다.");
-        if (search != null && search.length() > 50) throw bad("검색어는 50자 이내로 입력하세요.");
+        if (state != null && !Arrays.asList("PENDING", "APPROVED", "REJECTED", "CANCELED").contains(state)) throw bad("処理状態が正しくありません。");
+        if (search != null && search.length() > 50) throw bad("検索キーワードは 50文字以内で入力してください。");
         return mapper.findRequests(departmentId, start == null ? null : Date.valueOf(start),
             end == null ? null : Date.valueOf(end.plusDays(1)), state, search);
     }
 
     @Transactional
     public void decide(int requestId, int approverId, boolean approve) {
-        if (requestId <= 0) throw new ResponseStatusException(HttpStatus.NOT_FOUND, "휴가 신청을 찾을 수 없습니다.");
-        if (approverId <= 0) throw new ResponseStatusException(HttpStatus.CONFLICT, "관리자 계정에 사원 정보를 연결해 주세요.");
+        if (requestId <= 0) throw new ResponseStatusException(HttpStatus.NOT_FOUND, "休暇申請が見つかりません。");
+        if (approverId <= 0) throw new ResponseStatusException(HttpStatus.CONFLICT, "管理者アカウントに社員情報を紐付けてください。");
         AdminLeaveRequestRow request = mapper.lockRequest(requestId);
-        if (request == null) throw new ResponseStatusException(HttpStatus.NOT_FOUND, "휴가 신청을 찾을 수 없습니다.");
-        if (!"PENDING".equals(request.getStatus())) throw conflict("이미 처리된 신청입니다. 목록을 새로 조회하세요.");
+        if (request == null) throw new ResponseStatusException(HttpStatus.NOT_FOUND, "休暇申請が見つかりません。");
+        if (!"PENDING".equals(request.getStatus())) throw conflict("この申請はすでに処理されています。 一覧を再読み込みしてください。");
         if (approve) {
             Map<String, BigDecimal> yearlyDays = splitByYear(request);
             List<AdminLeaveBalance> balances = new ArrayList<>();
             // Lock balances in year order; validate all years before updating any balance.
             for (Map.Entry<String, BigDecimal> entry : yearlyDays.entrySet()) {
                 AdminLeaveBalance balance = mapper.lockBalance(request.getEmpId(), entry.getKey());
-                if (balance == null) throw conflict(entry.getKey() + "년 휴가 잔액이 등록되어 있지 않습니다.");
+                if (balance == null) throw conflict(entry.getKey() + "年の休暇残日数が登録されていません。");
                 if (balance.getTotalDays() == null || balance.getUsedDays() == null
                         || balance.getTotalDays().subtract(balance.getUsedDays()).compareTo(entry.getValue()) < 0) {
-                    throw conflict(entry.getKey() + "년 잔여 휴가가 부족합니다.");
+                    throw conflict(entry.getKey() + "年の休暇残日数が不足しています。");
                 }
                 balances.add(balance);
             }
             int index = 0;
             for (BigDecimal days : yearlyDays.values()) {
                 if (mapper.consumeBalance(balances.get(index++).getBalanceId(), days) != 1)
-                    throw conflict("휴가 잔액이 변경되었습니다. 다시 조회하세요.");
+                    throw conflict("休暇残日数が変更されました。 もう一度検索してください。");
             }
         }
         if (mapper.decide(requestId, approve ? "APPROVED" : "REJECTED", approverId) != 1)
-            throw conflict("이미 처리된 신청입니다. 목록을 새로 조회하세요.");
+            throw conflict("この申請はすでに処理されています。 一覧を再読み込みしてください。");
     }
 
     private Map<String, BigDecimal> splitByYear(AdminLeaveRequestRow request) {
         LocalDate start = optionalDate(request.getStartDate()), end = optionalDate(request.getEndDate());
         BigDecimal days = request.getDays();
         if (start == null || end == null || end.isBefore(start) || end.isAfter(start.plusYears(1))
-                || days == null || days.signum() <= 0) throw conflict("신청 기간과 일수를 확인하세요.");
+                || days == null || days.signum() <= 0) throw conflict("申請期間と日数を確認してください。");
         Map<String, BigDecimal> result = new TreeMap<>();
         if (days.compareTo(new BigDecimal("0.5")) == 0) {
-            if (!start.equals(end) || !weekday(start)) throw conflict("반차 신청 정보를 확인하세요.");
+            if (!start.equals(end) || !weekday(start)) throw conflict("半日休暇の申請内容を確認してください。");
             result.put(String.valueOf(start.getYear()), days);
         } else {
             for (LocalDate date = start; !date.isAfter(end); date = date.plusDays(1)) {
@@ -85,7 +85,7 @@ public class AdminLeaveService {
             }
             BigDecimal total = BigDecimal.ZERO;
             for (BigDecimal part : result.values()) total = total.add(part);
-            if (total.compareTo(days) != 0) throw conflict("신청 일수가 평일 계산과 다릅니다. 신청 정보를 확인하세요.");
+            if (total.compareTo(days) != 0) throw conflict("申請日数が平日数と一致しません。 申請内容を確認してください。");
         }
         return result;
     }
@@ -93,8 +93,8 @@ public class AdminLeaveService {
     private static String trim(String value) { return value == null || value.trim().isEmpty() ? null : value.trim(); }
     private static LocalDate optionalDate(String value) {
         if (trim(value) == null) return null;
-        try { LocalDate date = LocalDate.parse(value.trim()); if (date.getYear() < 1900 || date.getYear() > 9998) throw bad("조회 날짜를 확인하세요."); return date; }
-        catch (DateTimeParseException e) { throw bad("날짜 형식을 확인하세요."); }
+        try { LocalDate date = LocalDate.parse(value.trim()); if (date.getYear() < 1900 || date.getYear() > 9998) throw bad("検索する日付を確認してください。"); return date; }
+        catch (DateTimeParseException e) { throw bad("日付の形式を確認してください。"); }
     }
     private static ResponseStatusException bad(String message) { return new ResponseStatusException(HttpStatus.BAD_REQUEST, message); }
     private static ResponseStatusException conflict(String message) { return new ResponseStatusException(HttpStatus.CONFLICT, message); }

@@ -19,27 +19,27 @@ $(function() {
 					});
 
 					if (!response.ok) {
-						throw new Error("휴가 신청 내역 조회 실패: " + response.status);
+						throw new Error("休暇申請履歴の取得に失敗しました: " + response.status);
 					}
 
 					const records = await
 					response.json();
 
 					if (!Array.isArray(records)) {
-						throw new Error("서버 응답 형식이 올바르지 않습니다.");
+						throw new Error("サーバーのレスポンス形式が正しくありません。");
 					}
 
-					console.log("휴가 신청 내역 조회 결과", records);
+					console.log("休暇申請履歴の取得結果", records);
 
 					const tbody = $("tbody[name='historyRows']");
 					tbody.empty();
 
 					// 승인 상태를 한글로 변환
 					const statusNames = {
-						APPROVED : "승인 완료",
-						PENDING : "승인 대기",
-						REJECTED : "반려",
-						CANCELED : "취소됨"
+						APPROVED : "承認済み",
+						PENDING : "承認待ち",
+						REJECTED : "否認",
+						CANCELED : "取消済み"
 					};
 
 					// DB에서 가져온 기록을 테이블에 추가
@@ -52,8 +52,8 @@ $(function() {
 						const period = startDate === endDate ? startDate
 								: startDate + " ~ " + endDate;
 
-						const leaveType = row.leaveType || "휴가";
-						const days = row.days != null ? row.days + "일" : "-";
+						const leaveType = row.leaveType || "休暇";
+						const days = row.days != null ? row.days + "日" : "-";
 						const status = statusNames[row.status] || row.status
 								|| "-";
 						const remark = row.remark || "-";
@@ -82,7 +82,7 @@ $(function() {
 
 						$("<button>").attr("type", "button").attr("name",
 								"detailButton").addClass("lh-detail-btn").text(
-								"상세").appendTo(detailTd);
+								"詳細").appendTo(detailTd);
 
 						tr.append(detailTd);
 						tbody.append(tr);
@@ -92,20 +92,20 @@ $(function() {
 					// 실제 DB 데이터로 목록 갱신
 					allRows = tbody.children("tr").toArray();
 
-					$("#historyEmptyRow td").text("검색 결과가 없습니다.");
+					$("#historyEmptyRow td").text("検索結果がありません。");
 
 					filterHistory();
 
 				} catch (error) {
 
-					console.error("휴가 신청 내역 조회 오류", error);
+					console.error("休暇申請履歴の取得エラー", error);
 
 					allRows = [];
 					filteredRows = [];
 
 					$("tbody[name='historyRows']").empty();
 
-					$("#historyEmptyRow td").text("휴가 신청 내역을 불러오지 못했습니다.");
+					$("#historyEmptyRow td").text("休暇申請履歴を読み込めませんでした。");
 
 					renderHistory();
 
@@ -118,8 +118,8 @@ $(function() {
 				const totalPages = Math.max(1, Math.ceil(total / pageSize));
 				currentPage = Math.max(1, Math.min(currentPage, totalPages));
 
-				$("span[name='historyCount']").text("총 " + total + "건");
-				$("span[name='historyFooterCount']").text("총 " + total + "건");
+				$("span[name='historyCount']").text("合計 " + total + "件");
+				$("span[name='historyFooterCount']").text("合計 " + total + "件");
 				$(allRows).hide();
 
 				filteredRows.slice((currentPage - 1) * pageSize,
@@ -136,7 +136,7 @@ $(function() {
 						"class" : "lh-page-btn"
 								+ (page === currentPage ? " is-current" : ""),
 						text : page,
-						"aria-label" : page + "페이지",
+						"aria-label" : page + "ページ",
 						"aria-current" : page === currentPage ? "page" : null
 					});
 					button.on("click", function() {
@@ -156,7 +156,7 @@ $(function() {
 				const endDate = $("input[name='filterEndDate']").val();
 				const status = $("select[name='filterStatus']").val();
 				if (startDate && endDate && startDate > endDate) {
-					alert("조회 종료일은 시작일보다 빠를 수 없습니다.");
+					alert("検索終了日は開始日以降に設定してください。");
 					return;
 				}
 				// 현재는 Figma 예시 행을 필터링. REST API 연결 후 서버 데이터로 대체.
@@ -189,12 +189,12 @@ $(function() {
 			// 버튼 이동
 
 			$("button[name='moveApplyButton']").on("click", function() {
-				console.log("휴가 신청 버튼 클릭 성공");
+				console.log("休暇申請ボタンをクリックしました");
 				window.location.href = contextPath + "/leave/apply";
 			});
 
 			$("button[name='moveViewButton']").on("click", function() {
-				console.log("휴가 목록 버튼 클릭 성공");
+				console.log("休暇一覧ボタンをクリックしました");
 				window.location.href = contextPath + "/leave";
 			});
 

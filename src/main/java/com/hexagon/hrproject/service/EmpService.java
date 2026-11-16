@@ -102,7 +102,7 @@ public class EmpService {
 
 		// ~~ 용훈 추가
 		if (account.getPassword() == null || account.getPassword().length() < 8) {
-			throw new IllegalArgumentException("비밀번호는 8자 이상이어야 합니다.");
+			throw new IllegalArgumentException("パスワードは 8文字以上である必要があります。");
 		}
 
 		account.setPassword(passwordEncoder.encode(account.getPassword()));
@@ -119,7 +119,7 @@ public class EmpService {
 		int roleResult = accountMapper.insertDefaultEmployeeRole(account.getAccountId());
 
 		if (roleResult != 1) {
-			throw new IllegalStateException("기본 사원 권한 등록 실패");
+			throw new IllegalStateException("一般社員ロールの登録に失敗しました");
 		}
 		// 용훈 추가
 	}

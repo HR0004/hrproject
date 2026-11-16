@@ -5,11 +5,11 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="ja">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HRMS - 급여 관리</title>
+    <title>HRMS - 給与管理</title>
 
     <!-- Font Awesome -->
     
@@ -22,7 +22,7 @@
     
 <%@ include file="/WEB-INF/views/common/adminlte-head.jspf" %>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/static/vendor/fontawesome-6.5.2/css/all.min.css">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/css/salary.css?v=salary-unified-1">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/salary.css?v=ja-1">
 </head>
 
 <body class="hold-transition hrms-adminlte hrms-salary" data-context-path="${pageContext.request.contextPath}">
@@ -42,8 +42,8 @@
         <section class="content-header">
             <div class="container-fluid">
                 <div class="salary-heading">
-                    <h1 class="hrms-page-title">급여 관리</h1>
-                    <p class="page-path">사원별 월 급여를 조회하고 관리합니다.</p>
+                    <h1 class="hrms-page-title">給与管理</h1>
+                    <p class="page-path">社員別の月次給与を検索・管理できます。</p>
                 </div>
             </div>
         </section>
@@ -55,23 +55,23 @@
                 <div class="salary-stats">
 
                     <div class="salary-stat-card summary-card">
-                        <span>급여 대상</span>
-                        <strong id="salaryEmployeeCount">0명</strong>
+                        <span>給与対象者</span>
+                        <strong id="salaryEmployeeCount">0名</strong>
                     </div>
 
                     <div class="salary-stat-card summary-card">
-                        <span>지급 예정</span>
-                        <strong id="salaryRecordCount">0건</strong>
+                        <span>支給予定</span>
+                        <strong id="salaryRecordCount">0件</strong>
                     </div>
 
                     <div class="salary-stat-card summary-card">
-                        <span>급여 총액</span>
-                        <strong id="salaryTotalAmount">0원</strong>
+                        <span>給与総額</span>
+                        <strong id="salaryTotalAmount">0ウォン</strong>
                     </div>
 
                     <div class="salary-stat-card summary-card">
-                        <span>조회 연월</span>
-                        <strong id="salaryMonthInfo">전체</strong>
+                        <span>検索年月</span>
+                        <strong id="salaryMonthInfo">すべて</strong>
                     </div>
 
                 </div>
@@ -80,8 +80,8 @@
                 <div class="salary-toolbar">
 
                     <div class="salary-toolbar-title">
-                        <h2>급여 목록</h2>
-                        <p>조회 범위 · 권한이 허용된 사원</p>
+                        <h2>給与一覧</h2>
+                        <p>検索範囲 ・ 閲覧権限のある社員</p>
                     </div>
 
                     <!-- 기존 SalaryController.list()와 연결 -->
@@ -95,7 +95,7 @@
                                id="salaryYearMonth"
                                name="salaryYearMonth"
                                value="<c:out value='${salaryYearMonth}'/>"
-                               aria-label="지급 연월"
+                               aria-label="支給年月"
                                class="salary-input salary-month-input">
 
                         <!-- 사번 / 사원명 -->
@@ -103,23 +103,23 @@
                                id="employeeKeyword"
                                name="employeeKeyword"
                                value="<c:out value='${employeeKeyword}'/>"
-                               placeholder="사번 / 사원명 검색"
-                               aria-label="사번 또는 사원명"
+                               placeholder="社員番号 / 社員名で検索"
+                               aria-label="社員番号または社員名"
                                maxlength="50"
                                class="salary-input salary-keyword-input">
 
                         <button type="submit"
                                 class="salary-search-btn">
                             <i class="fas fa-search"></i>
-                            검색
+                            検索
                         </button>
                     </form>
 
-                    <a href="${pageContext.request.contextPath}/salary/my" class="salary-cancel-btn">내 급여 조회</a>
+                    <a href="${pageContext.request.contextPath}/salary/my" class="salary-cancel-btn">自分の給与を表示</a>
                     <!-- 급여 등록 -->
                     <a href="${pageContext.request.contextPath}/salary/create"
                        class="salary-register-btn primary-btn">
-                        + 급여 등록
+                        + 給与登録
                     </a>
 
                 </div>
@@ -138,13 +138,13 @@
 
                         <thead>
                             <tr>
-                                <th>급여 ID</th>
-                                <th>사원</th>
-                                <th>지급 연월</th>
-                                <th>기본급</th>
-                                <th>수당</th>
-                                <th>공제액</th>
-                                <th>실수령액</th>
+                                <th>給与 ID</th>
+                                <th>社員</th>
+                                <th>支給年月</th>
+                                <th>基本給</th>
+                                <th>手当</th>
+                                <th>控除額</th>
+                                <th>手取り額</th>
                             </tr>
                         </thead>
 
@@ -212,19 +212,19 @@
                     <div id="salaryEmpty"
                          class="salary-empty"
                          style="display:none;">
-                        조회된 급여 내역이 없습니다.
+                        該当する給与履歴がありません。
                     </div>
 
                 </div>
 
                 <p class="salary-table-notice">
-                    급여 ID를 선택하면 상세 화면으로 이동합니다.
+                    給与 IDを選択すると詳細画面に移動します。
                 </p>
 
                 <!-- 페이지 처리 -->
                 <div class="salary-pagination-area">
 
-                    <span id="salaryCountInfo">총 0건</span>
+                    <span id="salaryCountInfo">合計 0件</span>
 
                     <div id="salaryPagination"
                          class="salary-pagination">
@@ -250,7 +250,7 @@
 <script>
 
 // ==========================================
-// 1. 급여 목록 페이지 처리
+// 1. 給与一覧のページ処理
 // ==========================================
 
 const salaryRows = Array.from(
@@ -289,14 +289,14 @@ function showSalaryPage(page) {
         totalCount === 0 ? "block" : "none";
 
     document.getElementById("salaryCountInfo").textContent =
-        "총 " + totalCount + "건";
+        "合計 " + totalCount + "件";
 
     printSalaryPagination(totalPages);
 }
 
 
 // ==========================================
-// 2. 페이지 번호 출력
+// 2. ページ番号を表示
 // ==========================================
 
 function printSalaryPagination(totalPages) {
@@ -329,7 +329,7 @@ function printSalaryPagination(totalPages) {
         pagination.appendChild(button);
     }
 
-    // 이전 페이지
+    // 前のページ
     addButton(
         "‹",
         salaryCurrentPage - 1,
@@ -337,7 +337,7 @@ function printSalaryPagination(totalPages) {
         false
     );
 
-    // 페이지 번호
+    // ページ番号
     for (let i = 1; i <= totalPages; i++) {
         addButton(
             i,
@@ -347,7 +347,7 @@ function printSalaryPagination(totalPages) {
         );
     }
 
-    // 다음 페이지
+    // 次のページ
     addButton(
         "›",
         salaryCurrentPage + 1,
@@ -358,12 +358,12 @@ function printSalaryPagination(totalPages) {
 
 
 // ==========================================
-// 3. 급여 통계 출력
+// 3. 給与統計を表示
 // ==========================================
 
 function printSalaryStats() {
 
-    // 현재 조회된 급여 데이터 기준
+    // 現在の検索結果に基づく給与データ
     const uniqueEmployees = new Set();
     let totalAmount = 0;
 
@@ -377,24 +377,24 @@ function printSalaryStats() {
     });
 
     document.getElementById("salaryEmployeeCount").textContent =
-        uniqueEmployees.size + "명";
+        uniqueEmployees.size + "名";
 
     document.getElementById("salaryRecordCount").textContent =
-        salaryRows.length + "건";
+        salaryRows.length + "件";
 
     document.getElementById("salaryTotalAmount").textContent =
-        totalAmount.toLocaleString("ko-KR") + "원";
+        totalAmount.toLocaleString("ja-JP") + "ウォン";
 
     const month =
         document.getElementById("salaryYearMonth").value;
 
     document.getElementById("salaryMonthInfo").textContent =
-        month || "전체";
+        month || "すべて";
 }
 
 
 // ==========================================
-// 4. 화면 초기화
+// 4. 画面を初期化
 // ==========================================
 
 document.addEventListener("DOMContentLoaded", () => {

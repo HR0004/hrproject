@@ -48,7 +48,7 @@ public class LeaveService {
 	public void applyLeave(int empId, String startDate, String endDate, String halfDayType, String reason) {
 
 		if (reason == null || reason.trim().isEmpty() || reason.trim().length() > 50) {
-			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "신청 사유는 1~50자로 입력하세요.");
+			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "申請理由は 1~50文字で入力してください。");
 		}
 
 		LocalDate start;
@@ -58,11 +58,11 @@ public class LeaveService {
 			start = LocalDate.parse(startDate);
 			end = LocalDate.parse(endDate);
 		} catch (DateTimeParseException | NullPointerException e) {
-			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "휴가 날짜를 확인하세요.");
+			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "休暇の日付を確認してください。");
 		}
 
 		if (end.isBefore(start) || end.isAfter(start.plusYears(1))) {
-			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "휴가 기간을 확인하세요.");
+			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "休暇期間を確認してください。");
 		}
 
 		BigDecimal days = BigDecimal.ZERO;
@@ -82,17 +82,17 @@ public class LeaveService {
 
 			if (!start.equals(end) || start.getDayOfWeek() == DayOfWeek.SATURDAY
 					|| start.getDayOfWeek() == DayOfWeek.SUNDAY) {
-				throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "반차는 평일 하루만 신청할 수 있습니다.");
+				throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "半日休暇は平日の1日のみ申請できます。");
 			}
 
 			days = new BigDecimal("0.5");
 
 		} else {
-			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "휴가 구분이 올바르지 않습니다.");
+			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "休暇区分が正しくありません。");
 		}
 
 		if (days.compareTo(BigDecimal.ZERO) <= 0) {
-			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "신청 가능한 평일이 없습니다.");
+			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "申請可能な平日がありません。");
 		}
 
 		leaveMapper.insertLeaveRequest(empId, Date.valueOf(start), Date.valueOf(end), days, reason.trim());

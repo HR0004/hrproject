@@ -4,11 +4,11 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="ja">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>HRMS - 급여 등록</title>
+<title>HRMS - 給与登録</title>
 
 
 
@@ -17,7 +17,7 @@
 
 <%@ include file="/WEB-INF/views/common/adminlte-head.jspf" %>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/static/vendor/fontawesome-6.5.2/css/all.min.css">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/css/salary.css?v=salary-unified-1">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/salary.css?v=ja-1">
 </head>
 
 <body class="hold-transition hrms-adminlte hrms-salary" data-context-path="${pageContext.request.contextPath}">
@@ -32,16 +32,15 @@
 
 			<section class="content-header">
 				<div class="container-fluid salary-heading">
-					<h1 class="hrms-page-title">급여 등록</h1>
-					<p class="page-path">지급 대상과 금액을 입력한 뒤 급여 내역을 검토해 주세요.</p>
+					<h1 class="hrms-page-title">給与登録</h1>
+					<p class="page-path">支給対象と金額を入力し、給与明細を確認してください。</p>
 				</div>
 			</section>
 
 			<section class="content">
 				<div class="container-fluid">
 
-					<div class="salary-notice">사원과 지급 연월을 선택하면 기존 급여 등록 여부를
-						확인합니다.</div>
+					<div class="salary-notice">社員と支給年月を選択すると、給与の登録状況を確認できます。</div>
 
 
 					<c:if test="${not empty errorMessage}">
@@ -52,7 +51,7 @@
 
 						<a
 							href="${pageContext.request.contextPath}/salary/list?salaryYearMonth=${salaryCreateRequest.salaryYearMonth}&amp;employeeKeyword=${salaryCreateRequest.empId}"
-							class="salary-cancel-btn"> 기존 급여 내역 보기 </a>
+							class="salary-cancel-btn"> 登録済みの給与を表示 </a>
 
 					</c:if>
 
@@ -67,16 +66,16 @@
 
 						<div class="salary-form-card content-card">
 
-							<h2>급여 정보</h2>
+							<h2>給与情報</h2>
 
 							<div class="salary-form-grid">
 
 								<!-- 대상 사원 -->
 								<div class="salary-field">
-									<label for="empId">대상 사원 *</label> <select id="empId"
+									<label for="empId">対象社員 *</label> <select id="empId"
 										name="empId" class="salary-form-input" required>
 
-										<option value="">사원을 선택하세요</option>
+										<option value="">社員を選択してください</option>
 
 										<c:forEach var="emp" items="${salaryEmployees}">
 
@@ -94,7 +93,7 @@
 
 								<!-- 지급 연월 -->
 								<div class="salary-field">
-									<label for="salaryYearMonth">지급 연월 *</label> <input
+									<label for="salaryYearMonth">支給年月 *</label> <input
 										type="month" id="salaryYearMonth" name="salaryYearMonth"
 										class="salary-form-input"
 										value="<c:out value='${salaryCreateRequest.salaryYearMonth}'/>"
@@ -103,48 +102,48 @@
 
 								<!-- 기본급 -->
 								<div class="salary-field">
-									<label for="baseSalary">기본급 *</label> <input type="number"
+									<label for="baseSalary">基本給 *</label> <input type="number"
 										id="baseSalary" name="baseSalary" class="salary-form-input"
-										min="0" max="999999999999999" step="1" placeholder="기본급 입력"
+										min="0" max="999999999999999" step="1" placeholder="基本給を入力"
 										value="<c:out value='${salaryCreateRequest.baseSalary}'/>"
-										required> <small>원 단위로 입력합니다.</small>
+										required> <small>ウォン単位で入力します。</small>
 								</div>
 
 								<!-- 수당 -->
 								<div class="salary-field">
-									<label for="bonus">수당 *</label> <input type="number" id="bonus"
+									<label for="bonus">手当 *</label> <input type="number" id="bonus"
 										name="bonus" class="salary-form-input" min="0"
 										max="999999999999999" step="1"
 										value="<c:out value='${salaryCreateRequest.bonus}'/>" required>
 
-									<small>수당이 없으면 0원을 입력합니다.</small>
+									<small>手当がない場合は 0ウォンを入力してください。</small>
 								</div>
 
 								<!-- 공제액 -->
 								<div class="salary-field">
-									<label for="deduction">공제액 *</label> <input type="number"
+									<label for="deduction">控除額 *</label> <input type="number"
 										id="deduction" name="deduction" class="salary-form-input"
 										min="0" max="999999999999999" step="1"
 										value="<c:out value='${salaryCreateRequest.deduction}'/>"
-										required> <small>공제액이 없으면 0원을 입력합니다.</small>
+										required> <small>控除がない場合は 0ウォンを入力してください。</small>
 								</div>
 
 								<!-- 지급일 -->
 								<div class="salary-field">
-									<label for="paymentDate">지급일</label> <input type="date"
+									<label for="paymentDate">支給日</label> <input type="date"
 										id="paymentDate" name="paymentDate" class="salary-form-input"
 										value="<c:out value='${salaryCreateRequest.paymentDate}'/>">
 
-									<small>미정인 경우 비워둘 수 있습니다.</small>
+									<small>未定の場合は空欄にできます。</small>
 								</div>
 
 							</div>
 
 							<div class="salary-preview">
 								<div>
-									<span>예상 실수령액</span> <small>기본급 + 수당 - 공제액</small>
+									<span>手取り額の見込み</span> <small>基本給 + 手当 - 控除額</small>
 								</div>
-								<strong id="netSalaryPreview">0원</strong>
+								<strong id="netSalaryPreview">0ウォン</strong>
 							</div>
 
 							<p id="salaryValidationMessage" class="salary-validation-message"
@@ -154,10 +153,10 @@
 
 						<div class="salary-form-actions">
 							<a href="${pageContext.request.contextPath}/salary/list"
-								class="salary-cancel-btn">취소</a>
+								class="salary-cancel-btn">キャンセル</a>
 
 							<button type="button" id="salaryReviewBtn"
-								class="salary-confirm-btn primary-btn">급여 검토</button>
+								class="salary-confirm-btn primary-btn">給与の確認</button>
 						</div>
 
 					</form>
@@ -174,41 +173,41 @@
 		<div class="salary-modal" role="dialog" aria-modal="true"
 			aria-labelledby="salaryModalTitle">
 
-			<span class="salary-modal-badge">최종 검토</span>
+			<span class="salary-modal-badge">最終確認</span>
 
-			<h2 id="salaryModalTitle">급여를 등록하시겠습니까?</h2>
-			<p>아래 계산 결과와 지급 정보를 확인해 주세요.</p>
+			<h2 id="salaryModalTitle">給与を登録しますか？</h2>
+			<p>以下の計算結果と支給情報を確認してください。</p>
 
 			<div class="salary-modal-summary">
 				<div>
-					<span>대상 사원</span><strong id="reviewEmployee"></strong>
+					<span>対象社員</span><strong id="reviewEmployee"></strong>
 				</div>
 				<div>
-					<span>지급 연월</span><strong id="reviewMonth"></strong>
+					<span>支給年月</span><strong id="reviewMonth"></strong>
 				</div>
 				<div>
-					<span>기본급</span><strong id="reviewBase"></strong>
+					<span>基本給</span><strong id="reviewBase"></strong>
 				</div>
 				<div>
-					<span>수당</span><strong id="reviewBonus"></strong>
+					<span>手当</span><strong id="reviewBonus"></strong>
 				</div>
 				<div>
-					<span>공제액</span><strong id="reviewDeduction"></strong>
+					<span>控除額</span><strong id="reviewDeduction"></strong>
 				</div>
 				<div>
-					<span>지급일</span><strong id="reviewDate"></strong>
+					<span>支給日</span><strong id="reviewDate"></strong>
 				</div>
 			</div>
 
 			<div class="salary-modal-total">
-				<span>실수령액</span> <strong id="reviewNet"></strong>
+				<span>手取り額</span> <strong id="reviewNet"></strong>
 			</div>
 
 			<div class="salary-modal-actions">
-				<button type="button" id="salaryBackBtn" class="salary-cancel-btn">돌아가기</button>
+				<button type="button" id="salaryBackBtn" class="salary-cancel-btn">戻る</button>
 
 				<button type="button" id="salarySubmitBtn"
-					class="salary-confirm-btn primary-btn">등록 확정</button>
+					class="salary-confirm-btn primary-btn">登録を確定</button>
 			</div>
 		</div>
 	</div>
@@ -226,7 +225,7 @@ const baseInput = document.getElementById("baseSalary");
 const bonusInput = document.getElementById("bonus");
 const deductionInput = document.getElementById("deduction");
 
-const money = value => Number(value).toLocaleString("ko-KR") + "원";
+const money = value => Number(value).toLocaleString("ja-JP") + "ウォン";
 
 function getAmount(input) {
     return input.value.trim() === "" ? NaN : Number(input.value);
@@ -251,7 +250,7 @@ function updatePreview() {
     const net = calculateNet();
 
     document.getElementById("netSalaryPreview").textContent =
-        net === null ? "입력값 확인 필요" : money(net);
+        net === null ? "入力内容の確認が必要です" : money(net);
 }
 
 [baseInput, bonusInput, deductionInput].forEach(input => {
@@ -270,7 +269,7 @@ document.getElementById("salaryReviewBtn").addEventListener("click", () => {
 
     if (net === null) {
         validationMessage.textContent =
-            "금액은 0 이상의 15자리 이내 정수로 입력하고, 계산 결과도 확인해 주세요.";
+            "金額は 0 以上の 15桁以内の整数で入力し、 計算結果も確認してください。";
         return;
     }
 
@@ -292,7 +291,7 @@ document.getElementById("salaryReviewBtn").addEventListener("click", () => {
         money(getAmount(deductionInput));
 
     document.getElementById("reviewDate").textContent =
-        document.getElementById("paymentDate").value || "미정";
+        document.getElementById("paymentDate").value || "未定";
 
     document.getElementById("reviewNet").textContent = money(net);
 
@@ -311,7 +310,7 @@ document.getElementById("salarySubmitBtn").addEventListener("click", event => {
     }
 
     event.currentTarget.disabled = true;
-    event.currentTarget.textContent = "등록 중...";
+    event.currentTarget.textContent = "登録中。..";
 
     salaryForm.submit();
 });

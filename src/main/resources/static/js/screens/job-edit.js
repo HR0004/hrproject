@@ -9,7 +9,7 @@ const registJob = async (event) => {
     const registerBtn = document.getElementById("registerBtn");
 
     if (!jobName) {
-        alert("직급명을 입력하세요.");
+        alert("役職名を入力してください。");
         return;
     }
 
@@ -39,16 +39,16 @@ const registJob = async (event) => {
         });
 
         if (!response.ok) {
-            throw new Error("직급 등록 실패 (HTTP " + response.status + ")");
+            throw new Error("役職の登録に失敗しました (HTTP " + response.status + ")");
         }
 
-        alert("직급이 등록되었습니다.");
+        alert("役職を登録しました。");
 
         location.href = contextPath + "/jobs";
 
     } catch (error) {
 
-        console.error("직급 등록 오류:", error);
+        console.error("役職登録エラー:", error);
         alert(error.message);
 
     } finally {

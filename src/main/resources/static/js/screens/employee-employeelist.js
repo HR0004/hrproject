@@ -19,7 +19,7 @@ async function loadEmployees(page = 1) {
         );
 
         if (!response.ok) {
-            throw new Error("사원 목록 조회 실패");
+            throw new Error("社員一覧の取得に失敗しました");
         }
 
         const pager = await response.json();
@@ -28,13 +28,13 @@ async function loadEmployees(page = 1) {
         printPagination(pager);
 
     } catch (error) {
-        console.error("사원 목록 조회 오류:", error);
+        console.error("社員一覧の取得エラー:", error);
 
         document.getElementById("employeeTableBody").innerHTML = "";
         document.getElementById("employeePagination").innerHTML = "";
 
         const empty = document.getElementById("employeeEmpty");
-        empty.textContent = "사원 목록을 불러오지 못했습니다.";
+        empty.textContent = "社員一覧を読み込めませんでした。";
         empty.style.display = "block";
     }
 }
@@ -44,17 +44,17 @@ function printEmployees(employees) {
     const tbody = $("#employeeTableBody").empty();
     const empty = document.getElementById("employeeEmpty");
 
-    empty.textContent = "등록된 사원이 없습니다.";
+    empty.textContent = "登録されている社員がいません。";
     empty.style.display = employees.length === 0 ? "block" : "none";
 
     employees.forEach(emp => {
         const url = contextPath + "/employees/" + emp.empId;
 
         const status = {
-            ACTIVE: ["재직", "status-active"],
-            LEAVE: ["휴직", "status-leave"],
-            RETIRED: ["퇴직", "status-retired"]
-        }[emp.status] || ["미확인", ""];
+            ACTIVE: ["在籍", "status-active"],
+            LEAVE: ["休職", "status-leave"],
+            RETIRED: ["退職", "status-retired"]
+        }[emp.status] || ["未確認", ""];
 
         const tr = $("<tr>");
 
@@ -72,7 +72,7 @@ function printEmployees(employees) {
             emp.job?.jobName ?? "-",
             emp.email ?? "-",
             emp.hiredate
-                ? new Date(emp.hiredate).toLocaleDateString("ko-KR")
+                ? new Date(emp.hiredate).toLocaleDateString("ja-JP")
                 : "-"
         ].forEach(value => {
             $("<td>").text(value).appendTo(tr);
@@ -88,12 +88,12 @@ function printEmployees(employees) {
             $("<a>")
                 .addClass("employee-action-link")
                 .attr("href", url)
-                .text("상세"),
+                .text("詳細"),
             " / ",
             $("<a>")
                 .addClass("employee-action-link")
                 .attr("href", url + "/edit")
-                .text("수정")
+                .text("編集")
         ).appendTo(tr);
 
         tbody.append(tr);
@@ -141,7 +141,7 @@ async function loadEmployeeStats() {
         const response = await fetch(contextPath + "/api/employees");
 
         if (!response.ok) {
-            throw new Error("통계 조회 실패");
+            throw new Error("統計の取得に失敗しました");
         }
 
         const employees = await response.json();
@@ -158,7 +158,7 @@ async function loadEmployeeStats() {
         );
 
     } catch (error) {
-        console.error("사원 통계 오류:", error);
+        console.error("社員統計の取得エラー:", error);
     }
 }
 

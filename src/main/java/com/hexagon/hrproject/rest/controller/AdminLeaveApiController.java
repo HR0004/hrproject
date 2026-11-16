@@ -35,20 +35,20 @@ public class AdminLeaveApiController {
     @PostMapping("/{requestId}/approve")
     public Map<String, String> approve(@PathVariable("requestId") int requestId, @AuthenticationPrincipal AccountDetails details) {
         service.decide(requestId, approver(details), true);
-        return Collections.singletonMap("message", "휴가 신청을 승인했습니다.");
+        return Collections.singletonMap("message", "休暇申請を承認しました。");
     }
     @PostMapping("/{requestId}/reject")
     public Map<String, String> reject(@PathVariable("requestId") int requestId, @AuthenticationPrincipal AccountDetails details) {
         service.decide(requestId, approver(details), false);
-        return Collections.singletonMap("message", "휴가 신청을 반려했습니다.");
+        return Collections.singletonMap("message", "休暇申請を否認しました。");
     }
     private int approver(AccountDetails details) {
-        if (details == null || details.getAccount() == null) throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "로그인이 필요합니다.");
-        if (details.getAccount().getEmp() == null) throw new ResponseStatusException(HttpStatus.CONFLICT, "관리자 계정에 사원 정보를 연결해 주세요.");
+        if (details == null || details.getAccount() == null) throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "ログインが必要です。");
+        if (details.getAccount().getEmp() == null) throw new ResponseStatusException(HttpStatus.CONFLICT, "管理者アカウントに社員情報を紐付けてください。");
         return details.getAccount().getEmp().getEmpId();
     }
     @ExceptionHandler(ResponseStatusException.class)
     public ResponseEntity<Map<String, String>> handleStatus(ResponseStatusException e) {
-        return ResponseEntity.status(e.getStatus()).body(Collections.singletonMap("message", e.getReason() == null ? "요청을 처리할 수 없습니다." : e.getReason()));
+        return ResponseEntity.status(e.getStatus()).body(Collections.singletonMap("message", e.getReason() == null ? "リクエストを処理できません。" : e.getReason()));
     }
 }

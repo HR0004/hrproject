@@ -4,20 +4,20 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="ja">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport"
           content="width=device-width, initial-scale=1.0">
 
-    <title>HRMS - 급여 오류</title>
+    <title>HRMS - 給与エラー</title>
 
     
 
     
 <%@ include file="/WEB-INF/views/common/adminlte-head.jspf" %>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/static/vendor/fontawesome-6.5.2/css/all.min.css">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/css/salary.css?v=salary-unified-1">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/salary.css?v=ja-1">
 </head>
 
 <body class="hold-transition hrms-adminlte hrms-salary" data-context-path="${pageContext.request.contextPath}">
@@ -37,7 +37,7 @@
 
                     <div class="salary-error-icon">!</div>
 
-                    <h1 class="hrms-page-title">급여 정보를 확인할 수 없습니다.</h1>
+                    <h1 class="hrms-page-title">給与情報を確認できません。</h1>
 
                     <p class="page-path">
                         <c:choose>
@@ -45,14 +45,14 @@
                                 <c:out value="${errorMessage}"/>
                             </c:when>
                             <c:otherwise>
-                                요청하신 급여 정보를 처리할 수 없습니다.
+                                指定された給与情報を処理できません。
                             </c:otherwise>
                         </c:choose>
                     </p>
 
                     <a href="${pageContext.request.contextPath}<%= request.isUserInRole("HR_ADMIN") ? "/salary/list" : "/salary/my" %>"
                        class="salary-confirm-btn primary-btn">
-                        급여 목록으로 돌아가기
+                        給与一覧に戻る
                     </a>
 
                 </div>

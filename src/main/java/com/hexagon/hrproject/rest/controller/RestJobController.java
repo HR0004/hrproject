@@ -34,7 +34,7 @@ public class RestJobController {
 
 		jobService.regist(jobDTO);
 
-		ApiResponse<Void> response = ApiResponse.success("직급 등록 성공", null);
+		ApiResponse<Void> response = ApiResponse.success("役職を登録しました", null);
 
 		return ResponseEntity.status(HttpStatus.CREATED).body(response);
 	}
@@ -43,7 +43,7 @@ public class RestJobController {
 	public ResponseEntity<ApiResponse<List<Job>>> getList() {
 		List<Job> jobList = jobService.getList();
 
-		ApiResponse<List<Job>> response = ApiResponse.success("직급 목록 가져오기 성공", jobList);
+		ApiResponse<List<Job>> response = ApiResponse.success("役職一覧を取得しました", jobList);
 
 		return ResponseEntity.status(HttpStatus.OK).body(response);
 
@@ -54,7 +54,7 @@ public class RestJobController {
 
 		Job job = jobService.getDetail(jobId);
 
-		ApiResponse<Job> response = ApiResponse.success("직급 상세 조회 성공", job);
+		ApiResponse<Job> response = ApiResponse.success("役職の詳細を取得しました", job);
 
 		return ResponseEntity.status(HttpStatus.OK).body(response);
 	}
@@ -65,7 +65,7 @@ public class RestJobController {
 
 		List<Job> jobList = jobService.search(jobName);
 
-		ApiResponse<List<Job>> response = ApiResponse.success("직급 검색 성공", jobList);
+		ApiResponse<List<Job>> response = ApiResponse.success("役職の検索が完了しました", jobList);
 
 		return ResponseEntity.status(HttpStatus.OK).body(response);
 	}
@@ -74,7 +74,7 @@ public class RestJobController {
 	public ResponseEntity<ApiResponse<Void>> update(@PathVariable int jobId, @RequestBody JobDTO jobDTO) {
 		jobService.update(jobId, jobDTO);
 
-		ApiResponse<Void> response = ApiResponse.success("직급 수정 성공", null);
+		ApiResponse<Void> response = ApiResponse.success("役職情報を更新しました", null);
 
 		return ResponseEntity.status(HttpStatus.OK).body(response);
 	}
@@ -85,7 +85,7 @@ public class RestJobController {
 
 		jobService.deactivity(jobId);
 
-		ApiResponse<Void> response = ApiResponse.success("직급 비활성화 성공", null);
+		ApiResponse<Void> response = ApiResponse.success("役職を無効にしました", null);
 
 		return ResponseEntity.status(HttpStatus.OK).body(response);
 	}
@@ -98,7 +98,7 @@ public class RestJobController {
 		Pager pager = jobService.getPageList(request);
 
 		// 공통 API 응답 생성
-		ApiResponse<Pager> response = ApiResponse.success("직급 페이지 조회 성공", pager);
+		ApiResponse<Pager> response = ApiResponse.success("役職一覧ページを取得しました", pager);
 
 		return ResponseEntity.ok(response);
 	}

@@ -12,12 +12,12 @@ async function loadDepartments() {
         );
 
         if (!response.ok) {
-            throw new Error("부서 목록 조회 실패: " + response.status);
+            throw new Error("部署一覧の取得に失敗しました: " + response.status);
         }
 
         const result = await response.json();
 
-        console.log("부서 목록 API 응답:", result);
+        console.log("部署一覧 API レスポンス:", result);
 
         // API가 배열 또는 data/content에 배열을 반환하는 경우 처리
         const departments = Array.isArray(result)
@@ -29,7 +29,7 @@ async function loadDepartments() {
         select.empty();
 
         select.append(
-            $("<option>").val("").text("전체 부서")
+            $("<option>").val("").text("すべての部署")
         );
 
         departments.forEach(function(dept) {
@@ -51,12 +51,12 @@ async function loadDepartments() {
 
     } catch (error) {
 
-        console.error("부서 조회 오류:", error);
+        console.error("部署情報の取得エラー:", error);
 
         select.empty().append(
             $("<option>")
                 .val("")
-                .text("부서 조회 실패")
+                .text("部署情報の取得に失敗しました")
         );
     }
 }
@@ -66,7 +66,7 @@ async function loadDepartments() {
 
 let departmentAttendanceRows = [];
 
-const deptStatusText = {NORMAL:"정상 출근", LATE:"지각", EARLY:"조퇴", LEAVE:"휴가", UNKNOWN:"미기록"};
+const deptStatusText = {NORMAL:"通常出勤", LATE:"遅刻", EARLY:"早退", LEAVE:"休暇", UNKNOWN:"未記録"};
 
 const deptStatusClass = {NORMAL:"dat-pill-normal", LATE:"dat-pill-late", EARLY:"dat-pill-early", LEAVE:"dat-pill-leave", UNKNOWN:"dat-pill-unknown"};
 
@@ -100,14 +100,14 @@ const getDepartmentAttendance = async function() {
         );
 
         if (!response.ok) {
-            throw new Error("근태 조회 실패: " + response.status);
+            throw new Error("勤怠情報の取得に失敗しました: " + response.status);
         }
 
         // 3. 서버에서 받은 실제 근태 데이터
         const data = await response.json();
 
         if (!Array.isArray(data)) {
-            throw new Error("근태 데이터 형식이 올바르지 않습니다.");
+            throw new Error("勤怠データの形式が正しくありません。");
         }
 
         departmentAttendanceRows = data;
@@ -124,7 +124,7 @@ const getDepartmentAttendance = async function() {
 
          item.department = option.length
              ? option.text()
-             : "부서 정보 없음";
+             : "部署情報なし";
      });
 
         // 4. 상태와 직원 이름/사번 필터
@@ -139,26 +139,26 @@ const getDepartmentAttendance = async function() {
         });
 
         // 5. 상단 통계 갱신
-        $("div[name='allEmployees']").text(rows.length + "명");
+        $("div[name='allEmployees']").text(rows.length + "名");
 
         $("div[name='normalEmployees']").text(
-            rows.filter(r => r.status === "NORMAL").length + "명"
+            rows.filter(r => r.status === "NORMAL").length + "名"
         );
 
         $("div[name='lateEmployees']").text(
             rows.filter(r =>
                 r.status === "LATE" || r.status === "EARLY"
-            ).length + "명"
+            ).length + "名"
         );
 
         $("div[name='otherEmployees']").text(
             rows.filter(r =>
                 r.status === "LEAVE" || r.status === "UNKNOWN"
-            ).length + "명"
+            ).length + "名"
         );
 
         $("span[name='attendanceCount']").text(
-            "총 " + rows.length + "명"
+            "合計 " + rows.length + "名"
         );
 
         // 6. 조회된 데이터가 없는 경우
@@ -168,7 +168,7 @@ const getDepartmentAttendance = async function() {
                     $("<td>", {
                         colspan: 7,
                         "class": "dat-empty",
-                        text: "조회된 근태 내역이 없습니다."
+                        text: "該当する勤怠記録がありません。"
                     })
                 )
             );
@@ -191,7 +191,7 @@ const getDepartmentAttendance = async function() {
                     $("<span>", {
                         "class": "dat-pill " +
                             (deptStatusClass[item.status] || "dat-pill-unknown"),
-                        text: deptStatusText[item.status] || "미기록"
+                        text: deptStatusText[item.status] || "未記録"
                     })
                 )
             );
@@ -201,7 +201,7 @@ const getDepartmentAttendance = async function() {
                     $("<button>", {
                         type: "button",
                         "class": "dat-btn dat-btn-small",
-                        text: "상세",
+                        text: "詳細",
                         "data-emp-id": item.empId
                     })
                 )
@@ -212,22 +212,22 @@ const getDepartmentAttendance = async function() {
 
     } catch (error) {
 
-        console.error("부서 근태 조회 오류:", error);
+        console.error("部署別勤怠の取得エラー:", error);
 
         departmentAttendanceRows = [];
 
-        $("div[name='allEmployees']").text("0명");
-        $("div[name='normalEmployees']").text("0명");
-        $("div[name='lateEmployees']").text("0명");
-        $("div[name='otherEmployees']").text("0명");
-        $("span[name='attendanceCount']").text("총 0명");
+        $("div[name='allEmployees']").text("0名");
+        $("div[name='normalEmployees']").text("0名");
+        $("div[name='lateEmployees']").text("0名");
+        $("div[name='otherEmployees']").text("0名");
+        $("span[name='attendanceCount']").text("合計 0名");
 
         $tbody.append(
             $("<tr>").append(
                 $("<td>", {
                     colspan: 7,
                     "class": "dat-empty",
-                    text: "근태 정보를 불러오지 못했습니다."
+                    text: "勤怠情報を読み込めませんでした。"
                 })
             )
         );
@@ -245,9 +245,9 @@ const showDepartmentAttendanceDetail = function(empId) {
 
     if (!item) return;
 
-    const details = [["사번",item.empId],["직원명",item.name],["소속 부서",item.department],["근무 일자",item.date],
+    const details = [["社員番号",item.empId],["社員名",item.name],["所属部署",item.department],["勤務日",item.date],
 
-        ["출근 시간",item.clockIn],["퇴근 시간",item.clockOut],["근태 상태",deptStatusText[item.status]],["비고",item.note]];
+        ["出勤時刻",item.clockIn],["退勤時刻",item.clockOut],["勤怠状態",deptStatusText[item.status]],["備考",item.note]];
 
     const $content = $("dl[name='attendanceDetailContent']").empty();
 

@@ -53,7 +53,7 @@ public interface DepartmentAttendanceMapper {
 
         "    CASE",
         "        WHEN a.attendance_id IS NOT NULL",
-        "            THEN '출퇴근 기록'",
+        "            THEN '出退勤記録'",
 
         "        WHEN EXISTS (",
         "            SELECT 1",
@@ -62,9 +62,9 @@ public interface DepartmentAttendanceMapper {
         "              AND lr.status = 'APPROVED'",
         "              AND #{workDate}",
         "                  BETWEEN lr.start_date AND lr.end_date",
-        "        ) THEN '승인된 휴가'",
+        "        ) THEN '承認済みの休暇'",
 
-        "        ELSE '근태 기록 없음'",
+        "        ELSE '勤怠記録なし'",
         "    END AS note",
 
         "FROM emp e",

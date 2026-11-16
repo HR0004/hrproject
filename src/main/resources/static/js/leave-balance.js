@@ -11,12 +11,12 @@
             );
 
             if (!response.ok) {
-                throw new Error("휴가 현황 조회 실패: " + response.status);
+                throw new Error("休暇状況の取得に失敗しました: " + response.status);
             }
 
             const result = await response.json();
 
-            console.log("휴가 현황 조회 결과", result);
+            console.log("休暇状況の取得結果", result);
 
             if (result == null) {
 
@@ -27,13 +27,13 @@
                 return;
             }
 
-            $("div[name='totalDays']").text(result.totalDays + "일");
-            $("div[name='usedDays']").text(result.usedDays + "일");
-            $("div[name='remainingDays']").text(result.remainingDays + "일");
+            $("div[name='totalDays']").text(result.totalDays + "日");
+            $("div[name='usedDays']").text(result.usedDays + "日");
+            $("div[name='remainingDays']").text(result.remainingDays + "日");
 
         } catch (error) {
 
-            console.error("휴가 현황 조회 오류", error);
+            console.error("休暇状況の取得エラー", error);
 
         }
     };
@@ -46,7 +46,7 @@
         const count = $("div[name='leaveHistoryCount']");
 
         tbody.empty();
-        count.text("조회 중");
+        count.text("読み込み中");
 
         try {
 
@@ -58,20 +58,20 @@
             );
 
             if (!response.ok) {
-                throw new Error("휴가 사용 내역 조회 실패: " + response.status);
+                throw new Error("休暇取得履歴の取得に失敗しました: " + response.status);
             }
 
             const records = await response.json();
 
-            console.log("휴가 사용 내역 조회 결과", records);
+            console.log("休暇取得履歴の取得結果", records);
 
             if (!Array.isArray(records)) {
-                throw new Error("휴가 사용 내역 응답 형식 오류");
+                throw new Error("休暇取得履歴のレスポンス形式エラー");
             }
 
             tbody.empty();
 
-            count.text("총 " + records.length + "건");
+            count.text("合計 " + records.length + "件");
 
             // 휴가 사용 내역이 없는 경우
             if (records.length === 0) {
@@ -81,7 +81,7 @@
                 $("<td>")
                     .attr("colspan", 5)
                     .addClass("leave-empty")
-                    .text("사용한 휴가 내역이 없습니다.")
+                    .text("取得済みの休暇履歴がありません。")
                     .appendTo(tr);
 
                 tbody.append(tr);
@@ -99,14 +99,14 @@
                     ? startDate
                     : startDate + " ~ " + endDate;
 
-                const leaveType = row.leaveType || "휴가";
+                const leaveType = row.leaveType || "休暇";
 
                 const days = row.days != null
-                    ? row.days + "일"
+                    ? row.days + "日"
                     : "-";
 
                 const status = row.status === "APPROVED"
-                    ? "사용 완료"
+                    ? "取得済み"
                     : row.status || "-";
 
                 const tr = $("<tr>");
@@ -123,17 +123,17 @@
 
         } catch (error) {
 
-            console.error("휴가 사용 내역 조회 오류", error);
+            console.error("休暇取得履歴の取得エラー", error);
 
             tbody.empty();
-            count.text("조회 실패");
+            count.text("取得に失敗しました");
 
             const tr = $("<tr>");
 
             $("<td>")
                 .attr("colspan", 5)
                 .addClass("leave-empty")
-                .text("휴가 사용 내역을 불러오지 못했습니다.")
+                .text("休暇取得履歴を読み込めませんでした。")
                 .appendTo(tr);
 
             tbody.append(tr);

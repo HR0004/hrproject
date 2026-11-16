@@ -3,20 +3,20 @@
     pageEncoding="UTF-8" %>
 
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="ja">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport"
           content="width=device-width, initial-scale=1.0">
 
-    <title>HRMS Admin - 대시보드</title>
+    <title>HRMS Admin - ダッシュボード</title>
 
     <%@ include file="/WEB-INF/views/common/adminlte-head.jspf" %>
 
     <!-- 대시보드 내부 전용 CSS -->
     <link rel="stylesheet"
-          href="${pageContext.request.contextPath}/css/dashboard.css?v=job-unified-1">
+          href="${pageContext.request.contextPath}/css/dashboard.css?v=ja-1">
 </head>
 
 <body class="hold-transition hrms-adminlte">
@@ -39,11 +39,11 @@
                 <div class="dashboard-heading">
 
                     <h1 class="dashboard-heading-title">
-                        관리자 대시보드
+                        管理者ダッシュボード
                     </h1>
 
                     <p class="dashboard-heading-desc">
-                        인사관리 시스템의 전체 현황을 확인할 수 있습니다.
+                        人事管理システム全体の状況を確認できます。
                     </p>
 
                 </div>
@@ -66,7 +66,7 @@
                         <div class="dashboard-stat-card">
 
                             <div class="dashboard-stat-label">
-                                전체 사원
+                                社員総数
                             </div>
 
                             <div class="dashboard-stat-value">
@@ -84,7 +84,7 @@
                         <div class="dashboard-stat-card">
 
                             <div class="dashboard-stat-label">
-                                재직
+                                在籍
                             </div>
 
                             <div class="dashboard-stat-value">
@@ -102,7 +102,7 @@
                         <div class="dashboard-stat-card">
 
                             <div class="dashboard-stat-label">
-                                휴직
+                                休職
                             </div>
 
                             <div class="dashboard-stat-value">
@@ -120,7 +120,7 @@
                         <div class="dashboard-stat-card">
 
                             <div class="dashboard-stat-label">
-                                퇴직
+                                退職
                             </div>
 
                             <div class="dashboard-stat-value">
@@ -139,7 +139,7 @@
                 <div class="dashboard-system">
 
                     <h2 class="dashboard-system-title">
-                        시스템 현황 요약
+                        システム状況サマリー
                     </h2>
 
                     <div class="dashboard-table-scroll">
@@ -148,25 +148,25 @@
 
                             <thead>
                                 <tr>
-                                    <th>구분</th>
-                                    <th>상태 값</th>
-                                    <th>비고</th>
+                                    <th>区分</th>
+                                    <th>状態</th>
+                                    <th>備考</th>
                                 </tr>
                             </thead>
 
                             <tbody>
 
                                 <tr>
-                                    <td>데이터베이스 연결</td>
-                                    <td>정상 (MySQL)</td>
-                                    <td>MyBatis 연동 완료</td>
+                                    <td>データベース接続</td>
+                                    <td>正常 (MySQL)</td>
+                                    <td>MyBatis 連携完了</td>
                                 </tr>
 
                                 <tr>
-                                    <td>보안 및 라우팅</td>
-                                    <td>컨트롤러 매핑 완료</td>
+                                    <td>セキュリティとルーティング</td>
+                                    <td>コントローラーのマッピング完了</td>
                                     <td>
-                                        사원·부서·근태·휴가·권한 모듈 연동
+                                        社員・部署・勤怠・休暇・権限モジュール連携
                                     </td>
                                 </tr>
 

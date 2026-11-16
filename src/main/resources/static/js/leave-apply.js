@@ -47,17 +47,17 @@ $(function () {
          $("textarea[name='reason']").val().trim();
 
      if (!startDate || !endDate) {
-         alert("휴가 기간을 선택하세요.");
+         alert("休暇期間を選択してください。");
          return;
      }
 
      if (endDate < startDate) {
-         alert("종료일을 확인하세요.");
+         alert("終了日を確認してください。");
          return;
      }
 
      if (!reason || reason.length > 50) {
-         alert("신청 사유를 1~50자로 입력하세요.");
+         alert("申請理由を 1~50文字で入力してください。");
          return;
      }
 
@@ -89,11 +89,11 @@ $(function () {
 
          if (!response.ok) {
              throw new Error(
-                 "신청 실패 (HTTP " + response.status + ")"
+                 "申請に失敗しました (HTTP " + response.status + ")"
              );
          }
 
-         alert("휴가 신청이 완료되었습니다.");
+         alert("休暇を申請しました。");
 
          window.location.href =
              contextPath + "/leave/history";

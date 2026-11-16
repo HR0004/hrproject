@@ -1,4 +1,4 @@
 <%@ page pageEncoding="UTF-8" %>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/static/vendor/adminlte-3.2.0/adminlte.min.css">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/css/hrms-theme.css?v=job-unified-1">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/css/adminlte-layout.css?v=job-unified-1">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/hrms-theme.css?v=ja-1">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/adminlte-layout.css?v=ja-1">

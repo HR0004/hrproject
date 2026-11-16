@@ -52,7 +52,7 @@ public int regist(DepartmentDTO departmentDTO) {
 
     // 7. 부서 코드 저장
     if (departmentMapper.updateCode(dept) != 1) {
-        throw new IllegalStateException("부서코드 생성 실패");
+        throw new IllegalStateException("部署コードの生成に失敗しました");
     }
 
     return result;

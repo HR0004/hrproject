@@ -16,14 +16,13 @@ const getDetail = async () => {
         const result = await response.json();
 
         if (!response.ok || !result.success) {
-            throw new Error(result.message || "부서 조회 실패");
+            throw new Error(result.message || "部署情報の取得に失敗しました");
         }
 
         document.getElementById("departmentCode").value =
             result.data.departmentCode;
 
-        document.getElementById("departmentName").value =
-            result.data.departmentName;
+        window.hrmsJapaneseReferenceInput(document.getElementById("departmentName"), result.data.departmentName);
 
     } catch (error) {
         console.error(error);
@@ -36,10 +35,10 @@ const getDetail = async () => {
 const update = async () => {
 
     const departmentName =
-        document.getElementById("departmentName").value.trim();
+        window.hrmsJapaneseStoredValue(document.getElementById("departmentName")).trim();
 
     if (!departmentName) {
-        alert("부서명을 입력하세요.");
+        alert("部署名を入力してください。");
         return;
     }
 
@@ -59,7 +58,7 @@ const update = async () => {
         const result = await response.json();
 
         if (!response.ok || !result.success) {
-            throw new Error(result.message || "부서 수정 실패");
+            throw new Error(result.message || "部署情報の更新に失敗しました");
         }
 
         alert(result.message);
@@ -97,7 +96,7 @@ document.getElementById("bt-cancel").addEventListener("click", () => {
 
 // 페이지 실행 시 상세 조회
 if (!departmentId || !/^[1-9]\d*$/.test(departmentId)) {
-    alert("잘못된 부서 번호입니다.");
+    alert("部署番号が正しくありません。");
     location.href = contextPath + "/departments";
 } else {
     getDetail();

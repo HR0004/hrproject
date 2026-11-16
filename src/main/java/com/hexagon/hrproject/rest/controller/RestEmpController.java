@@ -60,7 +60,7 @@ public class RestEmpController {
 
         return ResponseEntity
                 .status(HttpStatus.CREATED)
-                .body("사원 및 계정 등록 성공");
+                .body("社員とアカウントを登録しました");
     }
 
     /*----------------------------------------
@@ -77,7 +77,7 @@ public class RestEmpController {
         // Service 호출
         empService.update(emp);
 
-        return ResponseEntity.ok("사원 정보 수정 성공");
+        return ResponseEntity.ok("社員情報を更新しました");
     }
 
     /*----------------------------------------
@@ -90,7 +90,7 @@ public class RestEmpController {
         // Service 호출
         empService.retire(empId);
 
-        return ResponseEntity.ok("퇴사 처리 성공");
+        return ResponseEntity.ok("退職処理が完了しました");
     }
 
     /*----------------------------------------

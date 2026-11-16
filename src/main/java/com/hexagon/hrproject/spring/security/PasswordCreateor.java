@@ -8,7 +8,7 @@ public class PasswordCreateor {
 		// TODO Auto-generated method stub
 		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 		String encodedPassword=encoder.encode("1234");
-		System.out.println("결과" + encodedPassword);
+		System.out.println("結果" + encodedPassword);
 	}
 
 }

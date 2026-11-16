@@ -79,7 +79,7 @@ public class RolePermissionService {
 
         if (role == null) {
             throw new IllegalArgumentException(
-                "존재하지 않는 역할입니다."
+                "指定されたロールは存在しません。"
             );
         }
 
@@ -110,7 +110,7 @@ public class RolePermissionService {
 
         if (!valid.containsAll(selected)) {
             throw new IllegalArgumentException(
-                "유효하지 않은 권한이 포함되어 있습니다."
+                "無効な権限が含まれています。"
             );
         }
 
@@ -123,8 +123,8 @@ public class RolePermissionService {
                 ))) {
 
             throw new IllegalArgumentException(
-                "인사 관리자 역할의 계정 관리·역할 부여·"
-                + "역할별 권한 설정 권한은 유지해야 합니다."
+                "人事管理者ロールのアカウント管理・ロールの付与・"
+                + "ロール別権限設定の権限は保持する必要があります。"
             );
         }
 

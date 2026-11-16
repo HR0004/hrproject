@@ -124,7 +124,7 @@ public class SalaryController {
 
             model.addAttribute(
                 "errorMessage",
-                "입력값을 확인하세요. 필수 항목과 날짜·금액 형식이 올바르지 않습니다."
+                "入力内容を確認してください。 必須項目と日付・金額の形式が正しくありません。"
             );
 
             return createView(model);
@@ -178,7 +178,7 @@ public class SalaryController {
 
         model.addAttribute(
             "errorMessage",
-            "입력값을 확인하세요. 필수 항목과 날짜·금액 형식이 올바르지 않습니다."
+            "入力内容を確認してください。 必須項目と日付・金額の形式が正しくありません。"
         );
 
         return "salary/error";

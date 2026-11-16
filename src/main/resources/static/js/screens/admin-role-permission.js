@@ -11,7 +11,7 @@
             form.addEventListener("submit", function (event) {
                 if (
                     busy ||
-                    !window.confirm("권한을 변경하시겠습니까?")
+                    !window.confirm("権限を変更しますか？")
                 ) {
                     event.preventDefault();
                     return;
@@ -19,14 +19,14 @@
 
                 busy = true;
                 button.disabled = true;
-                button.textContent = "저장 중...";
+                button.textContent = "保存中。..";
             });
 
             window.addEventListener("pageshow", function (event) {
                 if (event.persisted) {
                     busy = false;
                     button.disabled = false;
-                    button.textContent = "권한 저장";
+                    button.textContent = "権限の保存";
                 }
             });
         }

@@ -17,7 +17,7 @@ $(function() {
 			// YYYY년 MM월 문자열 생성
 			function monthLabel(month) {
 				const parts = month.split("-");
-				return parts[0] + "년 " + parts[1] + "월";
+				return parts[0] + "年 " + parts[1] + "月";
 			}
 
 			// 이번 달부터 지난 11개월까지 선택 목록 구성
@@ -65,7 +65,7 @@ $(function() {
 				const hours = Math.floor(total / 60);
 				const minutes = total % 60;
 
-				return hours + "시간 " + minutes + "분";
+				return hours + "時間 " + minutes + "分";
 			}
 
 			// 해당 월의 실제 근태 통계 계산
@@ -152,15 +152,15 @@ $(function() {
 
 				const summary = calculateMonth(selectedMonth);
 
-				$("div[name='totalWorkDays']").text(summary.workDays + "일");
+				$("div[name='totalWorkDays']").text(summary.workDays + "日");
 
 				$("div[name='lateEarlyCount']").text(
-						"지각 " + summary.late + "회 / 조퇴 " + summary.early + "회");
+						"遅刻 " + summary.late + "回 / 早退 " + summary.early + "回");
 
 				// 결근은 현재 별도 집계 기능이 없으므로
 				// 명시적인 ABSENT 기록이 있을 때만 표시
 				$("div[name='absentDays']").text(
-						summary.absent > 0 ? summary.absent + "일" : "미집계");
+						summary.absent > 0 ? summary.absent + "日" : "未集計");
 
 				$("div[name='overtimeTotal']").text(
 						formatMinutes(summary.overtimeMinutes));
@@ -192,20 +192,20 @@ $(function() {
 
 					$("<td>").text(monthLabel(row.month)).appendTo(tr);
 
-					$("<td>").text(row.workDays + "일").appendTo(tr);
+					$("<td>").text(row.workDays + "日").appendTo(tr);
 
-					$("<td>").text(row.late + "회").appendTo(tr);
+					$("<td>").text(row.late + "回").appendTo(tr);
 
-					$("<td>").text(row.early + "회").appendTo(tr);
+					$("<td>").text(row.early + "回").appendTo(tr);
 
-					$("<td>").text(row.absent > 0 ? row.absent + "일" : "미집계")
+					$("<td>").text(row.absent > 0 ? row.absent + "日" : "未集計")
 							.appendTo(tr);
 
 					$("<td>").text(formatMinutes(row.overtimeMinutes))
 							.appendTo(tr);
 
 					// DB에 정산 전송 상태가 없으므로 임의 표시 금지
-					$("<td>").text("미연동").appendTo(tr);
+					$("<td>").text("未連携").appendTo(tr);
 
 					tbody.append(tr);
 
@@ -216,7 +216,7 @@ $(function() {
 
 					$("<tr>").append(
 							$("<td>").attr("colspan", 7).addClass("ma-empty")
-									.text("해당 기간의 근태 기록이 없습니다.")).appendTo(
+									.text("この期間の勤怠記録がありません。")).appendTo(
 							tbody);
 				}
 			}
@@ -232,17 +232,17 @@ $(function() {
 					});
 
 					if (!response.ok) {
-						throw new Error("근태 조회 실패: " + response.status);
+						throw new Error("勤怠情報の取得に失敗しました: " + response.status);
 					}
 
 					const result = await
 					response.json();
 
 					if (!Array.isArray(result)) {
-						throw new Error("근태 조회 응답 형식 오류");
+						throw new Error("勤怠取得レスポンスの形式エラー");
 					}
 
-					console.log("나의 근태 기록:", result);
+					console.log("自分の勤怠記録:", result);
 
 					attendanceRecords = result;
 
@@ -250,7 +250,7 @@ $(function() {
 
 				} catch (error) {
 
-					console.error("월별 근태 조회 오류:", error);
+					console.error("月次勤怠の取得エラー:", error);
 
 					$("div[name='totalWorkDays']").text("-");
 					$("div[name='lateEarlyCount']").text("-");
@@ -261,7 +261,7 @@ $(function() {
 							$("<tr>").append(
 									$("<td>").attr("colspan", 7).addClass(
 											"ma-empty").text(
-											"근태 기록을 불러오지 못했습니다.")));
+											"勤怠記録を読み込めませんでした。")));
 				}
 			}
 

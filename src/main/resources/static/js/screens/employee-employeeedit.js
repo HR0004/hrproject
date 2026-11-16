@@ -40,18 +40,18 @@
         try {
             response = await fetch(contextPath + path, options);
         } catch (error) {
-            throw new Error("서버와의 통신 중 오류가 발생했습니다.");
+            throw new Error("サーバーとの通信中にエラーが発生しました。");
         }
 
         if (response.status === 401 || response.redirected) {
             throw new Error(
-                "로그인 정보가 만료되었습니다. 다시 로그인해 주세요."
+                "ログイン情報の有効期限が切れました。 再度ログインしてください。"
             );
         }
 
         if (response.status === 403) {
             throw new Error(
-                "요청이 거부되었습니다. 페이지를 새로고침한 뒤 다시 시도해 주세요."
+                "リクエストが拒否されました。 ページを再読み込みしてから再度お試しください。"
             );
         }
 
@@ -70,7 +70,7 @@
 
         if (!response.ok || (data && data.success === false)) {
             let message =
-                "요청 처리에 실패했습니다. (HTTP " +
+                "リクエストの処理に失敗しました。 (HTTP " +
                 response.status + ")";
 
             if (
@@ -92,7 +92,7 @@
 
         if (contentType.includes("text/html")) {
             throw new Error(
-                "서버에서 예상하지 못한 화면을 반환했습니다. 요청 주소와 로그인 상태를 확인해 주세요."
+                "サーバーから想定外の画面が返されました。 リクエスト先とログイン状態を確認してください。"
             );
         }
 
@@ -109,35 +109,35 @@
                 typeof emp !== "object" ||
                 Array.isArray(emp)
             ) {
-                throw new Error("사원 정보 응답을 확인할 수 없습니다.");
+                throw new Error("社員情報のレスポンスを確認できません。");
             }
 
             byId("loginUser").textContent =
-                (emp.ename || "사용자") + " 사원";
+                (emp.ename || "ユーザー") + " 社員";
 
             const status = {
-                ACTIVE: "재직",
-                LEAVE: "휴직",
-                RETIRED: "퇴직"
+                ACTIVE: "在籍",
+                LEAVE: "休職",
+                RETIRED: "退職"
             }[emp.status] || "-";
 
             byId("empId").value = emp.empId ?? "";
             byId("ename").value = emp.ename ?? "";
 
             byId("departmentName").value =
-                emp.department?.departmentName ?? "";
+                window.hrmsJapaneseLabel(emp.department?.departmentName ?? "");
 
             byId("jobName").value =
-                emp.job?.jobName ?? "";
+                window.hrmsJapaneseLabel(emp.job?.jobName ?? "");
 
             byId("hiredate").value = emp.hiredate
-                ? new Date(emp.hiredate).toLocaleDateString("ko-KR")
+                ? new Date(emp.hiredate).toLocaleDateString("ja-JP")
                 : "";
 
             byId("status").value = status;
 
             byId("statusBadge").textContent =
-                status === "재직" ? "재직 중" : status;
+                status === "在籍" ? "在籍中" : status;
 
             byId("email").value = emp.email ?? "";
             byId("phone").value = emp.phone ?? "";
@@ -153,8 +153,8 @@
         title,
         message,
         description = "",
-        cancelText = "취소",
-        confirmText = "확인",
+        cancelText = "キャンセル",
+        confirmText = "確認",
         onCancel,
         onConfirm
     }) {
@@ -201,7 +201,7 @@
         };
     }
 
-    // 이메일·연락처 실제 저장
+    // 이메일・연락처 실제 저장
     async function saveMyInfo(email, phone) {
         if (infoSaving) {
             return;
@@ -219,11 +219,11 @@
 
             showInfoModal({
                 type: "success",
-                title: "내 정보 수정 완료",
-                message: "변경이 완료되었습니다.",
-                description: "변경된 정보는 내 정보 화면에 반영됩니다.",
-                cancelText: "닫기",
-                confirmText: "내 정보 보기",
+                title: "プロフィールを更新しました",
+                message: "変更しました。",
+                description: "変更内容はプロフィール画面に反映されます。",
+                cancelText: "閉じる",
+                confirmText: "プロフィールを表示",
                 onCancel: () => location.reload(),
                 onConfirm: () => {
                     location.href = contextPath + "/employee/home";
@@ -233,8 +233,8 @@
         } catch (error) {
             showInfoModal({
                 type: "error",
-                title: "정보 수정 실패",
-                message: "정보를 저장하지 못했습니다.",
+                title: "情報の更新に失敗しました",
+                message: "情報を保存できませんでした。",
                 description: error.message
             });
 
@@ -244,7 +244,7 @@
         }
     }
 
-    // 이메일·연락처 변경 전 확인
+    // 이메일・연락처 변경 전 확인
     byId("myInfoEditForm").addEventListener("submit", event => {
         event.preventDefault();
 
@@ -261,9 +261,9 @@
         ) {
             showInfoModal({
                 type: "error",
-                title: "입력 정보 확인",
-                message: "이메일 형식이 올바르지 않습니다.",
-                description: "이메일 주소를 다시 확인해 주세요."
+                title: "入力内容の確認",
+                message: "メールアドレスの形式が正しくありません。",
+                description: "メールアドレスをもう一度確認してください。"
             });
             return;
         }
@@ -271,19 +271,19 @@
         if (phone && !/^010-\d{4}-\d{4}$/.test(phone)) {
             showInfoModal({
                 type: "error",
-                title: "입력 정보 확인",
-                message: "연락처 형식이 올바르지 않습니다.",
-                description: "010-0000-0000 형식으로 입력해 주세요."
+                title: "入力内容の確認",
+                message: "電話番号の形式が正しくありません。",
+                description: "010-0000-0000 形式で入力してください。"
             });
             return;
         }
 
         showInfoModal({
             type: "confirm",
-            title: "내 정보 변경 확인",
-            message: "변경하시겠습니까?",
-            description: "본인 계정의 연락처 정보만 변경됩니다.",
-            confirmText: "변경사항 저장",
+            title: "プロフィール変更の確認",
+            message: "変更しますか？",
+            description: "ご自身の連絡先情報のみ変更されます。",
+            confirmText: "変更を保存",
             onConfirm: () => saveMyInfo(email, phone)
         });
     });
@@ -292,11 +292,11 @@
     byId("cancelMyEditBtn").addEventListener("click", () => {
         showInfoModal({
             type: "warning",
-            title: "변경사항 취소",
-            message: "저장하지 않은 변경사항이 있습니다.",
-            description: "이 화면에서 나가면 변경 내용이 사라집니다.",
-            cancelText: "계속 수정",
-            confirmText: "변경 취소",
+            title: "変更を取り消す",
+            message: "保存されていない変更があります。",
+            description: "この画面を離れると変更内容が失われます。",
+            cancelText: "編集を続ける",
+            confirmText: "変更を取り消す",
             onConfirm: () => {
                 location.href = contextPath + "/employee/home";
             }
@@ -349,25 +349,25 @@
 
         if (!current || !newPassword || !confirm) {
             passwordMessage.textContent =
-                "모든 항목을 입력해 주세요.";
+                "すべての項目を入力してください。";
             return;
         }
 
         if (newPassword.length < 8) {
             passwordMessage.textContent =
-                "새 비밀번호는 8자 이상 입력해 주세요.";
+                "新しいパスワードは 8文字以上で入力してください。";
             return;
         }
 
         if (newPassword !== confirm) {
             passwordMessage.textContent =
-                "새 비밀번호가 일치하지 않습니다.";
+                "新しいパスワードが一致しません。";
             return;
         }
 
         if (current === newPassword) {
             passwordMessage.textContent =
-                "현재 비밀번호와 다른 비밀번호를 입력해 주세요.";
+                "現在のパスワードとは異なるパスワードを入力してください。";
             return;
         }
 
@@ -382,11 +382,11 @@
             const confirmed = await new Promise(resolve => {
                 showInfoModal({
                     type: "confirm",
-                    title: "비밀번호 변경 확인",
-                    message: "변경하시겠습니까?",
-                    description: "확인을 누르면 비밀번호가 변경됩니다.",
-                    cancelText: "취소",
-                    confirmText: "확인",
+                    title: "パスワード変更の確認",
+                    message: "変更しますか？",
+                    description: "確認を押すとパスワードが変更されます。",
+                    cancelText: "キャンセル",
+                    confirmText: "確認",
                     onCancel: () => resolve(false),
                     onConfirm: () => resolve(true)
                 });
@@ -409,11 +409,11 @@
 
             showInfoModal({
                 type: "success",
-                title: "비밀번호 변경 완료",
-                message: "변경이 완료되었습니다.",
-                description: "다음 로그인부터 새 비밀번호를 사용해 주세요.",
-                cancelText: "닫기",
-                confirmText: "확인"
+                title: "パスワードを変更しました",
+                message: "変更しました。",
+                description: "次回のログインから新しいパスワードをご使用ください。",
+                cancelText: "閉じる",
+                confirmText: "確認"
             });
 
         } catch (error) {

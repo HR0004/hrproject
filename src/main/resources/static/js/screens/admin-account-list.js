@@ -16,9 +16,9 @@
         next.disabled = !selected;
 
         message.textContent = selected
-            ? "선택한 사용자: "
+            ? "選択したユーザー: "
                 + selected.getAttribute("data-user-label")
-            : "사용자를 선택해 주세요.";
+            : "ユーザーを選択してください。";
 
         Array.prototype.forEach.call(rows, function (row) {
             var radio = row.querySelector(
@@ -117,7 +117,7 @@
                 return;
             }
 
-            if (!window.confirm("계정 상태를 변경하시겠습니까?")) {
+            if (!window.confirm("アカウントの状態を変更しますか？")) {
                 event.preventDefault();
                 return;
             }

@@ -10,18 +10,18 @@ const loadMyEditInfo = async () => {
         );
 
         if (!response.ok) {
-            throw new Error("사원 정보 조회 실패: " + response.status);
+            throw new Error("社員情報の取得に失敗しました: " + response.status);
         }
 
         const emp = await response.json();
 
         document.getElementById("loginUser").textContent =
-            emp.ename + " 사원";
+            emp.ename + " 社員";
 
         const status = {
-            ACTIVE: "재직",
-            LEAVE: "휴직",
-            RETIRED: "퇴직"
+            ACTIVE: "在籍",
+            LEAVE: "休職",
+            RETIRED: "退職"
         }[emp.status] ?? "-";
 
         // 수정 불가능한 정보
@@ -29,28 +29,28 @@ const loadMyEditInfo = async () => {
         document.getElementById("ename").value = emp.ename ?? "";
 
         document.getElementById("departmentName").value =
-            emp.department?.departmentName ?? "";
+            window.hrmsJapaneseLabel(emp.department?.departmentName ?? "");
 
         document.getElementById("jobName").value =
-            emp.job?.jobName ?? "";
+            window.hrmsJapaneseLabel(emp.job?.jobName ?? "");
 
         document.getElementById("hiredate").value = emp.hiredate
-            ? new Date(emp.hiredate).toLocaleDateString("ko-KR")
+            ? new Date(emp.hiredate).toLocaleDateString("ja-JP")
             : "";
 
         document.getElementById("status").value = status;
         document.getElementById("statusBadge").textContent =
-            status === "재직" ? "재직 중" : status;
+            status === "在籍" ? "在籍中" : status;
 
         // 수정 가능한 정보
         document.getElementById("email").value = emp.email ?? "";
         document.getElementById("phone").value = emp.phone ?? "";
 
     } catch (error) {
-        console.error("내 정보 조회 오류:", error);
+        console.error("プロフィールの取得エラー:", error);
 
         document.getElementById("myEditMessage").textContent =
-            "사원 정보를 불러오지 못했습니다.";
+            "社員情報を読み込めませんでした。";
     }
 };
 
@@ -66,8 +66,8 @@ const showInfoModal = ({
     title,
     message,
     description,
-    cancelText = "취소",
-    confirmText = "확인",
+    cancelText = "キャンセル",
+    confirmText = "確認",
     onCancel,
     onConfirm
 }) => {
@@ -142,9 +142,9 @@ myInfoForm.addEventListener("submit", (event) => {
 
         showInfoModal({
             type: "error",
-            title: "입력 정보 확인",
-            message: "이메일 형식이 올바르지 않습니다.",
-            description: "이메일 주소를 다시 확인해 주세요."
+            title: "入力内容の確認",
+            message: "メールアドレスの形式が正しくありません。",
+            description: "メールアドレスをもう一度確認してください。"
         });
         return;
     }
@@ -154,9 +154,9 @@ myInfoForm.addEventListener("submit", (event) => {
 
         showInfoModal({
             type: "error",
-            title: "입력 정보 확인",
-            message: "연락처 형식이 올바르지 않습니다.",
-            description: "010-0000-0000 형식으로 입력해 주세요."
+            title: "入力内容の確認",
+            message: "電話番号の形式が正しくありません。",
+            description: "010-0000-0000 形式で入力してください。"
         });
         return;
     }
@@ -164,11 +164,11 @@ myInfoForm.addEventListener("submit", (event) => {
     // 저장 확인 팝업
     showInfoModal({
         type: "confirm",
-        title: "내 정보 변경 확인",
-        message: "수정한 이메일과 연락처를 저장하시겠습니까?",
-        description: "본인 계정의 연락처 정보만 변경됩니다.",
-        cancelText: "취소",
-        confirmText: "변경사항 저장",
+        title: "プロフィール変更の確認",
+        message: "変更したメールアドレスと電話番号を保存しますか？",
+        description: "ご自身の連絡先情報のみ変更されます。",
+        cancelText: "キャンセル",
+        confirmText: "変更を保存",
         onConfirm: () => saveMyInfo(email, phone)
     });
 });
@@ -202,18 +202,18 @@ const saveMyInfo = async (email, phone) => {
             const errorResponse = await response.json();
 
             throw new Error(
-                errorResponse.message || "요청 처리에 실패했습니다."
+                errorResponse.message || "リクエストの処理に失敗しました。"
             );
         }
 
         // 저장 완료 팝업
         showInfoModal({
             type: "success",
-            title: "내 정보 수정 완료",
-            message: "개인정보가 정상적으로 변경되었습니다.",
-            description: "변경된 정보는 내 정보 화면에 반영됩니다.",
-            cancelText: "닫기",
-            confirmText: "내 정보 보기",
+            title: "プロフィールを更新しました",
+            message: "個人情報を更新しました。",
+            description: "変更内容はプロフィール画面に反映されます。",
+            cancelText: "閉じる",
+            confirmText: "プロフィールを表示",
             onCancel: () => location.reload(),
             onConfirm: () => {
                 location.href =
@@ -222,12 +222,12 @@ const saveMyInfo = async (email, phone) => {
         });
 
     } catch (error) {
-        console.error("정보 수정 오류:", error);
+        console.error("情報更新エラー:", error);
 
         showInfoModal({
             type: "error",
-            title: "정보 수정 실패",
-            message: "정보 수정 실패",
+            title: "情報の更新に失敗しました",
+            message: "情報の更新に失敗しました",
             description: error.message
         });
 
@@ -246,11 +246,11 @@ document.getElementById("cancelMyEditBtn")
 
         showInfoModal({
             type: "warning",
-            title: "변경사항 취소",
-            message: "저장하지 않은 변경사항이 있습니다.",
-            description: "이 화면에서 나가면 변경 내용이 사라집니다.",
-            cancelText: "계속 수정",
-            confirmText: "변경 취소",
+            title: "変更を取り消す",
+            message: "保存されていない変更があります。",
+            description: "この画面を離れると変更内容が失われます。",
+            cancelText: "編集を続ける",
+            confirmText: "変更を取り消す",
             onConfirm: () => {
                 location.href =
                     (document.body.getAttribute("data-context-path") || "") + "/employee/home";
@@ -311,25 +311,25 @@ passwordForm.addEventListener("submit", async (event) => {
     // 입력값 검사
     if (!current || !newPassword || !confirm) {
         passwordMessage.textContent =
-            "모든 항목을 입력해 주세요.";
+            "すべての項目を入力してください。";
         return;
     }
 
     if (newPassword.length < 8) {
         passwordMessage.textContent =
-            "새 비밀번호는 8자 이상 입력해 주세요.";
+            "新しいパスワードは 8文字以上で入力してください。";
         return;
     }
 
     if (newPassword !== confirm) {
         passwordMessage.textContent =
-            "새 비밀번호가 일치하지 않습니다.";
+            "新しいパスワードが一致しません。";
         return;
     }
 
     if (current === newPassword) {
         passwordMessage.textContent =
-            "현재 비밀번호와 다른 비밀번호를 입력해 주세요.";
+            "現在のパスワードとは異なるパスワードを入力してください。";
         return;
     }
 
@@ -357,7 +357,7 @@ passwordForm.addEventListener("submit", async (event) => {
             const errorResponse = await response.json();
 
             throw new Error(
-                errorResponse.message || "요청 처리에 실패했습니다."
+                errorResponse.message || "リクエストの処理に失敗しました。"
             );
         }
 
@@ -366,15 +366,15 @@ passwordForm.addEventListener("submit", async (event) => {
         // 비밀번호 변경 완료 팝업
         showInfoModal({
             type: "success",
-            title: "비밀번호 변경 완료",
-            message: "비밀번호가 정상적으로 변경되었습니다.",
-            description: "다음 로그인부터 새 비밀번호를 사용해 주세요.",
-            cancelText: "닫기",
-            confirmText: "확인"
+            title: "パスワードを変更しました",
+            message: "パスワードを変更しました。",
+            description: "次回のログインから新しいパスワードをご使用ください。",
+            cancelText: "閉じる",
+            confirmText: "確認"
         });
 
     } catch (error) {
-        console.error("비밀번호 변경 오류:", error);
+        console.error("パスワード変更エラー:", error);
         passwordMessage.textContent = error.message;
 
     } finally {

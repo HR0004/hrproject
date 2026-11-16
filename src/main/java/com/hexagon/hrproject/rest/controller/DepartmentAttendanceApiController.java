@@ -60,7 +60,7 @@ public class DepartmentAttendanceApiController {
         if (!isAdmin && !canReadTeam) {
             throw new ResponseStatusException(
                 HttpStatus.FORBIDDEN,
-                "근태 조회 권한이 없습니다."
+                "勤怠情報の閲覧権限がありません。"
             );
         }
 
@@ -84,7 +84,7 @@ public class DepartmentAttendanceApiController {
                     && !departmentId.equals(myDepartmentId)) {
                 throw new ResponseStatusException(
                     HttpStatus.FORBIDDEN,
-                    "다른 부서를 조회할 수 없습니다."
+                    "他の部署の情報は閲覧できません。"
                 );
             }
 
@@ -101,7 +101,7 @@ public class DepartmentAttendanceApiController {
     @ResponseBody
     public org.springframework.http.ResponseEntity<java.util.Map<String, String>> handleStatus(ResponseStatusException e) {
         return org.springframework.http.ResponseEntity.status(e.getStatus()).body(
-            java.util.Collections.singletonMap("message", e.getReason() == null ? "요청을 처리할 수 없습니다." : e.getReason()));
+            java.util.Collections.singletonMap("message", e.getReason() == null ? "リクエストを処理できません。" : e.getReason()));
     }
 
     private boolean hasAuthority(

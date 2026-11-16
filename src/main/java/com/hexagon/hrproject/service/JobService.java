@@ -38,7 +38,7 @@ public class JobService {
 
         // 2. 직급명 중복 검사
         if (jobMapper.countByName(name) > 0) {
-        	System.out.println("직급 중복 검사 실행됨: " + name);
+        	System.out.println("役職の重複チェックを実行しました: " + name);
             throw new BusinessException(ErrorCode.JOB_ALREADY_EXISTS);
         }
 

@@ -21,7 +21,7 @@ public class LoginFailureHandler implements AuthenticationFailureHandler {
         // AJAX 요청(fetch)에 맞춰 JSON 응답 전송 (상태코드 200 또는 401)
         response.setContentType("application/json;charset=UTF-8");
         response.setStatus(HttpServletResponse.SC_OK);
-        log.debug("로그인 실패");
-        response.getWriter().write("{\"success\":false, \"message\":\"아이디 또는 비밀번호가 일치하지 않습니다.\"}");
+        log.debug("ログイン失敗");
+        response.getWriter().write("{\"success\":false, \"message\":\"IDまたはパスワードが一致しません。\"}");
     }
 }

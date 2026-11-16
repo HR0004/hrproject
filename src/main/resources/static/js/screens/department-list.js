@@ -16,7 +16,7 @@ const getList = async () => {
         const result = await response.json();
 
         if (!response.ok || !result.success) {
-            throw new Error(result.message || "부서 목록 조회 실패");
+            throw new Error(result.message || "部署一覧の取得に失敗しました");
         }
 
         departmentList = result.data;
@@ -42,7 +42,7 @@ const renderList = (list) => {
         const tr = document.createElement("tr");
         const td = document.createElement("td");
         td.colSpan = 5;
-        td.textContent = "검색 결과가 없습니다.";
+        td.textContent = "検索結果がありません。";
         td.style.textAlign = "center";
         tr.appendChild(td);
         tbody.appendChild(tr);
@@ -63,13 +63,13 @@ const renderList = (list) => {
         
         // 부서별 사원 수
         const employeeCount = document.createElement("td");
-        employeeCount.textContent = (dept.employeeCount ?? 0) + "명";
+        employeeCount.textContent = (dept.employeeCount ?? 0) + "名";
 
         // 상태
         const active = Number(dept.isActive) === 1;
 
         const status = document.createElement("td");
-        status.textContent = active ? "활성" : "비활성";
+        status.textContent = active ? "有効" : "無効";
 
         // 관리 버튼
         const action = document.createElement("td");
@@ -77,7 +77,7 @@ const renderList = (list) => {
         // 수정 버튼
         const editBtn = document.createElement("button");
         editBtn.type = "button";
-        editBtn.textContent = "수정";
+        editBtn.textContent = "編集";
 
         editBtn.onclick = () => {
 
@@ -91,7 +91,7 @@ const renderList = (list) => {
         // 비활성화 버튼
         const deleteBtn = document.createElement("button");
         deleteBtn.type = "button";
-        deleteBtn.textContent = "비활성화";
+        deleteBtn.textContent = "無効化";
 
         deleteBtn.onclick = () => {
             deactivate(dept.departmentId);
@@ -112,7 +112,7 @@ const renderList = (list) => {
 // 3. 부서 비활성화
 const deactivate = async (departmentId) => {
 
-    if (!confirm("해당 부서를 비활성화하시겠습니까?")) {
+    if (!confirm("この部署を無効にしますか？")) {
         return;
     }
 
@@ -126,7 +126,7 @@ const deactivate = async (departmentId) => {
         const result = await response.json();
 
         if (!response.ok || !result.success) {
-            throw new Error(result.message || "부서 비활성화 실패");
+            throw new Error(result.message || "部署の無効化に失敗しました");
         }
 
         alert(result.message);
@@ -167,7 +167,7 @@ const filterDepartments = () => {
     const filtered = departmentList.filter(dept => {
         const code = String(dept.departmentCode ?? "").toLowerCase();
         const name = String(dept.departmentName ?? "").toLowerCase();
-        const matchesKeyword = code.includes(keyword) || name.includes(keyword);
+        const matchesKeyword = code.includes(keyword) || name.includes(keyword) || window.hrmsJapaneseLabel(dept.departmentName ?? "").toLowerCase().includes(keyword);
         const matchesStatus = status === "" || Number(dept.isActive) === Number(status);
         return matchesKeyword && matchesStatus;
     });

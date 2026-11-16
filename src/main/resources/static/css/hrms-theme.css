@@ -5,7 +5,7 @@
  --hrms-muted: #8293b1; --hrms-border: #e2e8f0; --hrms-input-border: #dce3ec;
  --hrms-primary: #10192e; --hrms-primary-hover: #263754; --hrms-table-head: #edf2f8;
  --hrms-soft: #f5f7fb; --hrms-success: #197849; --hrms-warning: #a66d14; --hrms-danger: #b83b48;
- --hrms-font: "Malgun Gothic", Arial, sans-serif; --hrms-body-size: 13px;
+ --hrms-font: "Noto Sans JP", "Yu Gothic", Meiryo, sans-serif; --hrms-body-size: 13px;
  --hrms-title-size: 24px; --hrms-section-title-size: 16px; --hrms-control-height: 42px;
  --hrms-card-radius: 10px; --hrms-card-padding: 24px; --hrms-page-x: 36px; --hrms-page-y: 32px;
 }

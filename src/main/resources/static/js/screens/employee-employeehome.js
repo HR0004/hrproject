@@ -7,19 +7,19 @@
             );
 
             if (!response.ok) {
-                throw new Error("내 정보 조회 실패: " + response.status);
+                throw new Error("プロフィールの取得に失敗しました: " + response.status);
             }
 
             const emp = await response.json();
 
             // 상단 사용자
-            $("#loginUser").text(emp.ename + " 사원");
+            $("#loginUser").text(emp.ename + " 社員");
 
             // 재직 상태
             const status = {
-                ACTIVE: "재직",
-                LEAVE: "휴직",
-                RETIRED: "퇴직"
+                ACTIVE: "在籍",
+                LEAVE: "休職",
+                RETIRED: "退職"
             }[emp.status] ?? "-";
 
             // 요약 카드
@@ -32,7 +32,7 @@
             );
 
             const hiredate = emp.hiredate
-                ? new Date(emp.hiredate).toLocaleDateString("ko-KR")
+                ? new Date(emp.hiredate).toLocaleDateString("ja-JP")
                 : "-";
 
             $("#summaryHiredate").text(hiredate);
@@ -50,7 +50,7 @@
             );
 
         } catch (error) {
-            console.error("마이페이지 조회 오류:", error);
+            console.error("マイページ取得エラー:", error);
         }
     };
 

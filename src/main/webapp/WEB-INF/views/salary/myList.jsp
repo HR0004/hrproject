@@ -5,20 +5,20 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="ja">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport"
           content="width=device-width, initial-scale=1.0">
 
-    <title>HRMS - 내 급여 조회</title>
+    <title>HRMS - 自分の給与を表示</title>
 
     
 
     
 <%@ include file="/WEB-INF/views/common/adminlte-head.jspf" %>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/static/vendor/fontawesome-6.5.2/css/all.min.css">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/css/salary.css?v=salary-unified-1">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/salary.css?v=ja-1">
 </head>
 
 <body class="hold-transition hrms-adminlte hrms-salary" data-context-path="${pageContext.request.contextPath}">
@@ -33,8 +33,8 @@
 
         <section class="content-header">
             <div class="container-fluid salary-heading">
-                <h1 class="hrms-page-title">내 급여 조회</h1>
-                <p class="page-path">본인의 월별 급여와 지급 내역을 확인할 수 있습니다.</p>
+                <h1 class="hrms-page-title">自分の給与を表示</h1>
+                <p class="page-path">ご自身の月別給与と支給履歴を確認できます。</p>
             </div>
         </section>
 
@@ -45,7 +45,7 @@
                 <div class="salary-stats">
 
                     <div class="salary-stat-card summary-card">
-                        <span>선택 연월</span>
+                        <span>選択年月</span>
                         <strong>
                             <c:choose>
                                 <c:when test="${not empty latestSalary}">
@@ -57,13 +57,13 @@
                     </div>
 
                     <div class="salary-stat-card summary-card">
-                        <span>기본급</span>
+                        <span>基本給</span>
                         <strong>
                             <c:choose>
                                 <c:when test="${not empty latestSalary}">
                                     <fmt:formatNumber
                                         value="${latestSalary.baseSalary}"
-                                        pattern="#,##0"/>원
+                                        pattern="#,##0"/>ウォン
                                 </c:when>
                                 <c:otherwise>-</c:otherwise>
                             </c:choose>
@@ -71,13 +71,13 @@
                     </div>
 
                     <div class="salary-stat-card summary-card">
-                        <span>실수령액</span>
+                        <span>手取り額</span>
                         <strong>
                             <c:choose>
                                 <c:when test="${not empty latestSalary}">
                                     <fmt:formatNumber
                                         value="${latestSalary.netSalary}"
-                                        pattern="#,##0"/>원
+                                        pattern="#,##0"/>ウォン
                                 </c:when>
                                 <c:otherwise>-</c:otherwise>
                             </c:choose>
@@ -85,12 +85,12 @@
                     </div>
 
                     <div class="salary-stat-card summary-card">
-                        <span>지급일</span>
+                        <span>支給日</span>
                         <strong>
                             <c:choose>
                                 <c:when test="${not empty latestSalary}">
                                     <c:out value="${latestSalary.paymentDate}"
-                                           default="미정"/>
+                                           default="未定"/>
                                 </c:when>
                                 <c:otherwise>-</c:otherwise>
                             </c:choose>
@@ -103,9 +103,9 @@
                 <div class="salary-toolbar">
 
                     <div class="salary-toolbar-title">
-                        <h2>내 급여 목록</h2>
+                        <h2>自分の給与一覧</h2>
                         <p>
-                            사번 <c:out value="${empId}"/> · 본인 급여
+                            社員番号 <c:out value="${empId}"/> ・ 自分の給与
                         </p>
                     </div>
 
@@ -116,14 +116,14 @@
                         <select name="year"
                                 class="salary-input salary-month-input">
 
-                            <option value="">연도 선택</option>
+                            <option value="">年を選択</option>
 
                             <c:forEach var="yearOption" items="${years}">
                                 <option value="${yearOption}"
                                     <c:if test="${searchYear eq yearOption.toString()}">
                                         selected
                                     </c:if>>
-                                    <c:out value="${yearOption}"/>년 전체 월
+                                    <c:out value="${yearOption}"/>年の全月
                                 </option>
                             </c:forEach>
 
@@ -131,7 +131,7 @@
 
                         <button type="submit"
                                 class="salary-register-btn primary-btn">
-                            조회
+                            検索
                         </button>
                     </form>
 
@@ -144,12 +144,12 @@
 
                         <thead>
                             <tr>
-                                <th>지급 연월</th>
-                                <th>기본급</th>
-                                <th>수당</th>
-                                <th>공제액</th>
-                                <th>실수령액</th>
-                                <th>지급일</th>
+                                <th>支給年月</th>
+                                <th>基本給</th>
+                                <th>手当</th>
+                                <th>控除額</th>
+                                <th>手取り額</th>
+                                <th>支給日</th>
                             </tr>
                         </thead>
 
@@ -191,7 +191,7 @@
 
                                     <td>
                                         <c:out value="${salary.paymentDate}"
-                                               default="미정"/>
+                                               default="未定"/>
                                     </td>
 
                                 </tr>
@@ -202,21 +202,21 @@
 
                     <c:if test="${empty salaries}">
                         <div class="salary-empty">
-                            조회된 급여 내역이 없습니다.
+                            該当する給与履歴がありません。
                         </div>
                     </c:if>
 
                 </div>
 
                 <p class="salary-table-notice">
-                    지급 연월을 선택하면 상세 화면으로 이동합니다.
+                    支給年月を選択すると詳細画面に移動します。
                 </p>
 
                 <!-- 페이지 처리 -->
                 <div class="salary-pagination-area">
 
                     <span id="mySalaryCount">
-                        총 <c:out value="${salaries.size()}"/>건
+                        合計 <c:out value="${salaries.size()}"/>件
                     </span>
 
                     <div id="mySalaryPagination"

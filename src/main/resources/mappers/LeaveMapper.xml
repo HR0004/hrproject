@@ -27,7 +27,7 @@
 		SELECT
 		DATE_FORMAT(start_date, '%Y-%m-%d') AS startDate,
 		DATE_FORMAT(end_date, '%Y-%m-%d') AS endDate,
-		'휴가' AS leaveType,
+		'休暇' AS leaveType,
 		days,
 		status
 		FROM leave_request
@@ -48,7 +48,7 @@
 		DATE_FORMAT(request_date, '%Y-%m-%d') AS submittedDate,
 		DATE_FORMAT(start_date, '%Y-%m-%d') AS startDate,
 		DATE_FORMAT(end_date, '%Y-%m-%d') AS endDate,
-		'휴가' AS leaveType,
+		'休暇' AS leaveType,
 		days,
 		status,
 		reason AS remark

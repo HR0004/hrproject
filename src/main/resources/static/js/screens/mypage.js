@@ -38,18 +38,18 @@
                 document.getElementById("confirm-password").value;
 
             if (!currentPassword || !newPassword || !confirmPassword) {
-                showMessage("비밀번호를 모두 입력해 주세요.", false);
+                showMessage("パスワードをすべて入力してください。", false);
                 return;
             }
 
             if (newPassword.length < 8) {
-                showMessage("새 비밀번호는 8자 이상이어야 합니다.", false);
+                showMessage("新しいパスワードは 8文字以上である必要があります。", false);
                 return;
             }
 
             if (newPassword !== confirmPassword) {
                 showMessage(
-                    "새 비밀번호와 확인 값이 일치하지 않습니다.",
+                    "新しいパスワードと確認用パスワードが一致しません。",
                     false
                 );
                 return;
@@ -57,7 +57,7 @@
 
             if (currentPassword === newPassword) {
                 showMessage(
-                    "현재 비밀번호와 다른 비밀번호를 입력해 주세요.",
+                    "現在のパスワードとは異なるパスワードを入力してください。",
                     false
                 );
                 return;
@@ -80,7 +80,7 @@
 
             submitting = true;
             button.disabled = true;
-            button.textContent = "변경 중...";
+            button.textContent = "変更中。..";
 
             try {
                 const response = await fetch(form.action, {
@@ -94,13 +94,13 @@
                 });
 
                 if (response.status === 401 || response.redirected) {
-                    showMessage("다시 로그인한 후 변경해 주세요.", false);
+                    showMessage("再度ログインしてから変更してください。", false);
                     return;
                 }
 
                 if (response.status === 403) {
                     showMessage(
-                        "요청이 거부되었습니다. 페이지를 새로고침한 뒤 다시 시도해 주세요.",
+                        "リクエストが拒否されました。 ページを再読み込みしてから再度お試しください。",
                         false
                     );
                     return;
@@ -120,7 +120,7 @@
 
                 if (!response.ok || (result && result.success === false)) {
                     let message =
-                        "비밀번호를 변경하지 못했습니다. 입력 내용을 확인해 주세요.";
+                        "パスワードを変更できませんでした。 入力内容を確認してください。";
 
                     if (
                         result &&
@@ -142,22 +142,22 @@
 
                 if (contentType.includes("text/html")) {
                     showMessage(
-                        "서버 응답을 확인할 수 없습니다. 다시 로그인한 후 시도해 주세요.",
+                        "サーバーのレスポンスを確認できません。 再度ログインしてからお試しください。",
                         false
                     );
                     return;
                 }
 
                 form.reset();
-                showMessage("비밀번호가 변경되었습니다.", true);
+                showMessage("パスワードを変更しました。", true);
 
             } catch (error) {
-                showMessage("서버와의 통신 중 오류가 발생했습니다.", false);
+                showMessage("サーバーとの通信中にエラーが発生しました。", false);
 
             } finally {
                 submitting = false;
                 button.disabled = false;
-                button.textContent = "비밀번호 변경";
+                button.textContent = "パスワード変更";
             }
         });
     }());

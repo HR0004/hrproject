@@ -12,7 +12,7 @@ const getList = async () => {
         const result = await response.json();
 
         if (!response.ok || !result.success) {
-            throw new Error(result.message || "직급 목록 조회 실패");
+            throw new Error(result.message || "役職一覧の取得に失敗しました");
         }
 
         jobList = result.data;
@@ -37,7 +37,7 @@ const loadPage = async (page = 1) => {
      const result = await response.json();
 
      if (!response.ok || !result.success) {
-         throw new Error(result.message || "페이지 조회 실패");
+         throw new Error(result.message || "ページの取得に失敗しました");
      }
 
      const pager = result.data;
@@ -85,13 +85,13 @@ const renderPagination = (totalCount) => {
      container.appendChild(btn);
  };
 
- addButton("이전", currentPage - 1, currentPage === 1);
+ addButton("前へ", currentPage - 1, currentPage === 1);
 
  for (let i = firstPage; i <= lastPage; i++) {
      addButton(i, i);
  }
 
- addButton("다음", currentPage + 1, currentPage === totalPage);
+ addButton("次へ", currentPage + 1, currentPage === totalPage);
 };
 
 
@@ -120,7 +120,7 @@ const renderList = (list) => {
         const tr = document.createElement("tr");
         const td = document.createElement("td");
         td.colSpan = 5;
-        td.textContent = "검색 결과가 없습니다.";
+        td.textContent = "検索結果がありません。";
         td.style.textAlign = "center";
         tr.appendChild(td);
         tbody.appendChild(tr);
@@ -141,13 +141,13 @@ const renderList = (list) => {
         
         // 직급별 사원 수
         const employeeCount = document.createElement("td");
-        employeeCount.textContent = job.employeeCount == null ? "-" : job.employeeCount + "명";
+        employeeCount.textContent = job.employeeCount == null ? "-" : job.employeeCount + "名";
 
         // 상태
         const active = Number(job.isActive) === 1;
 
         const status = document.createElement("td");
-        status.textContent = active ? "활성" : "비활성";
+        status.textContent = active ? "有効" : "無効";
 
         // 관리 버튼
         const action = document.createElement("td");
@@ -155,7 +155,7 @@ const renderList = (list) => {
         // 수정 버튼
         const editBtn = document.createElement("button");
         editBtn.type = "button";
-        editBtn.textContent = "수정";
+        editBtn.textContent = "編集";
 
         editBtn.onclick = () => {
 
@@ -170,7 +170,7 @@ const renderList = (list) => {
         // 비활성화 버튼
         const deleteBtn = document.createElement("button");
         deleteBtn.type = "button";
-        deleteBtn.textContent = "비활성화";
+        deleteBtn.textContent = "無効化";
 
         deleteBtn.onclick = () => {
             deactivate(job.jobId);
@@ -191,7 +191,7 @@ const renderList = (list) => {
 // 3. 직급 비활성화
 const deactivate = async (jobId) => {
 
-    if (!confirm("해당 직급을 비활성화하시겠습니까?")) {
+    if (!confirm("この役職を無効にしますか？")) {
         return;
     }
 
@@ -205,7 +205,7 @@ const deactivate = async (jobId) => {
         const result = await response.json();
 
         if (!response.ok || !result.success) {
-            throw new Error(result.message || "직급 비활성화 실패");
+            throw new Error(result.message || "役職の無効化に失敗しました");
         }
 
         alert(result.message);
@@ -261,7 +261,7 @@ const filterJobs = (page = 1) => {
         const name = String(job.jobName ?? "").toLowerCase();
 
         const matchesKeyword =
-            code.includes(keyword) || name.includes(keyword);
+            code.includes(keyword) || name.includes(keyword) || window.hrmsJapaneseLabel(job.jobName ?? "").toLowerCase().includes(keyword);
 
         const matchesStatus =
             status === "" ||

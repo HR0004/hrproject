@@ -24,14 +24,14 @@
 %>
 
 <!DOCTYPE html>
-<html lang="ko"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<title>HRMS - 역할별 권한 설정</title>
+<html lang="ja"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>HRMS - ロール別権限設定</title>
 
 <meta name="_csrf" content="${_csrf.token}">
 <meta name="_csrf_header" content="${_csrf.headerName}">
 <%@ include file="/WEB-INF/views/common/adminlte-head.jspf" %>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/static/vendor/fontawesome-6.5.2/css/all.min.css">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/css/screens/admin-role-permission.css?v=job-unified-1">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/screens/admin-role-permission.css?v=ja-1">
 </head><body class="hold-transition hrms-adminlte hrms-screen-admin-role-permission role-permission-page" data-context-path="${pageContext.request.contextPath}">
 <div class="wrapper">
 <%@ include file="/WEB-INF/views/common/adminlte-header.jspf" %>
@@ -40,8 +40,8 @@
 <main class="hrms-page-content">
 <div class="hrms-page-heading">
 <div class="page-title-area">
-<p class="tools-location">HRMS / 권한 관리</p>
-<h1 class="hrms-page-title">역할별 권한 설정</h1>
+<p class="tools-location">HRMS / 権限管理</p>
+<h1 class="hrms-page-title">ロール別権限設定</h1>
 </div>
 </div>
 
@@ -53,18 +53,18 @@
 
         <div class="tools-navigation">
 <a href="${pageContext.request.contextPath}/admin/accounts">
-                사용자별 역할 부여
+                ユーザー別ロール設定
             </a>
 </div>
 <section class="tools-card">
-<h2>역할에 사용할 수 있는 기능 지정</h2>
+<h2>ロールで利用できる機能を指定</h2>
 <p class="tools-description">
-                역할을 선택한 뒤 조회해 주세요.
-                변경된 권한은 해당 사용자가 재로그인한 뒤 적용됩니다.
+                ロールを選択して検索してください。
+                変更した権限は対象ユーザーが再ログインした後に適用されます。
             </p>
 <!-- 역할 조회 -->
 <form action="${pageContext.request.contextPath}/admin/roles/permissions" class="tools-role-picker" method="get">
-<label for="roleSelect">역할</label>
+<label for="roleSelect">ロール</label>
 <select id="roleSelect" name="roleId">
                     <%
                     for (Map<String, Object> row : rpRoles) {
@@ -83,7 +83,7 @@
                     <% } %>
                 </select>
 <button class="tools-secondary" type="submit">
-                    조회
+                    検索
                 </button>
 </form>
 
@@ -123,18 +123,18 @@
 
                 </div>
 <p class="tools-description">
-                    인사 관리자 역할의 계정 관리·역할 부여·역할별 권한 설정
-                    권한은 유지해야 합니다.
+                    人事管理者ロールのアカウント管理・ロールの付与・ロール別権限設定
+                    権限を保持する必要があります。
                 </p>
 <button class="tools-button" id="rolePermissionSave" type="submit">
-                    권한 저장
+                    権限の保存
                 </button>
 </form>
 
             <% } else { %>
 
             <p class="tools-description">
-                설정할 역할이 없습니다.
+                設定可能なロールがありません。
             </p>
 
             <% } %>
@@ -144,5 +144,5 @@
 </div>
 </div>
 <%@ include file="/WEB-INF/views/common/adminlte-scripts.jspf" %>
-<script src="${pageContext.request.contextPath}/static/js/screens/admin-role-permission.js?v=1"></script>
+<script src="${pageContext.request.contextPath}/static/js/screens/admin-role-permission.js?v=ja-1"></script>
 </body></html>

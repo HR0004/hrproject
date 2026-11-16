@@ -1,13 +1,13 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="ja">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>나의 월별 근태 성적</title>
+    <title>月次勤怠実績</title>
     <%@ include file="/WEB-INF/views/common/adminlte-head.jspf" %>
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/attendance-monthly.css?v=job-unified-1">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/attendance-leave-layout.css?v=2">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/attendance-monthly.css?v=ja-1">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/attendance-leave-layout.css?v=ja-1">
 </head>
 <body class="hold-transition hrms-adminlte hrms-attendance" data-context-path="${pageContext.request.contextPath}">
 <div class="wrapper">
@@ -19,51 +19,50 @@
 <main class="ma-page hrms-page-content hrms-attendance-leave-page">
 <header class="ma-head hrms-section-page-header">
 <div>
-<h2 class="ma-title hrms-page-title">나의 월별 근태 성적</h2>
-<p class="ma-subtitle page-path">월별 총근일수, 지각·조퇴, 결근 및 연장근무 현황을 확인할 수
-							있습니다.</p>
+<h2 class="ma-title hrms-page-title">月次勤怠実績</h2>
+<p class="ma-subtitle page-path">月別の出勤日数、遅刻・早退・欠勤、残業時間を確認できます。</p>
 </div>
 <div class="ma-search-controls">
-<select aria-label="조회할 월 선택" class="ma-month-select" name="selectedMonth">
-<option value="2026-12">2026년 12월</option>
-<option value="2026-11">2026년 11월</option>
-<option selected="" value="2026-10">2026년 10월</option>
-<option value="2026-09">2026년 09월</option>
-<option value="2026-08">2026년 08월</option>
-<option value="2026-07">2026년 07월</option>
-<option value="2026-06">2026년 06월</option>
-<option value="2026-05">2026년 05월</option>
-<option value="2026-04">2026년 04월</option>
-<option value="2026-03">2026년 03월</option>
-<option value="2026-02">2026년 02월</option>
-<option value="2026-01">2026년 01월</option>
+<select aria-label="検索対象月を選択" class="ma-month-select" name="selectedMonth">
+<option value="2026-12">2026年 12月</option>
+<option value="2026-11">2026年 11月</option>
+<option selected="" value="2026-10">2026年 10月</option>
+<option value="2026-09">2026年 09月</option>
+<option value="2026-08">2026年 08月</option>
+<option value="2026-07">2026年 07月</option>
+<option value="2026-06">2026年 06月</option>
+<option value="2026-05">2026年 05月</option>
+<option value="2026-04">2026年 04月</option>
+<option value="2026-03">2026年 03月</option>
+<option value="2026-02">2026年 02月</option>
+<option value="2026-01">2026年 01月</option>
 </select>
-<button class="ma-search-button" name="moveAttendanceButton" type="button">근태 현황</button>
+<button class="ma-search-button" name="moveAttendanceButton" type="button">勤怠状況</button>
 </div>
 </header>
 <!-- 선택한 월의 근태 통계 -->
-<section aria-label="선택 월 근태 통계" class="ma-stats">
+<section aria-label="選択月の勤怠統計" class="ma-stats">
 <div class="ma-stat-card card">
-<p class="ma-stat-label">총 출근일수</p>
+<p class="ma-stat-label">出勤日数合計</p>
 <div class="ma-stat-value" name="totalWorkDays">-</div>
 </div>
 <div class="ma-stat-card card">
-<p class="ma-stat-label">지각 · 조퇴</p>
+<p class="ma-stat-label">遅刻 ・ 早退</p>
 <div class="ma-stat-value" name="lateEarlyCount">-</div>
 </div>
 <div class="ma-stat-card card">
-<p class="ma-stat-label">결근일수</p>
+<p class="ma-stat-label">欠勤日数</p>
 <div class="ma-stat-value" name="absentDays">-</div>
 </div>
 <div class="ma-stat-card card">
-<p class="ma-stat-label">총 연장근무시간</p>
+<p class="ma-stat-label">残業時間合計</p>
 <div class="ma-stat-value" name="overtimeTotal">-</div>
 </div>
 </section>
-<section aria-label="월별 근태 요약">
+<section aria-label="月次勤怠サマリー">
 <div class="ma-section-head">
-<h3 class="ma-section-title">월별 근태 요약</h3>
-<p class="ma-section-subtitle">개인별 월간 근태 집계</p>
+<h3 class="ma-section-title">月次勤怠サマリー</h3>
+<p class="ma-section-subtitle">個人別の月次勤怠集計</p>
 </div>
 <div class="ma-table-scroll">
 <div class="hrms-table-scroll"><table class="ma-table">
@@ -78,18 +77,18 @@
 </colgroup>
 <thead>
 <tr>
-<th scope="col">대상 월</th>
-<th scope="col">총 출근일수</th>
-<th scope="col">지각 횟수</th>
-<th scope="col">조퇴 횟수</th>
-<th scope="col">결근일수</th>
-<th scope="col">총 연장근무시간</th>
-<th scope="col">정산 전송 상태</th>
+<th scope="col">対象月</th>
+<th scope="col">出勤日数合計</th>
+<th scope="col">遅刻回数</th>
+<th scope="col">早退回数</th>
+<th scope="col">欠勤日数</th>
+<th scope="col">残業時間合計</th>
+<th scope="col">精算データ送信状況</th>
 </tr>
 </thead>
 <tbody name="monthlyAttendanceRows">
 <tr>
-<td class="ma-empty" colspan="7">근태 데이터를 불러오는 중입니다.</td>
+<td class="ma-empty" colspan="7">勤怠データを読み込んでいます。</td>
 </tr>
 </tbody>
 </table></div>
@@ -100,6 +99,6 @@
     </div>
 </div>
 <%@ include file="/WEB-INF/views/common/adminlte-scripts.jspf" %>
-<script src="${pageContext.request.contextPath}/static/js/attendance-monthly.js?v=1"></script>
+<script src="${pageContext.request.contextPath}/static/js/attendance-monthly.js?v=ja-dynamic-2"></script>
 </body>
 </html>

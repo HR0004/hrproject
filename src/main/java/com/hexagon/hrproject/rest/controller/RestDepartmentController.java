@@ -31,7 +31,7 @@ public class RestDepartmentController {
 		
 		departmentService.regist(departmentDTO);
 		
-		ApiResponse<Void> response = ApiResponse.success("부서 등록 성공", null);
+		ApiResponse<Void> response = ApiResponse.success("部署を登録しました", null);
 		
 		return ResponseEntity.status(HttpStatus.CREATED).body(response);
 	}
@@ -42,7 +42,7 @@ public class RestDepartmentController {
 		
 		List<Department> departmentList = departmentService.getList();
 		
-		ApiResponse<List<Department>> response = ApiResponse.success("부서 목록 가져오기 성공", departmentList);
+		ApiResponse<List<Department>> response = ApiResponse.success("部署一覧を取得しました", departmentList);
 		
 		return ResponseEntity.status(HttpStatus.OK).body(response);
 	}
@@ -54,7 +54,7 @@ public class RestDepartmentController {
 	    Department dept = departmentService.getDetail(departmentId);
 
 	    ApiResponse<Department> response =
-	            ApiResponse.success("부서 상세 조회 성공", dept);
+	            ApiResponse.success("部署の詳細を取得しました", dept);
 
 	    return ResponseEntity.status(HttpStatus.OK).body(response);
 	}
@@ -67,7 +67,7 @@ public class RestDepartmentController {
 	            departmentService.search(departmentName);
 
 	    ApiResponse<List<Department>> response =
-	            ApiResponse.success("부서 검색 성공", departmentList);
+	            ApiResponse.success("部署の検索が完了しました", departmentList);
 
 	    return ResponseEntity.status(HttpStatus.OK).body(response);
 	}
@@ -81,7 +81,7 @@ public class RestDepartmentController {
 	    departmentService.update(departmentId, dto);
 
 	    ApiResponse<Void> response =
-	            ApiResponse.success("부서 수정 성공", null);
+	            ApiResponse.success("部署情報を更新しました", null);
 
 	    return ResponseEntity.status(HttpStatus.OK).body(response);
 	}
@@ -94,7 +94,7 @@ public class RestDepartmentController {
 	    departmentService.deactivity(departmentId);
 
 	    ApiResponse<Void> response =
-	            ApiResponse.success("부서 비활성화 성공", null);
+	            ApiResponse.success("部署を無効にしました", null);
 
 	    return ResponseEntity.status(HttpStatus.OK).body(response);
 	}

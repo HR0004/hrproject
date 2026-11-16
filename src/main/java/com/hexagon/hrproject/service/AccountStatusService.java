@@ -26,17 +26,17 @@ public class AccountStatusService {
 
         if (accountId <= 0) {
             throw new IllegalArgumentException(
-                "올바른 계정을 선택해 주세요.");
+                "有効なアカウントを選択してください。");
         }
 
         if (enabled != 0 && enabled != 1) {
             throw new IllegalArgumentException(
-                "계정 상태는 활성 또는 비활성만 가능합니다.");
+                "アカウントの状態は有効または無効を指定してください。");
         }
 
         if (accountId == operatorAccountId && enabled == 0) {
             throw new IllegalArgumentException(
-                "본인 계정은 비활성화할 수 없습니다.");
+                "自分のアカウントは無効にできません。");
         }
 
         Integer currentEnabled =
@@ -44,7 +44,7 @@ public class AccountStatusService {
 
         if (currentEnabled == null) {
             throw new IllegalArgumentException(
-                "조회된 계정 정보가 없습니다.");
+                "該当するアカウント情報がありません。");
         }
 
         if (currentEnabled.intValue() == enabled) {
@@ -56,7 +56,7 @@ public class AccountStatusService {
 
         if (updated != 1) {
             throw new IllegalStateException(
-                "계정 상태 변경 결과를 확인할 수 없습니다.");
+                "アカウントの状態変更結果を確認できません。");
         }
 
         return true;

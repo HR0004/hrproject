@@ -1,14 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html lang="ko"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<title>직급 등록</title>
+<html lang="ja"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>役職登録</title>
 
 <meta name="_csrf" content="${_csrf.token}">
 <meta name="_csrf_header" content="${_csrf.headerName}">
 <%@ include file="/WEB-INF/views/common/adminlte-head.jspf" %>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/static/vendor/fontawesome-6.5.2/css/all.min.css">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/css/screens/job-edit.css?v=job-unified-1">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/screens/job-edit.css?v=ja-1">
 </head><body class="hold-transition hrms-adminlte hrms-screen-job-edit" data-context-path="${pageContext.request.contextPath}">
 <div class="wrapper">
 <%@ include file="/WEB-INF/views/common/adminlte-header.jspf" %>
@@ -18,50 +18,50 @@
 <main class="job-register-container">
 <!-- 상단 -->
 <div class="job-breadcrumb">
-                HRMS / 직급 관리 / 직급 등록
+                HRMS / 役職管理 / 役職登録
             </div>
 <div class="job-page-heading">
 <div>
-<h1 class="hrms-page-title">직급 등록</h1>
-<p>새로운 직급을 등록합니다.</p>
+<h1 class="hrms-page-title">役職登録</h1>
+<p>新しい役職を登録します。</p>
 </div>
 <a class="job-back-btn" href="${pageContext.request.contextPath}/jobs">
-                    목록으로
+                    一覧へ
                 </a>
 </div>
 <!-- 안내 -->
 <div class="job-info-box">
-                직급 코드는 등록 완료 후 자동으로 생성됩니다.
+                役職コードは登録後に自動生成されます。
             </div>
 <!-- 직급 등록 -->
 <section class="job-register-card">
 <div class="job-card-heading">
-<h2>직급 기본 정보</h2>
-<p>직급 정보를 입력해 주세요.</p>
+<h2>役職基本情報</h2>
+<p>役職情報を入力してください。</p>
 </div>
 <form id="jobRegisterForm">
 <div class="job-form-group">
 <label for="jobName">
-                            직급명 <span class="required">*</span>
+                            役職名 <span class="required">*</span>
 </label>
-<input id="jobName" maxlength="20" name="jobName" placeholder="예: 사원, 대리, 과장" required="" type="text"/>
+<input id="jobName" maxlength="20" name="jobName" placeholder="例: 社員、 主任、 課長" required="" type="text"/>
 <small>
-                            직급명을 입력해 주세요.
+                            役職名を入力してください。
                         </small>
 </div>
 <div class="job-form-group">
-<label>직급 코드</label>
-<input readonly="" type="text" value="등록 시 자동 생성"/>
+<label>役職コード</label>
+<input readonly="" type="text" value="登録時に自動生成"/>
 <small>
-                            직급 코드는 서버에서 자동 생성됩니다.
+                            役職コードはサーバーで自動生成されます。
                         </small>
 </div>
 <div class="job-form-actions">
 <a class="job-cancel-btn" href="${pageContext.request.contextPath}/jobs">
-                            취소
+                            キャンセル
                         </a>
 <button class="job-submit-btn" id="registerBtn" type="submit">
-                            직급 등록
+                            役職登録
                         </button>
 </div>
 </form>
@@ -71,5 +71,5 @@
 </div>
 </div>
 <%@ include file="/WEB-INF/views/common/adminlte-scripts.jspf" %>
-<script src="${pageContext.request.contextPath}/static/js/screens/job-edit.js?v=1"></script>
+<script src="${pageContext.request.contextPath}/static/js/screens/job-edit.js?v=ja-1"></script>
 </body></html>

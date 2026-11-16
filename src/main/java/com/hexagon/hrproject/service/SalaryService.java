@@ -48,13 +48,13 @@ public class SalaryService {
                 && !month.matches("[0-9]{4}-(0[1-9]|1[0-2])")) {
 
             throw new SalaryBusinessException(
-                    "지급 연월은 yyyy-MM 형식으로 입력하세요.");
+                    "支給年月は yyyy-MM 形式で入力してください。");
         }
 
         // 검색어 길이 검사
         if (keyword.length() > 50) {
             throw new SalaryBusinessException(
-                    "사원 검색어는 50자 이내로 입력하세요.");
+                    "社員検索キーワードは 50文字以内で入力してください。");
         }
 
         // 검색 조건이 없으면 전체 조회
@@ -103,7 +103,7 @@ public class SalaryService {
 
         if (request == null) {
             throw new SalaryBusinessException(
-                    "급여 정보를 입력하세요.");
+                    "給与情報を入力してください。");
         }
 
         // 사원 번호 검사
@@ -111,7 +111,7 @@ public class SalaryService {
                 || request.getEmpId() <= 0) {
 
             throw new SalaryBusinessException(
-                    "사원을 선택하세요.");
+                    "社員を選択してください。");
         }
 
         // 지급 연월 검사
@@ -122,7 +122,7 @@ public class SalaryService {
                         "[0-9]{4}-(0[1-9]|1[0-2])")) {
 
             throw new SalaryBusinessException(
-                    "지급 연월은 yyyy-MM 형식으로 입력하세요.");
+                    "支給年月は yyyy-MM 形式で入力してください。");
         }
 
         // 금액 필수 입력 검사
@@ -131,7 +131,7 @@ public class SalaryService {
                 || request.getDeduction() == null) {
 
             throw new SalaryBusinessException(
-                    "기본급, 수당, 공제액을 모두 입력하세요.");
+                    "基本給、 手当、 控除額をすべて入力してください。");
         }
 
         // 음수 검사
@@ -140,7 +140,7 @@ public class SalaryService {
                 || request.getDeduction().signum() < 0) {
 
             throw new SalaryBusinessException(
-                    "금액은 음수일 수 없습니다.");
+                    "金額に負の値は指定できません。");
         }
 
         // DB DECIMAL(15,0) 범위 검사
@@ -152,7 +152,7 @@ public class SalaryService {
                 || request.getDeduction().scale() > 0) {
 
             throw new SalaryBusinessException(
-                    "금액은 정수로 입력하세요.");
+                    "金額は整数で入力してください。");
         }
 
         if (request.getBaseSalary().compareTo(maxAmount) > 0
@@ -160,7 +160,7 @@ public class SalaryService {
                 || request.getDeduction().compareTo(maxAmount) > 0) {
 
             throw new SalaryBusinessException(
-                    "금액은 15자리 이내로 입력하세요.");
+                    "金額は 15桁以内で入力してください。");
         }
 
         // 실수령액 계산
@@ -172,7 +172,7 @@ public class SalaryService {
 
         if (netSalary.abs().compareTo(maxAmount) > 0) {
             throw new SalaryBusinessException(
-                    "실수령액은 15자리 이내의 금액이어야 합니다.");
+                    "手取り額は 15桁以内の金額である必要があります。");
         }
 
         // Salary 도메인 객체 생성
@@ -201,7 +201,7 @@ public class SalaryService {
                 salary.getEmpId()) == 0) {
 
             throw new SalaryBusinessException(
-                    "존재하지 않는 사원 번호입니다.");
+                    "指定された社員番号は存在しません。");
         }
 
         // 같은 사원의 동일 지급 연월 중복 검사
@@ -212,7 +212,7 @@ public class SalaryService {
 
         if (count > 0) {
             throw new SalaryBusinessException(
-                    "해당 사원의 같은 지급 연월 급여가 이미 등록되어 있습니다.");
+                    "この社員の同じ支給年月の給与はすでに登録されています。");
         }
 
         int result;
@@ -222,7 +222,7 @@ public class SalaryService {
 
         } catch (DuplicateKeyException e) {
             throw new SalaryBusinessException(
-                    "해당 사원의 같은 지급 연월 급여가 이미 등록되어 있습니다.",
+                    "この社員の同じ支給年月の給与はすでに登録されています。",
                     e
             );
         }
@@ -230,7 +230,7 @@ public class SalaryService {
         // 등록 성공 여부 확인
         if (result != 1) {
             throw new SalaryBusinessException(
-                    "급여 등록에 실패했습니다.");
+                    "給与の登録に失敗しました。");
         }
 
         // 새로 생성된 급여 ID 반환
@@ -244,7 +244,7 @@ public class SalaryService {
 
      if (empId == null || empId <= 0) {
          throw new SalaryBusinessException(
-                 "사원 정보를 확인할 수 없습니다.");
+                 "社員情報を確認できません。");
      }
 
      String searchYear = year == null ? "" : year.trim();
@@ -254,7 +254,7 @@ public class SalaryService {
              && !searchYear.matches("[0-9]{4}")) {
 
          throw new SalaryBusinessException(
-                 "조회 연도는 yyyy 형식으로 입력하세요.");
+                 "検索年は yyyy 形式で入力してください。");
      }
 
      return salaryMapper.selectMySalaries(empId, searchYear);

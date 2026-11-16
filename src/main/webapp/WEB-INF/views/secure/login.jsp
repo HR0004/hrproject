@@ -1,8 +1,8 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="ja">
 <head>
-    <title>로그인</title>
+    <title>ログイン</title>
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -11,18 +11,19 @@
           href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 
     <link rel="stylesheet"
-          href="${pageContext.request.contextPath}/css/login.css?v=20261106-2">
+          href="${pageContext.request.contextPath}/css/login.css?v=ja-1">
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<script src="${pageContext.request.contextPath}/static/js/hrms-ja.js?v=ja-1"></script>
 </head>
 <body>
 
     <div class="container login-container"
          style="max-width: 400px; margin-top: 50px;">
 
-        <h2>로그인</h2>
+        <h2>ログイン</h2>
 
         <div id="error-message"
              class="login-error"
@@ -40,9 +41,9 @@
             <div class="form-group">
                 <input type="text"
                        class="form-control"
-                       placeholder="Enter Your Id"
+                       placeholder="ログインID"
                        name="accountId"
-                       aria-label="아이디"
+                       aria-label="ID"
                        autocomplete="username"
                        required>
             </div>
@@ -51,9 +52,9 @@
                 <input type="password"
                        class="form-control"
                        id="pwd"
-                       placeholder="Enter password"
+                       placeholder="パスワード"
                        name="pwd"
-                       aria-label="비밀번호"
+                       aria-label="パスワード"
                        autocomplete="current-password"
                        required>
             </div>
@@ -61,7 +62,7 @@
             <button type="submit"
                     class="btn btn-primary btn-block"
                     id="bt-login">
-                Submit
+                ログイン
             </button>
 
         </form>
@@ -106,7 +107,7 @@
 
                 if (response.status === 403) {
                     errorMessage.textContent =
-                        "로그인 요청이 거부되었습니다. 페이지를 새로고침한 뒤 다시 시도해 주세요.";
+                        "ログインリクエストが拒否されました。 ページを再読み込みしてから再度お試しください。";
                     return;
                 }
 
@@ -115,7 +116,7 @@
 
                 if (!contentType.includes("application/json")) {
                     errorMessage.textContent =
-                        "서버 응답을 확인할 수 없습니다. 로그인 처리 설정을 확인해 주세요.";
+                        "サーバーのレスポンスを確認できません。 ログイン処理の設定を確認してください。";
                     return;
                 }
 
@@ -127,10 +128,10 @@
                         "${pageContext.request.contextPath}/employee/home"
                     ];
 
-                    // 서버에서 지정한 두 경로만 허용
+                    // サーバーで指定された2つのパスのみ許可
                     if (!allowedTargets.includes(json.redirectUrl)) {
                         errorMessage.textContent =
-                            "로그인 후 이동할 화면을 확인할 수 없습니다.";
+                            "ログイン後の移動先を確認できません。";
                         return;
                     }
 
@@ -140,12 +141,12 @@
                 } else {
                     errorMessage.textContent =
                         json.message ||
-                        "아이디 또는 비밀번호가 일치하지 않습니다.";
+                        "IDまたはパスワードが一致しません。";
                 }
 
             } catch (error) {
                 errorMessage.textContent =
-                    "서버와의 통신 중 오류가 발생했습니다.";
+                    "サーバーとの通信中にエラーが発生しました。";
 
             } finally {
                 if (!navigating) {

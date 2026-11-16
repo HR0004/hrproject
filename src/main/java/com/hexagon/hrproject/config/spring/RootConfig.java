@@ -113,7 +113,7 @@ public class RootConfig {
                 )) {
 
             System.out.println(
-                    "===== Flyway 처리 완료 ====="
+                    "===== Flyway 処理が完了しました ====="
             );
         }
     }

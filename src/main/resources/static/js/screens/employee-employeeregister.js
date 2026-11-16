@@ -34,11 +34,11 @@ const registerEmployee = async () => {
 
             const message = await response.text();
 
-            console.error("사원 등록 HTTP 상태:", response.status);
-            console.error("서버 응답:", message);
+            console.error("社員登録 HTTP 状態:", response.status);
+            console.error("サーバーのレスポンス:", message);
 
             throw new Error(
-                "사원 등록 실패 (HTTP " + response.status + ")"
+                "社員の登録に失敗しました (HTTP " + response.status + ")"
             );
         }
 
@@ -48,13 +48,13 @@ const registerEmployee = async () => {
         
     } catch (error) {
 
-        console.error("사원 등록 오류:", error);
+        console.error("社員登録エラー:", error);
 
-        if (error.message.includes("이미 사용중인 로그인 ID")) {
+        if (error.message.includes("すでに使用されているログイン ID")) {
             showRegisterPopup("duplicate");
         } else {
             $("#registerMessage").text(error.message);
-            alert("사원 등록 중 오류가 발생했습니다.");
+            alert("社員の登録中にエラーが発生しました。");
         }
 
     
@@ -99,7 +99,7 @@ $(function() {
 
         $(this).toggleClass(
             "active",
-            $(this).text().includes("03 사원 관리")
+            $(this).text().includes("03 社員管理")
         );
 
     });
@@ -114,34 +114,34 @@ const showRegisterPopup = (type, data = {}) => {
 
         confirm: {
             icon: "❔",
-            title: "신규 사원 등록 확인",
-            message: "입력한 사원 정보를 등록하시겠습니까?",
-            detail: "성명 " + (data.ename ?? "-") + " · 로그인 ID " + (data.loginId ?? "-"),
-            button: "등록하기"
+            title: "新規社員登録の確認",
+            message: "入力した社員情報を登録しますか？",
+            detail: "氏名 " + (data.ename ?? "-") + " ・ ログイン ID " + (data.loginId ?? "-"),
+            button: "登録する"
         },
 
         duplicate: {
             icon: "❗",
-            title: "로그인 ID 중복 안내",
-            message: "이미 사용 중인 로그인 ID입니다.",
-            detail: "다른 로그인 ID를 입력해 주세요.",
-            button: "닫기"
+            title: "ログイン ID 重複のお知らせ",
+            message: "すでに使用されているログイン IDです。",
+            detail: "別のログイン IDを入力してください。",
+            button: "閉じる"
         },
 
         required: {
             icon: "❗",
-            title: "필수 입력 항목 확인",
-            message: "입력하지 않은 필수 항목이 있습니다.",
-            detail: "필수 입력 항목을 확인해 주세요.",
-            button: "확인"
+            title: "必須項目の確認",
+            message: "未入力の必須項目があります。",
+            detail: "必須項目を確認してください。",
+            button: "確認"
         },
 
         success: {
             icon: "✅",
-            title: "사원 등록 완료",
-            message: "신규 사원이 정상적으로 등록되었습니다.",
-            detail: "성명 " + (data.ename ?? "-"),
-            button: "사원 목록 보기"
+            title: "社員を登録しました",
+            message: "新規社員を登録しました。",
+            detail: "氏名 " + (data.ename ?? "-"),
+            button: "社員一覧を表示"
         }
     };
 

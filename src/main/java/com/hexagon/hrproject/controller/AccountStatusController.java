@@ -38,7 +38,7 @@ public class AccountStatusController {
             RedirectAttributes redirectAttributes) {
 
         if (principal == null || principal.getAccount() == null) {
-            throw new AccessDeniedException("로그인이 필요합니다.");
+            throw new AccessDeniedException("ログインが必要です。");
         }
 
         try {
@@ -51,8 +51,8 @@ public class AccountStatusController {
             redirectAttributes.addFlashAttribute(
                 "accountStatusMessage",
                 changed
-                    ? "계정 상태가 변경되었습니다."
-                    : "이미 요청한 상태입니다."
+                    ? "アカウントの状態を変更しました。"
+                    : "すでに指定された状態です。"
             );
 
         } catch (IllegalArgumentException exception) {

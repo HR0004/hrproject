@@ -45,14 +45,14 @@
 %>
 
 <!DOCTYPE html>
-<html lang="ko"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<title>HRMS - 권한 관리</title>
+<html lang="ja"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>HRMS - 権限管理</title>
 
 <meta name="_csrf" content="${_csrf.token}">
 <meta name="_csrf_header" content="${_csrf.headerName}">
 <%@ include file="/WEB-INF/views/common/adminlte-head.jspf" %>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/static/vendor/fontawesome-6.5.2/css/all.min.css">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/css/screens/admin-account-list.css?v=job-unified-1">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/screens/admin-account-list.css?v=ja-1">
 </head><body class="hold-transition hrms-adminlte hrms-screen-admin-account-list" data-context-path="${pageContext.request.contextPath}">
 <div class="wrapper">
 <%@ include file="/WEB-INF/views/common/adminlte-header.jspf" %>
@@ -63,10 +63,10 @@
 <section class="content-header">
 <div class="container-fluid">
 <h1 class="employee-page-title hrms-page-title">
-                    권한 관리
+                    権限管理
                 </h1>
 <p class="employee-page-desc">
-                    계정 조회 · 역할 부여 · 활성/비활성 관리
+                    アカウント検索 ・ ロールの付与 ・ 有効/無効化の管理
                 </p>
 </div>
 </section>
@@ -80,10 +80,10 @@
                 <% } %>
 
                 <!-- 조회된 계정 통계 -->
-<div aria-label="조회된 계정 현황" class="employee-stats">
+<div aria-label="検索したアカウントの状況" class="employee-stats">
 <div class="employee-stat-card">
 <div class="employee-stat-label">
-                            조회 계정
+                            検索対象アカウント
                         </div>
 <div class="employee-stat-number">
                             <%=accounts.size()%>
@@ -91,7 +91,7 @@
 </div>
 <div class="employee-stat-card">
 <div class="employee-stat-label">
-                            사용 중
+                            有効
                         </div>
 <div class="employee-stat-number">
                             <%=enabledCount%>
@@ -99,7 +99,7 @@
 </div>
 <div class="employee-stat-card">
 <div class="employee-stat-label">
-                            사용 중지
+                            無効
                         </div>
 <div class="employee-stat-number">
                             <%=disabledCount%>
@@ -107,7 +107,7 @@
 </div>
 <div class="employee-stat-card">
 <div class="employee-stat-label">
-                            역할 미지정
+                            ロール未設定
                         </div>
 <div class="employee-stat-number">
                             <%=unassignedCount%>
@@ -117,30 +117,30 @@
 <!-- 목록 제목과 작업 버튼 -->
 <div class="employee-toolbar">
 <h2 class="employee-list-title">
-                        권한 부여 대상 선택
+                        ロールを付与するアカウントを選択
                     </h2>
 <div class="employee-toolbar-actions">
 <button aria-controls="account-search-panel" aria-expanded="true" class="employee-btn account-filter-toggle" id="account-filter-toggle" type="button">
 <i aria-hidden="true" class="fas fa-search"></i>
 
-                            검색/필터
+                            検索/フィルター
                         </button>
 <button class="employee-register-btn" disabled="" form="account-selection-form" id="account-next-button" type="submit">
-                            다음 · 역할 선택
+                            次へ ・ ロール選択
                         </button>
 </div>
 </div>
 <!-- 검색 폼 -->
 <form action="${pageContext.request.contextPath}/admin/accounts" class="account-search-form" id="account-search-panel" method="get">
 <label class="account-sr-only" for="account-keyword">
-                        이름 또는 로그인 아이디
+                        氏名またはログインID
                     </label>
-<input id="account-keyword" maxlength="100" name="keyword" placeholder="이름 또는 로그인 아이디 검색" type="search" value="<%=searchKeyword%>"/>
+<input id="account-keyword" maxlength="100" name="keyword" placeholder="氏名またはログインIDで検索" type="search" value="<%=searchKeyword%>"/>
 <button class="employee-search-btn account-search-submit" type="submit">
-                        검색
+                        検索
                     </button>
 <a class="account-reset-link" href="${pageContext.request.contextPath}/admin/accounts">
-                        초기화
+                        リセット
                     </a>
 </form>
 <!-- 계정 선택 폼 -->
@@ -148,16 +148,16 @@
 <div class="employee-table-wrap">
 <div class="hrms-table-scroll"><table class="employee-table account-select-table">
 <caption class="account-sr-only">
-                                권한 관리 대상 계정 목록
+                                権限管理対象のアカウント一覧
                             </caption>
 <thead>
 <tr>
-<th scope="col">선택</th>
-<th scope="col">이름</th>
-<th scope="col">로그인 아이디</th>
-<th scope="col">현재 역할</th>
-<th scope="col">계정 상태</th>
-<th scope="col">상태 변경</th>
+<th scope="col">選択</th>
+<th scope="col">氏名</th>
+<th scope="col">ログインID</th>
+<th scope="col">現在のロール</th>
+<th scope="col">アカウントの状態</th>
+<th scope="col">状態変更</th>
 </tr>
 </thead>
 <tbody>
@@ -172,7 +172,7 @@
 
                                 if (employeeName == null
                                         || employeeName.trim().isEmpty()) {
-                                    employeeName = "사원 정보 없음";
+                                    employeeName = "社員情報なし";
                                 }
 
                                 boolean isOwnAccount =
@@ -188,7 +188,7 @@
 
                                 <tr data-account-row="">
 <td>
-<input aria-label="<%=accountListEscape(employeeName)%> 선택" data-user-label="<%=accountListEscape(employeeName + " (" + item.getLoginId() + ")")%>" name="accountId" type="radio" value="<%=item.getAccountId()%>"/>
+<input aria-label="<%=accountListEscape(employeeName)%> 選択" data-user-label="<%=accountListEscape(employeeName + " (" + item.getLoginId() + ")")%>" name="accountId" type="radio" value="<%=item.getAccountId()%>"/>
 </td>
 <td>
                                         <%=accountListEscape(employeeName)%>
@@ -223,7 +223,7 @@
                                     %>
 
                                         <span class="account-muted">
-                                            미지정
+                                            未設定
                                         </span>
 
                                     <%
@@ -233,18 +233,18 @@
 <td>
 <span class="employee-status <%=item.getEnabled() == 1 ? "status-active" : "status-retired"%>">
                                             <%=item.getEnabled() == 1
-                                                ? "사용 중"
-                                                : "사용 중지"%>
+                                                ? "有効"
+                                                : "無効"%>
                                         </span>
 </td>
 <td>
 <button class="account-status-button <%=item.getEnabled() == 1 ? "account-disable" : "account-enable"%>" form="account-status-<%=item.getAccountId()%>" <%=blockSelfDisable ? "disabled" : ""%> type="submit">
 
                                             <%=blockSelfDisable
-                                                ? "본인 계정"
+                                                ? "自分のアカウント"
                                                 : (item.getEnabled() == 1
-                                                    ? "비활성화"
-                                                    : "활성화")%>
+                                                    ? "無効化"
+                                                    : "有効化")%>
 
                                         </button>
 </td>
@@ -258,8 +258,8 @@
 
                                 <tr>
 <td class="account-empty-list" colspan="6">
-                                        조회된 계정이 없습니다.
-                                        검색어를 바꾸거나 초기화해 주세요.
+                                        該当するアカウントがありません。
+                                        キーワードを変更するか、検索条件をリセットしてください。
                                     </td>
 </tr>
 
@@ -283,11 +283,11 @@
                 <% } %>
 
                 <p class="employee-notice" id="account-selection-message" role="status">
-                    사용자를 선택해 주세요.
+                    ユーザーを選択してください。
                 </p>
 <p class="account-scope-note">
-                    ※ 상단 숫자는 현재 검색 결과를 기준으로 표시합니다.
-                    사용자를 선택한 뒤 다음 버튼으로 역할 관리 화면에 이동합니다.
+                    ※ 上部の件数は現在の検索結果を基に表示しています。
+                    ユーザーを選択して「次へ」を押すと、ロール管理画面に進みます。
                 </p>
 </div>
 </section>
@@ -295,5 +295,5 @@
 </div>
 </div>
 <%@ include file="/WEB-INF/views/common/adminlte-scripts.jspf" %>
-<script src="${pageContext.request.contextPath}/static/js/screens/admin-account-list.js?v=1"></script>
+<script src="${pageContext.request.contextPath}/static/js/screens/admin-account-list.js?v=ja-1"></script>
 </body></html>

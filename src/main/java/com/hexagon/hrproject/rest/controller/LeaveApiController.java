@@ -85,7 +85,7 @@ public class LeaveApiController {
 		leaveService.applyLeave(empId, request.get("startDate"), request.get("endDate"), request.get("halfDayType"),
 				request.get("reason"));
 
-		return Collections.singletonMap("message", "휴가 신청이 접수되었습니다.");
+		return Collections.singletonMap("message", "休暇申請を受け付けました。");
 	}
 
 }

@@ -23,7 +23,7 @@ public class RestGlobalExceptionHandler {
 	@ExceptionHandler(BusinessException.class)
 	public ResponseEntity<ApiResponse<Void>> handlerException(BusinessException e) {
 
-		System.out.println("REST 예외 처리 실행: " + e.getMessage());
+		System.out.println("REST 例外処理を実行: " + e.getMessage());
 		
 		ErrorCode errorCode = e.getErrorCode();
 
@@ -35,7 +35,7 @@ public class RestGlobalExceptionHandler {
 	@ExceptionHandler(Exception.class)
 	public ResponseEntity<ApiResponse<Void>> handleException(Exception e) {
 
-		ApiResponse<Void> response = ApiResponse.error("서버 오류가 발생했습니다.");
+		ApiResponse<Void> response = ApiResponse.error("サーバーエラーが発生しました。");
 
 		return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);
 	}

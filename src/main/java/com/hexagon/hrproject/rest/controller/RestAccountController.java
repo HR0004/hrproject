@@ -54,6 +54,6 @@ public class RestAccountController {
         );
 
         // 5. 정상 처리
-        return ResponseEntity.ok("비밀번호가 변경되었습니다.");
+        return ResponseEntity.ok("パスワードを変更しました。");
     }
 }

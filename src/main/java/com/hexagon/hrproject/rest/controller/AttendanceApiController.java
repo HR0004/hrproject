@@ -68,10 +68,10 @@ public class AttendanceApiController {
         if (result == 0) {
             return ResponseEntity
                 .status(HttpStatus.CONFLICT)
-                .body("오늘은 이미 출근했습니다.");
+                .body("本日はすでに出勤打刻済みです。");
         }
 
-        return ResponseEntity.ok("출근 등록 완료");
+        return ResponseEntity.ok("出勤を打刻しました");
     }
 
     // 퇴근하기
@@ -87,9 +87,9 @@ public class AttendanceApiController {
         if (result == 0) {
             return ResponseEntity
                 .status(HttpStatus.CONFLICT)
-                .body("출근 기록이 없거나 이미 퇴근했습니다.");
+                .body("出勤記録がないか、すでに退勤打刻済みです。");
         }
 
-        return ResponseEntity.ok("퇴근 등록 완료");
+        return ResponseEntity.ok("退勤を打刻しました");
     }
 }

@@ -97,7 +97,7 @@ public class SecurityConfig {
                     antMatcher("/api/accounts/**")
                 ).hasRole("HR_ADMIN")
 
-                // 사원 홈, 마이페이지, 본인 근태·휴가 등
+                // 사원 홈, 마이페이지, 본인 근태・휴가 등
                 .anyRequest().authenticated()
             )
 

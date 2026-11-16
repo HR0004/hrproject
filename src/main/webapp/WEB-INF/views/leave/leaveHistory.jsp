@@ -1,13 +1,13 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="ja">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>휴가 신청 내역</title>
+    <title>休暇申請履歴</title>
     <%@ include file="/WEB-INF/views/common/adminlte-head.jspf" %>
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/leave-history.css?v=job-unified-1">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/attendance-leave-layout.css?v=2">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/leave-history.css?v=ja-1">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/attendance-leave-layout.css?v=ja-1">
 </head>
 <body class="hold-transition hrms-adminlte hrms-leave" data-context-path="${pageContext.request.contextPath}">
 <div class="wrapper">
@@ -17,52 +17,52 @@
         <div class="content hrms-leave-content">
 <main class="lh-page hrms-page-content hrms-attendance-leave-page">
 <header class="hrms-section-page-header">
-<h1 class="lh-heading hrms-page-title">휴가 신청 내역</h1>
-<p class="lh-caption page-path">신청한 휴가의 기간과 승인 상태를 확인할 수 있습니다.</p>
+<h1 class="lh-heading hrms-page-title">休暇申請履歴</h1>
+<p class="lh-caption page-path">申請した休暇の期間と承認状況を確認できます。</p>
 </header>
-<section aria-label="휴가 신청 내역 검색 조건" class="lh-filter-panel">
+<section aria-label="休暇申請履歴の検索条件" class="lh-filter-panel">
 <div class="lh-filter-controls">
 <div class="lh-filter-field">
-<label class="lh-filter-title" for="filterStartDate">신청
-								기간</label>
+<label class="lh-filter-title" for="filterStartDate">申請
+								期間</label>
 <div class="lh-date-range">
-<input aria-label="신청 시작일" class="lh-input" id="filterStartDate" name="filterStartDate" type="date"/> <span class="lh-date-separator">~</span> <input aria-label="신청 종료일" class="lh-input" id="filterEndDate" name="filterEndDate" type="date"/>
+<input aria-label="申請開始日" class="lh-input" id="filterStartDate" name="filterStartDate" type="date"/> <span class="lh-date-separator">~</span> <input aria-label="申請終了日" class="lh-input" id="filterEndDate" name="filterEndDate" type="date"/>
 </div>
 </div>
 <div class="lh-filter-field lh-status-filter">
-<label class="lh-filter-title" for="filterStatus">승인 상태</label>
+<label class="lh-filter-title" for="filterStatus">承認状態</label>
 <div class="lh-select-wrap">
 <select class="lh-select" id="filterStatus" name="filterStatus">
-<option value="ALL">전체</option>
-<option value="APPROVED">승인 완료</option>
-<option value="PENDING">승인 대기</option>
-<option value="REJECTED">반려</option>
-<option value="CANCELED">취소됨</option>
+<option value="ALL">すべて</option>
+<option value="APPROVED">承認済み</option>
+<option value="PENDING">承認待ち</option>
+<option value="REJECTED">否認</option>
+<option value="CANCELED">取消済み</option>
 </select>
 </div>
 </div>
 </div>
-<button class="lh-apply-btn" name="moveViewButton" type="button">휴가
-						목록</button>
-<button class="lh-apply-btn" name="moveApplyButton" type="button">휴가
-						신청</button>
+<button class="lh-apply-btn" name="moveViewButton" type="button">休暇
+						一覧</button>
+<button class="lh-apply-btn" name="moveApplyButton" type="button">休暇
+						申請</button>
 </section>
 <section aria-labelledby="lhHistoryTitle" class="lh-card card">
 <div class="lh-card-head">
-<h2 class="lh-card-title" id="lhHistoryTitle">신청 내역</h2>
-<span class="lh-count" name="historyCount">총 0건</span>
+<h2 class="lh-card-title" id="lhHistoryTitle">申請履歴</h2>
+<span class="lh-count" name="historyCount">合計 0件</span>
 </div>
 <div class="lh-table-scroll">
 <div class="hrms-table-scroll"><table class="lh-table">
 <thead>
 <tr>
-<th scope="col">신청일</th>
-<th scope="col">휴가 종류</th>
-<th scope="col">휴가 기간</th>
-<th scope="col">일수</th>
-<th scope="col">승인 상태</th>
-<th scope="col">비고</th>
-<th scope="col">관리</th>
+<th scope="col">申請日</th>
+<th scope="col">休暇区分</th>
+<th scope="col">休暇期間</th>
+<th scope="col">日数</th>
+<th scope="col">承認状態</th>
+<th scope="col">備考</th>
+<th scope="col">操作</th>
 </tr>
 </thead>
 <!-- 아래 5건은 Figma 시안의 예시 데이터. REST 조회 연결 시 교체 -->
@@ -70,18 +70,18 @@
 </tbody>
 <tbody>
 <tr id="historyEmptyRow" style="display: none">
-<td class="lh-empty" colspan="7">검색 결과가 없습니다.</td>
+<td class="lh-empty" colspan="7">検索結果がありません。</td>
 </tr>
 </tbody>
 </table></div>
 </div>
 <div class="lh-card-bottom">
-<span class="lh-footer-count" name="historyFooterCount">총
-							0건</span>
-<nav aria-label="페이지 이동" class="lh-pagination">
-<button aria-label="이전 페이지" class="lh-page-btn" name="previousPage" type="button">‹</button>
+<span class="lh-footer-count" name="historyFooterCount">合計
+							0件</span>
+<nav aria-label="ページ移動" class="lh-pagination">
+<button aria-label="前のページ" class="lh-page-btn" name="previousPage" type="button">‹</button>
 <span class="lh-pagination" name="pageNumbers"></span>
-<button aria-label="다음 페이지" class="lh-page-btn" name="nextPage" type="button">›</button>
+<button aria-label="次のページ" class="lh-page-btn" name="nextPage" type="button">›</button>
 </nav>
 </div>
 </section>
@@ -89,25 +89,25 @@
 <div class="lh-modal-overlay" id="leaveDetailOverlay" role="presentation">
 <section aria-labelledby="leaveDetailTitle" aria-modal="true" class="lh-modal" role="dialog">
 <div class="lh-modal-header">
-<h2 id="leaveDetailTitle">휴가 신청 상세</h2>
-<button aria-label="닫기" class="lh-modal-close" name="closeDetail" type="button">×</button>
+<h2 id="leaveDetailTitle">休暇申請の詳細</h2>
+<button aria-label="閉じる" class="lh-modal-close" name="closeDetail" type="button">×</button>
 </div>
 <dl class="lh-modal-data">
-<dt>신청일</dt>
+<dt>申請日</dt>
 <dd name="detailSubmitted">-</dd>
-<dt>휴가 종류</dt>
+<dt>休暇区分</dt>
 <dd name="detailType">-</dd>
-<dt>휴가 기간</dt>
+<dt>休暇期間</dt>
 <dd name="detailPeriod">-</dd>
-<dt>사용 일수</dt>
+<dt>取得日数</dt>
 <dd name="detailDays">-</dd>
-<dt>승인 상태</dt>
+<dt>承認状態</dt>
 <dd name="detailStatus">-</dd>
-<dt>비고</dt>
+<dt>備考</dt>
 <dd name="detailRemark">-</dd>
 </dl>
 <div class="lh-modal-footer">
-<button class="lh-modal-ok" name="closeDetail" type="button">닫기</button>
+<button class="lh-modal-ok" name="closeDetail" type="button">閉じる</button>
 </div>
 </section>
 </div>
@@ -115,6 +115,6 @@
     </div>
 </div>
 <%@ include file="/WEB-INF/views/common/adminlte-scripts.jspf" %>
-<script src="${pageContext.request.contextPath}/static/js/leave-history.js?v=1"></script>
+<script src="${pageContext.request.contextPath}/static/js/leave-history.js?v=ja-dynamic-2"></script>
 </body>
 </html>

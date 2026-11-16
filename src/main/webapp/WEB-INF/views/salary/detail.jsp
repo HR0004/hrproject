@@ -5,11 +5,11 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="ja">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HRMS - 급여 상세</title>
+    <title>HRMS - 給与明細</title>
 
     
 
@@ -18,7 +18,7 @@
     
 <%@ include file="/WEB-INF/views/common/adminlte-head.jspf" %>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/static/vendor/fontawesome-6.5.2/css/all.min.css">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/css/salary.css?v=salary-unified-1">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/salary.css?v=ja-1">
 </head>
 
 <body class="hold-transition hrms-adminlte hrms-salary" data-context-path="${pageContext.request.contextPath}">
@@ -33,10 +33,10 @@
 
         <section class="content-header">
             <div class="container-fluid salary-heading">
-                <h1 class="hrms-page-title">급여 상세</h1>
+                <h1 class="hrms-page-title">給与明細</h1>
                 <p class="page-path">
                     <c:out value="${salary.salaryYearMonth}"/>
-                    급여의 지급 내역입니다.
+                    給与の支給明細です。
                 </p>
             </div>
         </section>
@@ -47,7 +47,7 @@
                 <!-- 등록 성공 후 표시 -->
                 <c:if test="${param.created eq 'true'}">
                     <div class="salary-success-alert">
-                        급여가 정상적으로 등록되었습니다.
+                        給与を登録しました。
                     </div>
                 </c:if>
 
@@ -57,12 +57,12 @@
                     <div class="salary-detail-header">
                         <h2>
                             <c:out value="${salary.salaryYearMonth}"/>
-                            급여
+                            給与
                         </h2>
 
                         <p>
-                            급여 ID S<c:out value="${salary.salaryId}"/>
-                            ·
+                            給与 ID S<c:out value="${salary.salaryId}"/>
+                            ・
                             <c:out value="${salary.empId}"/>
                             <c:out value="${salary.employeeName}"/>
                         </p>
@@ -71,29 +71,29 @@
                     <div class="salary-detail-rows">
 
                         <div class="salary-detail-row">
-                            <span>기본급</span>
+                            <span>基本給</span>
                             <strong>
                                 <fmt:formatNumber
                                     value="${salary.baseSalary}"
-                                    pattern="#,##0"/> 원
+                                    pattern="#,##0"/> ウォン
                             </strong>
                         </div>
 
                         <div class="salary-detail-row">
-                            <span>수당</span>
+                            <span>手当</span>
                             <strong>
                                 <fmt:formatNumber
                                     value="${salary.bonus}"
-                                    pattern="#,##0"/> 원
+                                    pattern="#,##0"/> ウォン
                             </strong>
                         </div>
 
                         <div class="salary-detail-row">
-                            <span>공제액</span>
+                            <span>控除額</span>
                             <strong>
                                 <fmt:formatNumber
                                     value="${salary.deduction}"
-                                    pattern="#,##0"/> 원
+                                    pattern="#,##0"/> ウォン
                             </strong>
                         </div>
 
@@ -101,23 +101,23 @@
 
                     <!-- 실수령액 -->
                     <div class="salary-detail-total">
-                        <span>실수령액</span>
+                        <span>手取り額</span>
                         <strong>
                             <fmt:formatNumber
                                 value="${salary.netSalary}"
-                                pattern="#,##0"/> 원
+                                pattern="#,##0"/> ウォン
                         </strong>
                     </div>
 
                     <!-- 지급일 -->
                     <div class="salary-detail-payment">
-                        <span>지급일</span>
+                        <span>支給日</span>
                         <strong>
                             <c:choose>
                                 <c:when test="${not empty salary.paymentDate}">
                                     <c:out value="${salary.paymentDate}"/>
                                 </c:when>
-                                <c:otherwise>미정</c:otherwise>
+                                <c:otherwise>未定</c:otherwise>
                             </c:choose>
                         </strong>
                     </div>
@@ -128,7 +128,7 @@
                 <div class="salary-detail-actions">
                     <a href="${pageContext.request.contextPath}/salary/list"
                        class="salary-confirm-btn primary-btn">
-                        목록으로
+                        一覧へ
                     </a>
                 </div>
 

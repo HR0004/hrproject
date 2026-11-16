@@ -51,7 +51,7 @@ public class RolePermissionController {
 
             redirect.addFlashAttribute(
                 "rolePermissionMessage",
-                "권한 변경이 완료되었습니다."
+                "権限を変更しました。"
             );
 
         } catch (IllegalArgumentException ex) {

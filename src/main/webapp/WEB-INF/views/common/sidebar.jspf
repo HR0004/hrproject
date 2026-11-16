@@ -5,7 +5,7 @@
 %>
 
 <link rel="stylesheet"
-      href="${pageContext.request.contextPath}/css/sidebar.css?v=restore-2">
+      href="${pageContext.request.contextPath}/css/sidebar.css?v=ja-1">
 
 <aside class="main-sidebar hrms-sidebar" id="hrms-sidebar">
 
@@ -14,7 +14,7 @@
         <%=hrmsSidebarIsAdmin ? "HRMS Admin" : "HRMS Employee"%>
     </div>
 
-    <div class="sidebar-title">인사관리 시스템</div>
+    <div class="sidebar-title">人事管理システム</div>
 
     <nav class="sidebar-menu"
          id="hrms-sidebar-menu"
@@ -24,75 +24,75 @@
 
         <a href="${pageContext.request.contextPath}/dashboard"
            class="menu-item" data-menu-path="/dashboard">
-            00 대시보드
+            00 ダッシュボード
         </a>
 
         <a href="${pageContext.request.contextPath}/departments"
            class="menu-item" data-menu-path="/departments">
-            01 부서 관리
+            01 部署管理
         </a>
 
         <a href="${pageContext.request.contextPath}/jobs"
            class="menu-item" data-menu-path="/jobs">
-            02 직급 관리
+            02 役職管理
         </a>
 
         <a href="${pageContext.request.contextPath}/employees"
            class="menu-item" data-menu-path="/employees">
-            03 사원 관리
+            03 社員管理
         </a>
 
         <a href="${pageContext.request.contextPath}/attendance"
            class="menu-item" data-menu-path="/attendance">
-            04 내 근태
+            04 自分の勤怠
         </a>
 
         <a href="${pageContext.request.contextPath}/leave"
            class="menu-item" data-menu-path="/leave">
-            05 내 휴가
+            05 自分の休暇
         </a>
 
         <a href="${pageContext.request.contextPath}/admin/accounts"
            class="menu-item" data-menu-path="/admin/accounts">
-            06 권한 관리
+            06 権限管理
         </a>
 
         <a href="${pageContext.request.contextPath}/mypage"
            class="menu-item" data-menu-path="/mypage">
-            07 내 정보
+            07 プロフィール
         </a>
 
         <a href="${pageContext.request.contextPath}/admin/roles/permissions"
            class="menu-item"
            data-menu-path="/admin/roles/permissions">
-            08 역할별 권한 설정
+            08 ロール別権限設定
         </a>
 
         <% } else { %>
 
         <a href="${pageContext.request.contextPath}/employee/home"
            class="menu-item" data-menu-path="/employee/home">
-            00 사원 홈
+            00 社員ホーム
         </a>
 
         <a href="${pageContext.request.contextPath}/mypage"
            class="menu-item" data-menu-path="/mypage">
-            01 내 정보
+            01 プロフィール
         </a>
 
         <a href="${pageContext.request.contextPath}/employee/myedit"
            class="menu-item" data-menu-path="/employee/myedit">
-            02 내 정보 수정
+            02 プロフィール編集
         </a>
 
         <a href="${pageContext.request.contextPath}/attendance"
            class="menu-item" data-menu-path="/attendance">
-            03 내 근태
+            03 自分の勤怠
         </a>
 
         <a href="${pageContext.request.contextPath}/leave"
            class="menu-item" data-menu-path="/leave">
-            04 내 휴가
+            04 自分の休暇
         </a>
 
         <% } %>

@@ -6,14 +6,14 @@ async function loadDepartments() {
         const response = await fetch(contextPath + "/api/departments");
 
         if (!response.ok) {
-            throw new Error("부서 목록 조회 실패");
+            throw new Error("部署一覧の取得に失敗しました");
         }
 
         const result = await response.json();
         const departments = Array.isArray(result) ? result : result.data;
         const select = document.getElementById("searchDept");
 
-        select.innerHTML = '<option value="">전체 부서</option>';
+        select.innerHTML = '<option value="">すべての部署</option>';
 
         (departments || []).forEach(dept => {
             const option = document.createElement("option");
@@ -23,7 +23,7 @@ async function loadDepartments() {
         });
 
     } catch (error) {
-        console.error("부서 목록 오류:", error);
+        console.error("部署一覧の取得エラー:", error);
     }
 }
 
@@ -33,7 +33,7 @@ async function searchEmployees() {
         const response = await fetch(contextPath + "/api/employees");
 
         if (!response.ok) {
-            throw new Error("검색 실패");
+            throw new Error("検索に失敗しました");
         }
 
         const employees = await response.json();
@@ -84,12 +84,12 @@ async function searchEmployees() {
                    endMatch;
         });
 
-        $("#resultCount").text(result.length + "명");
+        $("#resultCount").text(result.length + "名");
         printSearchResults(result);
 
     } catch (error) {
-        console.error("사원 검색 오류:", error);
-        alert("사원 검색 중 오류가 발생했습니다.");
+        console.error("社員検索エラー:", error);
+        alert("社員の検索中にエラーが発生しました。");
     }
 }
 
@@ -108,23 +108,23 @@ function printSearchResults(employees) {
         $("<td>").text(emp.email ?? "-").appendTo(tr);
 
         const hiredate = emp.hiredate
-            ? new Date(emp.hiredate).toLocaleDateString("ko-KR")
+            ? new Date(emp.hiredate).toLocaleDateString("ja-JP")
             : "-";
 
         $("<td>").text(hiredate).appendTo(tr);
 
         const status = {
-            ACTIVE: "재직",
-            LEAVE: "휴직",
-            RETIRED: "퇴직"
-        }[emp.status] ?? "미확인";
+            ACTIVE: "在籍",
+            LEAVE: "休職",
+            RETIRED: "退職"
+        }[emp.status] ?? "未確認";
 
         $("<td>").text(status).appendTo(tr);
 
         $("<td>").append(
-            $("<a>").attr("href", url).text("상세"),
+            $("<a>").attr("href", url).text("詳細"),
             " / ",
-            $("<a>").attr("href", url + "/edit").text("수정")
+            $("<a>").attr("href", url + "/edit").text("編集")
         ).appendTo(tr);
 
         tbody.append(tr);
@@ -135,7 +135,7 @@ function printSearchResults(employees) {
             $("<td>")
                 .attr("colspan", 8)
                 .addClass("empty-message")
-                .text("검색 결과가 없습니다.")
+                .text("検索結果がありません。")
         ).appendTo(tbody);
     }
 }
@@ -149,11 +149,11 @@ function resetSearch() {
     $("#startDate").val("");
     $("#endDate").val("");
 
-    $("#resultCount").text("0명");
+    $("#resultCount").text("0名");
 
     $("#searchResultBody").html(
         '<tr><td colspan="8" class="empty-message">' +
-        '검색 조건을 입력하고 검색 버튼을 눌러주세요.' +
+        '検索条件を入力して検索ボタンを押してください。' +
         '</td></tr>'
     );
 }

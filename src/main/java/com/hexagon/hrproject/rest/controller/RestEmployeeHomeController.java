@@ -82,6 +82,6 @@ public class RestEmployeeHomeController {
             emp.getPhone()
         );
 
-        return ResponseEntity.ok("내 정보가 수정되었습니다.");
+        return ResponseEntity.ok("プロフィールを更新しました。");
     }
 }

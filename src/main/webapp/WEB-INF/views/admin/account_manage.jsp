@@ -58,14 +58,14 @@
 %>
 
 <!DOCTYPE html>
-<html lang="ko"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<title>HRMS - 권한 부여</title>
+<html lang="ja"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>HRMS - 権限の付与</title>
 
 <meta name="_csrf" content="${_csrf.token}">
 <meta name="_csrf_header" content="${_csrf.headerName}">
 <%@ include file="/WEB-INF/views/common/adminlte-head.jspf" %>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/static/vendor/fontawesome-6.5.2/css/all.min.css">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/css/screens/admin-account-manage.css?v=job-unified-1">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/screens/admin-account-manage.css?v=ja-1">
 </head><body class="hold-transition hrms-adminlte hrms-screen-admin-account-manage account-manage-page" data-context-path="${pageContext.request.contextPath}">
 <div class="wrapper">
 <%@ include file="/WEB-INF/views/common/adminlte-header.jspf" %>
@@ -74,8 +74,8 @@
 <main class="hrms-page-content">
 <div class="hrms-page-heading">
 <div class="page-title-area">
-<div class="breadcrumb">HRMS / 권한 관리</div>
-<h1 class="hrms-page-title">사원 계정 및 역할(Role) 설정</h1>
+<div class="breadcrumb">HRMS / 権限管理</div>
+<h1 class="hrms-page-title">社員アカウントとロール(Role) 設定</h1>
 </div>
 </div>
 <section class="content-card">
@@ -83,7 +83,7 @@
             <% if (managedAccount != null) { %>
 
             <h2 class="account-info-title">
-                계정 정보:
+                アカウント情報:
                 <%=rolePreviewEscape(managedAccount.getLoginId())%>
 
                 (<%=rolePreviewEscape(
@@ -95,8 +95,8 @@
 
             <% if (!permissionDataReady) { %>
             <p class="empty-message" role="alert">
-                권한 정보를 불러오지 못했습니다.
-                컨트롤러 적용 여부를 확인해 주세요.
+                権限情報を読み込めませんでした。
+                コントローラーの適用状態を確認してください。
             </p>
             <% } %>
 
@@ -105,7 +105,7 @@
 <!-- 역할 선택 -->
 <section aria-labelledby="roleSelectionTitle" id="roleSelection">
 <h3 class="section-subtitle" id="roleSelectionTitle">
-                        부여할 역할 선택
+                        付与するロールを選択
                     </h3>
 <div class="role-list-container">
 
@@ -163,7 +163,7 @@
 
                         <% if (!hasRoleOption) { %>
                         <p class="empty-message">
-                            선택 가능한 역할이 없습니다.
+                            選択可能なロールがありません。
                         </p>
                         <% } %>
 
@@ -171,27 +171,27 @@
 <button class="btn-save" id="previewButton" <%=hasRoleOption && permissionDataReady
                                 ? ""
                                 : "disabled"%> type="button">
-                        다음 · 권한 미리보기
+                        次へ ・ 権限プレビュー
                     </button>
 </section>
 <!-- 저장 전 미리보기 -->
 <section aria-labelledby="previewTitle" hidden="" id="rolePreview">
 <h3 class="section-subtitle" id="previewTitle" tabindex="-1">
-                        저장 전 권한 미리보기
+                        保存前の権限プレビュー
                     </h3>
 <dl class="preview-summary">
 <div>
-<dt>사원</dt>
+<dt>社員</dt>
 <dd>
                                 <%=rolePreviewEscape(
                                     managedAccount.getEmp() == null
-                                        ? "사원 정보 없음"
+                                        ? "社員情報なし"
                                         : managedAccount.getEmp().getEname()
                                 )%>
                             </dd>
 </div>
 <div>
-<dt>로그인 아이디</dt>
+<dt>ログインID</dt>
 <dd>
                                 <%=rolePreviewEscape(
                                     managedAccount.getLoginId()
@@ -199,12 +199,12 @@
                             </dd>
 </div>
 <div>
-<dt>선택한 역할</dt>
+<dt>選択したロール</dt>
 <dd id="previewRoles"></dd>
 </div>
 </dl>
 <h4 class="section-subtitle">
-                        선택한 역할에 연결된 권한
+                        選択したロールに紐付く権限
                     </h4>
 <p class="empty-message" hidden="" id="previewEmpty" role="status">
 </p>
@@ -212,23 +212,23 @@
 <div class="hrms-table-scroll"><table class="preview-table">
 <thead>
 <tr>
-<th scope="col">권한 이름</th>
-<th scope="col">권한 코드</th>
+<th scope="col">権限名</th>
+<th scope="col">権限コード</th>
 </tr>
 </thead>
 <tbody id="previewPermissions"></tbody>
 </table></div>
 </div>
 <p class="preview-note">
-                        중복 권한은 한 번만 표시합니다.
-                        변경된 권한은 대상 계정이 다시 로그인한 뒤 적용됩니다.
+                        重複する権限は一度だけ表示します。
+                        変更した権限は対象ユーザーが再ログインした後に適用されます。
                     </p>
 <div class="form-actions">
 <button class="btn-list" id="backButton" type="button">
-                            이전 · 역할 수정
+                            前へ ・ ロール編集
                         </button>
 <button class="btn-save" disabled="" id="saveButton" type="submit">
-                            권한 저장하기
+                            権限を保存
                         </button>
 </div>
 </section>
@@ -237,14 +237,14 @@
             <% } else { %>
 
             <p class="empty-message">
-                조회된 계정 정보가 없습니다.
+                該当するアカウント情報がありません。
             </p>
 
             <% } %>
 
             <div class="list-navigation">
 <a class="btn-list" href="${pageContext.request.contextPath}/admin/accounts">
-                    목록으로
+                    一覧へ
                 </a>
 </div>
 </section>
@@ -252,5 +252,5 @@
 </div>
 </div>
 <%@ include file="/WEB-INF/views/common/adminlte-scripts.jspf" %>
-<script src="${pageContext.request.contextPath}/static/js/screens/admin-account-manage.js?v=1"></script>
+<script src="${pageContext.request.contextPath}/static/js/screens/admin-account-manage.js?v=ja-1"></script>
 </body></html>

@@ -32,11 +32,11 @@ public class AccountDetails implements UserDetails {
 		Set<GrantedAuthority> authSet = new LinkedHashSet<>();
 
 		for (HrRole hrRole : account.getRoles()) {
-			log.debug("현재 role={}", hrRole.getRoleCode());
+			log.debug("現在の role={}", hrRole.getRoleCode());
 			authSet.add(new SimpleGrantedAuthority(hrRole.getRoleCode()));
 
 			for (Permission permission : hrRole.getPermissions()) {
-				log.debug("소속 permission은{}", permission.getPermissionCode());
+				log.debug("所属 permissionは{}", permission.getPermissionCode());
 				authSet.add(new SimpleGrantedAuthority(permission.getPermissionCode()));
 			}
 		}
